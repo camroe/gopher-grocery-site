@@ -1,0 +1,44 @@
+#accordion {
+	list-style: none;
+	padding: 0px 0px 0px 0px; /* Top Right Bottom Left */
+	width: 170px;
+}
+#accordion div {
+	list-style: none;
+	display: block;
+	width: 215px;
+	/* background-color: #FF9927; */
+	font-weight: bold;
+	margin: 1px;
+	cursor: pointer;
+	padding: 5px 5px 5px 2px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	border: 1px solid black;
+}
+#accordion li {
+	list-style: none;
+}
+#accordion ul {
+	list-style: none;
+	padding: 0 0 0 5px;
+}
+#accordion ul {
+	display: none;
+}
+#accordion ul li {
+	font-weight: normal;
+	cursor: auto;
+	background-color: #fff;
+	padding: 0 0 0 7px;
+}
+#accordion a {
+	text-decoration: none;
+}
+#accordion a:hover {
+	text-decoration: underline;
+}
+#accordion div:hover {
+	text-decoration: underline;
+}

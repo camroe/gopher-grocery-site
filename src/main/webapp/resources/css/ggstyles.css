@@ -1,0 +1,346 @@
+/**
+ * ggstyles.css
+ * Version: 1.0
+ * Author: Cam Roe
+ * Company: CMR Technologies
+ * Created: 2015-10-03
+ * Notes: CSS Styles used by Gopher-Groceries
+ */
+
+/* Get the resets and basic stuff out of the way */
+
+@font-face {
+	font-family: "Maven Pro";
+	src: url(Maven Pro Regular.otf) format("truetype");
+}
+
+html {
+	/*Specifies how to handle content  overflow of an element if the
+	 content is too wide for the element.
+	 */
+	overflow-x: hidden;
+}
+
+* {
+	outline: none
+}
+
+img {
+	border: 0px
+}
+
+form {
+	margin: 0px;
+	padding: 0px
+}
+
+p {
+	margin: 0px 0px 10px 0px
+}
+
+iframe {
+	border: 0px
+}
+
+/* base tables */
+th {
+	padding: 5px;
+	background: #ccc;
+	font-size: 14px;
+	color: #525252;
+}
+
+/* base links  */
+a, a:visited {
+	color: #000000;
+	text-decoration: underline
+}
+a:hover {
+	color: #4CC0CF
+}
+
+/*basic css classes*/
+.left {
+	float: left
+}
+.right {
+	float: right
+}
+.center {
+	margin: auto;
+	text-align: center
+}
+.clear {
+	clear: both
+}
+.bold {
+	font-weight: bold
+}
+.none {
+	display: none
+}/* will not be displayed.*/
+.red {
+	color: #ff0000
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	/* You could specify a body background here, for example*/
+	/*background-image:url('../ggcssImage/body_back_ground.gif');*/
+}
+
+.full_wrap {
+	width: 100%;
+	clear: both;
+}
+
+.full_wrap-background {
+	background: url('ggcssImage/header-back.png') repeat-x;
+	height: 161px;
+	width: 100%;
+}
+
+#header {
+	padding: 81px 0px;
+	background-image: url('ggcssImage/spalsh-bg.png');
+	/* Just a white image with fade in*/
+}
+.wide_wrap {
+	width: 940px; /*THIS SETS THE  WIDTH OF THE SITE */
+	margin: auto;
+	position: relative;
+}
+
+.cart {
+	background: url("ggcssImage/cart-bg.png") no-repeat;
+	color: #9E9D9D;
+	font: 12px/17px Arial, Helvetica, sans-serif;
+	height: 49px;
+	width: 226px;
+	letter-spacing: 0;
+	margin: 0;
+	overflow: hidden;
+	padding: 0 0 0 19px;
+	position: absolute;
+	right: -6px;
+	text-transform: none;
+	top: 28px;
+}
+.cart .moduletable {
+	background: url("ggcssImage/cart-img.png") no-repeat scroll left 16px transparent;
+	float: left;
+	overflow: hidden;
+	/*height: 39px;
+	 width: 28px;
+	 border: 1px solid black;*/
+}
+
+.cart .vmCartModule {
+	background: none repeat scroll 0 0 transparent !important;
+	margin: 10 0 0 0;
+	padding: 11px 0 10px 29px;
+	text-align: left;
+}
+
+/* Search*/
+#search_form {
+	background: url("ggcssImage/search-input.png") no-repeat scroll left top transparent;
+	border: medium none;
+	height: 41px;
+	margin: 0;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	right: -6px;
+	top: 78px;
+	width: 345px;
+	z-index: 1;
+}
+
+#search_form input {
+	background: none repeat scroll 0 0 transparent;
+	border: medium none;
+	color: #A6A6A6;
+	display: inline-block;
+	float: left;
+	font: 15px/20px Arial, Helvetica, sans-serif !important;
+	/*height: 20px;*/
+	margin: 0;
+	padding: 6px 5px 4px 12px;
+	text-transform: none;
+	vertical-align: top;
+	width: 287px;
+}
+
+#search_form button {
+	background: url("ggcssImage/search-button.png") no-repeat scroll left top transparent;
+	border: medium none !important;
+	color: #FFFFFF;
+	float: right;
+	font: bold 14px/21px 'Maven Pro', cursive;
+	height: 41px;
+	letter-spacing: -1px;
+	margin: 0;
+	padding: 0 0 0;
+	text-indent: -9999px;
+	text-transform: uppercase;
+	vertical-align: middle;
+	width: 40px;
+}
+#search_form button:hover {
+	background: url("ggcssImage/search-button-active.png") no-repeat scroll left top transparent;
+}
+
+.header-logo {
+	margin-top: -124px;
+	width: 230px;
+	/*opacity: 0.9;*/
+}
+
+/* MAIN NAV BAR */
+.main-nav-bar {
+	margin: -19px auto auto auto;
+	width: 940px;
+	position: relative;
+}
+.main-nav-bar .category-heading {
+	float: left;
+	width: 225px;
+	height: 50px;
+	background: url("ggcssImage/category-heading-title-bg.png") no-repeat;
+}
+.main-nav-bar .category-heading h3 {
+	color: #FFFFFF;
+	/*color: #000000; BLACK*/
+	font-size: 18px;
+	font-weight: normal;
+	margin: 9px 0px 0px 19px;
+	font-family: maven pro;
+}
+.main-nav-bar .nav-bar {
+	float: right;
+	position: absolute;
+	right: -6px;
+	width: 706px;
+	height: 50px;
+	float: right;
+	background: url("ggcssImage/topmenu-bg.png") no-repeat;
+}
+.main-nav-bar .nav-bar ul {
+	margin: 11px 0 0 31px;
+	padding: 0;
+	list-style: none;
+}
+.main-nav-bar .nav-bar ul li {
+	float: left;
+	background: url("ggcssImage/topmenu-a.png") no-repeat;
+	margin-right: 20px;
+	padding: 0 0 0 26px;
+}
+.main-nav-bar .nav-bar ul li a {
+	text-decoration: none;
+	color: #FFFFFF;
+	font-size: 18px;
+	line-height: 14px;
+	font-family: maven pro;
+}
+.main-nav-bar .nav-bar ul li a:hover {
+	color: #47C5D4;
+}
+
+.category-column {
+	width: 224px;
+	float: left;
+	border: 1px solid black;
+}
+
+.module-categories {
+	background: none repeat scroll 0 0 transparent;
+	margin: -51px 0 20px;
+	overflow: hidden;
+	font-family: maven pro;
+}
+.module-categories ul {
+	border: 1px solid #EAEAEA;
+	border-radius: 2px 2px 2px 2px;
+	list-style: none;
+	border-top: none;
+	margin: 21px 0px 0px 0px;
+	position: relative;
+	z-index: 1;
+	padding: 0;
+	width: 218px;
+}
+.module-categories ul li {
+	background: url("ggcssImage/hor-line.gif") repeat-x scroll left top transparent;
+	font: 12px/31px Maven Pro;
+	margin: 0px;
+	overflow: hidden;
+	padding: 0 0 0 8px;
+	vertical-align: top;
+}
+.module-categories ul li a {
+	background: url("ggcssImage/cat-a.png") no-repeat scroll left 9px transparent;
+	color: #A6A6A6;
+	display: inline-block;
+	padding-left: 22px;
+	position: relative;
+	text-decoration: none;
+}
+.module-categories ul li a:hover {
+	background: url("ggcssImage/cat-a-active.png") no-repeat scroll left 9px transparent;
+	color: #3ebacc;
+	display: inline-block;
+	padding-left: 22px;
+	position: relative;
+	text-decoration: none;
+}
+.wrapper {
+	overflow: hidden;
+	width: 100%;
+}
+
+/* CSS Document */
+
+#multi_display {
+	border: 1px solid #eaeaea;
+	width: 218px;
+}
+#multi_display a {
+	padding-left: 24px;
+	font: inherit;
+	border: none;
+	color: #000000;
+}
+#multi_display a:hover {
+	text-decoration: none;
+	border: none;
+	color: #3ebacc;
+}
+#multi_display .ui-icon {
+	margin-left: -10px;
+}
+#multi_display ul {
+	overflow: visible;
+	height: auto;
+	background: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+#multi_display li {
+	display: block;
+}
+#multi_display li ul {
+	margin-left: -8px;
+}
+#multi_display li ul a {
+	margin-left: 8px;
+	color: #333;
+	background: none;
+}
+
