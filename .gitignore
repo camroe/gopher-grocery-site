@@ -45,8 +45,9 @@ target/**
 .classpath
 */bin/**
 bin/**
-# Copied from Eclipse gitignore project #
-#########################################
+# Copied from Eclipse gitignore project                                    #
+# https://github.com/github/gitignore/blob/master/Global/Eclipse.gitignore #
+############################################################################
 *.pydevproject
 .metadata
 .gradle
