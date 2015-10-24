@@ -1,0 +1,151 @@
+.module_slider {
+  width: 698px;
+  min-height: 374px;
+  background: url(../cssImages/module_slider-bg.png) left top no-repeat;
+  position: relative;
+  z-index: 10;
+  margin: 0;
+  padding: 2px 0 0 2px;
+  float: right;
+}
+.module_slider div.first {
+  padding-top: 19px;
+  padding-bottom: 20px;
+}
+.module_slider p {
+  border: 1px solid #e5e5e5;
+  border-right: none;
+  border-left: none;
+  font: normal 12px/25px Arial, Helvetica, sans-serif;
+  color: #999;
+  background: none;
+  padding: 13px 0px 20px 0;
+  width: 100%;
+  overflow: hidden;
+}
+.module_slider p i {
+  font-style: normal;
+  display: inline-block;
+  line-height: 18px;
+  float: left;
+  vertical-align: top;
+  padding-top: 1px;
+  width: 515px;
+}
+.module_slider p span {
+  display: inline-block;
+  font: normal 32px/32px Arial, Helvetica, sans-serif;
+  font-family: 'Maven Pro', cursive;
+  letter-spacing: -2px;
+  color: #3fbbcc;
+  float: left;
+  padding: 2px 0px 0 0px;
+  width: 158px;
+}
+.slider-ower {
+  overflow: hidden;
+  height: 372px;
+}
+#slider {
+  position: relative;
+  width: 696px;
+  height: 342px;
+}
+.nivoSlider {
+  position: relative;
+}
+.nivoSlider img {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+/* If an image is wrapped in a link */
+.nivoSlider a.nivo-imageLink {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  z-index: 60;
+  display: none;
+}
+/* The slices in the Slider */
+.nivo-slice {
+  display: block;
+  position: absolute;
+  z-index: 50;
+  height: 100%;
+}
+/* Caption styles */
+.nivo-caption {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  background: #000;
+  color: #fff;
+  opacity: 0.8; /* Overridden by captionOpacity setting */
+  width: 100%;
+  z-index: 89;
+}
+.nivo-caption p {
+  padding: 5px;
+  margin: 0;
+}
+.nivo-caption a {
+  display: inline !important;
+}
+.nivo-html-caption {
+  display: none;
+}
+/* Direction nav styles (e.g. Next & Prev) */
+.nivo-directionNav a {
+  position: absolute;
+  top: 45%;
+  z-index: 99;
+  cursor: pointer;
+}
+.nivo-prevNav {
+  left: 0px;
+  display: none;
+}
+.nivo-nextNav {
+  right: 0px;
+  display: none;
+}
+/* Control nav styles (e.g. 1,2,3...) */
+.nivo-controlNav {
+  position: absolute;
+  right: 7px;
+  bottom: -21px;
+  z-index: 99;
+  overflow: hidden;
+}
+.nivo-controlNav li {
+}
+.nivo-controlNav a {
+  text-indent: -5000px;
+  z-index: 99;
+  float: left;
+  color: #fff;
+  font-weight: bold;
+  width: 10px;
+  height: 10px;
+  background: url(../cssImages/nivo-controlNav-a.png) -14px top no-repeat;
+  text-align: center;
+  text-decoration: none;
+  margin-left: 4px;
+  font-size: 12px;
+  line-height: 16px;
+  padding-top: 0px;
+  cursor: pointer;
+  display: block;
+}
+.nivo-controlNav a.active {
+  background: url(../cssImages/nivo-controlNav-a.png) left top no-repeat;
+}
+#wpcumuluswidgetcontent a:hover {
+  color: #000 !important;
+}
