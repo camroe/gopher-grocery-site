@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>Cameron Roe</Author>
+  <LastAuthor>Cameron Roe</LastAuthor>
+  <Created>2015-10-26T19:19:18Z</Created>
+  <LastSaved>2015-10-26T20:14:12Z</LastSaved>
+  <Company>Progrexion</Company>
+  <Version>14.0</Version>
+ </DocumentProperties>
+ <OfficeDocumentSettings xmlns="urn:schemas-microsoft-com:office:office">
+  <AllowPNG/>
+ </OfficeDocumentSettings>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>13220</WindowHeight>
+  <WindowWidth>25040</WindowWidth>
+  <WindowTopX>560</WindowTopX>
+  <WindowTopY>480</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Bottom"/>
+   <Borders/>
+   <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="12" ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="Sheet1">
+  <Table ss:ExpandedColumnCount="7" ss:ExpandedRowCount="14" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="65" ss:DefaultRowHeight="15">
+   <Column ss:AutoFitWidth="0" ss:Width="86"/>
+   <Column ss:AutoFitWidth="0" ss:Width="89"/>
+   <Column ss:AutoFitWidth="0" ss:Width="106"/>
+   <Column ss:AutoFitWidth="0" ss:Width="139"/>
+   <Column ss:AutoFitWidth="0" ss:Width="106"/>
+   <Column ss:AutoFitWidth="0" ss:Width="309"/>
+   <Column ss:AutoFitWidth="0" ss:Width="106"/>
+   <Row>
+    <Cell><Data ss:Type="String">Category</Data></Cell>
+    <Cell><Data ss:Type="String">Sub-Category</Data></Cell>
+    <Cell><Data ss:Type="String">Image</Data></Cell>
+    <Cell><Data ss:Type="String">Product Name</Data></Cell>
+    <Cell><Data ss:Type="String">SKU</Data></Cell>
+    <Cell><Data ss:Type="String">Description</Data></Cell>
+    <Cell><Data ss:Type="String">Price</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Baked Goods</Data></Cell>
+    <Cell><Data ss:Type="String">Bread</Data></Cell>
+    <Cell><Data ss:Type="String">image1.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">White Bread</Data></Cell>
+    <Cell><Data ss:Type="Number">1</Data></Cell>
+    <Cell><Data ss:Type="String">White enriched bread</Data></Cell>
+    <Cell><Data ss:Type="Number">2.34</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Bread</Data></Cell>
+    <Cell><Data ss:Type="String">image2.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Brown Bread</Data></Cell>
+    <Cell><Data ss:Type="Number">2</Data></Cell>
+    <Cell><Data ss:Type="String">Brown Bread - whole wheat</Data></Cell>
+    <Cell><Data ss:Type="Number">3.24</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Bread</Data></Cell>
+    <Cell><Data ss:Type="String">Image3.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Bagels 4C</Data></Cell>
+    <Cell><Data ss:Type="Number">3</Data></Cell>
+    <Cell><Data ss:Type="String">Plain Bagels - 4 count</Data></Cell>
+    <Cell><Data ss:Type="Number">4.32</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Bread</Data></Cell>
+    <Cell><Data ss:Type="String">image4.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Bagels 6C</Data></Cell>
+    <Cell><Data ss:Type="Number">4</Data></Cell>
+    <Cell><Data ss:Type="String">Plain Bagles - 6 count</Data></Cell>
+    <Cell><Data ss:Type="Number">6.42</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Bread</Data></Cell>
+    <Cell><Data ss:Type="String">image5.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Dinner Buns - 6</Data></Cell>
+    <Cell><Data ss:Type="Number">5</Data></Cell>
+    <Cell><Data ss:Type="String">White dinner buns - 6 count</Data></Cell>
+    <Cell><Data ss:Type="Number">2.36</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Bread</Data></Cell>
+    <Cell><Data ss:Type="String">image6.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Dinner Buns - 12</Data></Cell>
+    <Cell><Data ss:Type="Number">6</Data></Cell>
+    <Cell><Data ss:Type="String">White Dinner buns - 12 count</Data></Cell>
+    <Cell><Data ss:Type="Number">5.04</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Muffins</Data></Cell>
+    <Cell><Data ss:Type="String">image7.jjpg</Data></Cell>
+    <Cell><Data ss:Type="String">Bran Muffins - 6</Data></Cell>
+    <Cell><Data ss:Type="Number">7</Data></Cell>
+    <Cell><Data ss:Type="String">Bran Muffins - 6 pack, gluten free</Data></Cell>
+    <Cell><Data ss:Type="Number">6.7</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Muffins</Data></Cell>
+    <Cell><Data ss:Type="String">image8.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Lemon Poppy Seed Muffins</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+    <Cell><Data ss:Type="String">Poppy Seed lemon muffins -6</Data></Cell>
+    <Cell><Data ss:Type="Number">8</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">Condiments</Data></Cell>
+    <Cell><Data ss:Type="String">Standard</Data></Cell>
+    <Cell><Data ss:Type="String">image9.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Mustard 34 oz</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="String">Heinz Mustard - 34 oz, large size yellow mustard</Data></Cell>
+    <Cell><Data ss:Type="Number">2.98</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Standard</Data></Cell>
+    <Cell><Data ss:Type="String">image10.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Ketchup[ 34 oz</Data></Cell>
+    <Cell><Data ss:Type="Number">9</Data></Cell>
+    <Cell><Data ss:Type="String">Heinz Ketchup - 34 oz, large size squeeze bottle Ketchup</Data></Cell>
+    <Cell><Data ss:Type="Number">3.98</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Standard</Data></Cell>
+    <Cell><Data ss:Type="String">image11.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Relish 34 oz</Data></Cell>
+    <Cell><Data ss:Type="Number">10</Data></Cell>
+    <Cell><Data ss:Type="String">Heinz Sweet Relish - 34 oz, large size squeez bottle </Data></Cell>
+    <Cell><Data ss:Type="Number">4.5599999999999996</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Specialty</Data></Cell>
+    <Cell><Data ss:Type="String">image12.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Dijon Mustard - 16 oz</Data></Cell>
+    <Cell><Data ss:Type="Number">11</Data></Cell>
+    <Cell><Data ss:Type="String">Dijon hot mustard</Data></Cell>
+    <Cell><Data ss:Type="Number">6.5</Data></Cell>
+   </Row>
+   <Row>
+    <Cell ss:Index="2"><Data ss:Type="String">Specialty</Data></Cell>
+    <Cell><Data ss:Type="String">image13.jpg</Data></Cell>
+    <Cell><Data ss:Type="String">Sriracha Sauce </Data></Cell>
+    <Cell><Data ss:Type="Number">12</Data></Cell>
+    <Cell><Data ss:Type="String">Sriracha Hot sauce - Respect the Rooster!</Data></Cell>
+    <Cell><Data ss:Type="Number">7.4</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageLayoutZoom>0</PageLayoutZoom>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>14</ActiveRow>
+     <ActiveCol>1</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>
