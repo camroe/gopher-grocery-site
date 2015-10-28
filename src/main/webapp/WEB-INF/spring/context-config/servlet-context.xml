@@ -21,8 +21,17 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.gophergroceries.site" />
+	<context:component-scan base-package="com.gophergroceries" />
 	
-	
+	<!--  NOTE: The mvc namespace doesn't contain an element 'import', the spring-beans.xsd however does, therefore you must 
+	preface the import with the namespace 'beans'. -->
+	<!-- SpringMVC -->
+    <beans:import resource="spring-mvc.xml"/>
+ 
+    <!-- SpringData -->
+    <beans:import resource="spring-jpa.xml"/>
+ 
+    <!-- SpringSecurity -->
+    <beans:import resource="spring-security.xml"/>
 	
 </beans:beans>
