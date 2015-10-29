@@ -140,7 +140,9 @@
 			</div>
 		</div>
 	</div>
-
+	<h1>Hello world!</h1>
+	<img alt="Error guy" src="resources/images/errorguy.jpg" />
+	<P>The time on the server is ${serverTime}.</P>
 	<!-- JAVASCRIPT SECTION  -->
 	<script type="text/javascript">
 		$("#accordion > li > div").click(function() {
