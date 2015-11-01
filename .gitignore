@@ -58,9 +58,14 @@ tmp/
 *.swp
 *~.nib
 local.properties
+.settings
 .settings/
 .settings/**
+*.settings
+**.settings**
+**/.settings
 .loadpath
+.springbeans
 
 # Eclipse Core
 .project

@@ -1,4 +1,4 @@
-package com.gophergroceries.site;
+package com.gophergroceries.controllers;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -32,8 +32,7 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 
 		model.addAttribute("serverTime", formattedDate);
-
+		//This maps to webapp/WEB-INF/views/home.jsp based on config in servlet-context.xml
 		return "home";
 	}
-
 }
