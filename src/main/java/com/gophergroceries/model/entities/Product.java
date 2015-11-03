@@ -42,7 +42,7 @@ public class Product {
 	@Column(name = "image")
 	private String image;
 
-	@Column(name = "")
+	@Column(name = "category")
 	private String category;
 
 	// ********** GETTERS AND SETTERS ************

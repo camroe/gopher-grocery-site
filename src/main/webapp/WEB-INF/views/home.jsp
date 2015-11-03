@@ -102,19 +102,19 @@
 			<div>
 				<ul id="accordion">
 					<li>
-						<div>First Catalog Header</div>
-						<ul>
-							<li><a href=#>1st item</a></li>
-							<li><a href=#>2nd item</a></li>
-							<li><a href=#>3rd item</a></li>
+						<div class="category">First Catalog Header</div>
+						<ul class=subcategory>
+							<li id="First-One"><a href=#>1st item</a></li>
+							<li id="First-Two"><a href=#>2nd item</a></li>
+							<li id="First-Three"><a href=#>3rd item</a></li>
 						</ul>
 					</li>
 					<li>
-						<div>Second Catalog Header</div>
-						<ul>
-							<li><a href=#>1st item</a></li>
-							<li><a href=#>2nd item</a></li>
-							<li><a href=#>3rd item</a></li>
+						<div class="category">Second Catalog Header</div>
+						<ul class=subcategory>
+							<li id="Second-One"><a href=#>1st item</a></li>
+							<li id="Second-Two"><a href=#>2nd item</a></li>
+							<li id="Second-Three"><a href=#>3rd item</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -141,14 +141,37 @@
 		</div>
 	</div>
 
+	<c:forEach items="${catMap}" var="category">
+		
+		MajorCategory = ${category.displayName}, urlAddress = ${category.urlAddress}</br>
+		<c:forEach items="${category.subCategories}" var="subCategory">
+			SubCategory = ${subCategory.displayName}, idName=${subCategory.idName}</br>
+		</c:forEach>
+	</c:forEach>
+
+
 	<!-- JAVASCRIPT SECTION  -->
 	<script type="text/javascript">
-		$("#accordion > li > div").click(function() {
+		// 	$("#accordion > li > div").click(function() {
+		$(".category").click(function() {
+			console.log("cat clicked")
 
 			if (false == $(this).next().is(':visible')) {
 				$('#accordion ul').slideUp(200);
 			}
 			$(this).next().slideToggle(200);
+		});
+
+		$(".subcategory li").click(function() {
+			console.log("subcat clicked");
+			var target = $(event.target);
+			var origin = (target.context.origin);//http://localhost:8080
+			var pathname = (target.context.pathname);
+			var selectedSubCategory = target.context.innerText;
+			console.log(selectedSubCategory);
+			var callURL = origin.concat(pathname.concat(selectedSubCategory));
+			console.log(callURL);
+			// 			console.log(target);
 		});
 	</script>
 </body>

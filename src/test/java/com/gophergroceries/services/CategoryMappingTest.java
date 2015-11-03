@@ -12,23 +12,29 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.gophergroceries.model.Category;
+import com.gophergroceries.model.SubCategory;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/META-INF/spring/root-context.xml")
 public class CategoryMappingTest {
 
 	@Resource
 	@Qualifier("beanName")
-	CategoryMapping catMap;
+	CategoryMapping	catMap;
 
-	private String categoryUnderTest = "Baking";
+	private String	categoryUnderTest	= "Baking";
 
 	@Test
 	public void test() {
-		List<String> c = catMap.categoryMap.get(categoryUnderTest);
+		List<Category> c = catMap.getCategoryList();
 		assertNotNull(c);
 		System.out.println(categoryUnderTest);
-		for (String str : c) {
-			System.out.println("\t: " + str);
+		for (Category cat : c) {
+			System.out.println("Major Category: " + cat.getDisplayName() + " : " + cat.getUrlAddress());
+			for (SubCategory subCat : cat.getSubCategories()) {
+				System.out.println("\tSubCategory: " + subCat.getDisplayName() + " : " + subCat.getIdName());
+			}
 		}
 	}
 
