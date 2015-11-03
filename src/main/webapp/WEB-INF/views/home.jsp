@@ -101,6 +101,20 @@
 			<div style="float: right">Float:Right within wide_wrap</div>
 			<div>
 				<ul id="accordion">
+					<c:forEach items="${catMap}" var="mainCategory">
+						<li>
+							<div class="category">
+								<a href='${mainCategory.urlAddress}'>${mainCategory.displayName}</a>
+							</div>
+							<ul class=subcategory>
+								<c:forEach items="${mainCategory.subCategories}"
+									var="subCategory">
+									<li id='${subCategory.idName}'><a href=#>${subCategory.displayName}</a>
+								</c:forEach>
+							</ul>
+						</li>
+					</c:forEach>
+
 					<li>
 						<div class="category">First Catalog Header</div>
 						<ul class=subcategory>
@@ -141,13 +155,6 @@
 		</div>
 	</div>
 
-	<c:forEach items="${catMap}" var="category">
-		
-		MajorCategory = ${category.displayName}, urlAddress = ${category.urlAddress}</br>
-		<c:forEach items="${category.subCategories}" var="subCategory">
-			SubCategory = ${subCategory.displayName}, idName=${subCategory.idName}</br>
-		</c:forEach>
-	</c:forEach>
 
 
 	<!-- JAVASCRIPT SECTION  -->
@@ -167,11 +174,16 @@
 			var target = $(event.target);
 			var origin = (target.context.origin);//http://localhost:8080
 			var pathname = (target.context.pathname);
-			var selectedSubCategory = target.context.innerText;
-			console.log(selectedSubCategory);
+// 			var selectedSubCategory = target.context.innerText;
+			var selectedSubCategory = $(this).attr('id');
 			var callURL = origin.concat(pathname.concat(selectedSubCategory));
+
+			console.log(selectedSubCategory);
 			console.log(callURL);
-			// 			console.log(target);
+			console.log(target);
+			console.log($(this).attr('id'));
+			//Call product function here
+			 window.location.href=callURL;
 		});
 	</script>
 </body>
