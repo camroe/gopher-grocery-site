@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.gophergroceries.services.CategoryMapping;
 
 @Controller
-@RequestMapping("/v1/catalog")
-public class Categories {
+@RequestMapping("/v1/categories")
+public class CategoriesController {
 
 	@Autowired
 	CategoryMapping catMap;

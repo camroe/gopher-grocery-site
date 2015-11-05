@@ -104,35 +104,20 @@
 					<c:forEach items="${catMap}" var="mainCategory">
 						<li>
 							<div class="category">
-								<a href='${mainCategory.urlAddress}'>${mainCategory.displayName}</a>
+								<a href='${mainCategory.urlAddress}'>${mainCategory.name}</a>
 							</div>
 							<ul class=subcategory>
-								<c:forEach items="${mainCategory.subCategories}"
+								<c:forEach items="${mainCategory.getSubCats()}"
 									var="subCategory">
-									<li id='${subCategory.idName}'><a href=#>${subCategory.displayName}</a>
+									<li id='${subCategory.urlAddress}'><a href=#>${subCategory.displayName}</a>
 								</c:forEach>
 							</ul>
 						</li>
 					</c:forEach>
-
-					<li>
-						<div class="category">First Catalog Header</div>
-						<ul class=subcategory>
-							<li id="First-One"><a href=#>1st item</a></li>
-							<li id="First-Two"><a href=#>2nd item</a></li>
-							<li id="First-Three"><a href=#>3rd item</a></li>
-						</ul>
-					</li>
-					<li>
-						<div class="category">Second Catalog Header</div>
-						<ul class=subcategory>
-							<li id="Second-One"><a href=#>1st item</a></li>
-							<li id="Second-Two"><a href=#>2nd item</a></li>
-							<li id="Second-Three"><a href=#>3rd item</a></li>
-						</ul>
-					</li>
 				</ul>
 			</div>
+			
+			
 			<div class="results">
 				Here is the start of Results.
 				<div style="float: right">Results float right</div>
@@ -169,12 +154,12 @@
 			$(this).next().slideToggle(200);
 		});
 
-		$(".subcategory li").click(function() {
+		$(".subcategory li").click(function(e) {
 			console.log("subcat clicked");
-			var target = $(event.target);
+			var target = $(e.target);
 			var origin = (target.context.origin);//http://localhost:8080
 			var pathname = (target.context.pathname);
-// 			var selectedSubCategory = target.context.innerText;
+			// 			var selectedSubCategory = target.context.innerText;
 			var selectedSubCategory = $(this).attr('id');
 			var callURL = origin.concat(pathname.concat(selectedSubCategory));
 
@@ -183,7 +168,7 @@
 			console.log(target);
 			console.log($(this).attr('id'));
 			//Call product function here
-			 window.location.href=callURL;
+			window.location.href = callURL;
 		});
 	</script>
 </body>

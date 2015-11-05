@@ -23,7 +23,7 @@ public class SubCategoryEntity {
 	 * way to use the mapped by attribute inside the @ManyToOne annotation
 	 */
 	@ManyToOne
-	@JoinColumn(name = "subcategoryentity_id")
+	@JoinColumn(name = "category_FK")
 	@JsonBackReference
 	private CategoryEntity cat;
 

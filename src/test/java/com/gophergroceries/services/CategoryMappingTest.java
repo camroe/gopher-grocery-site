@@ -12,28 +12,28 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.gophergroceries.model.Category;
-import com.gophergroceries.model.SubCategory;
+import com.gophergroceries.model.entities.CategoryEntity;
+import com.gophergroceries.model.entities.SubCategoryEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/META-INF/spring/root-context.xml")
 public class CategoryMappingTest {
 
 	@Resource
-	@Qualifier("beanName")
-	CategoryMapping	catMap;
+	@Qualifier("categoryMapping")
+	CategoryMapping catMap;
 
-	private String	categoryUnderTest	= "Baking";
+	private String categoryUnderTest = "Baking";
 
 	@Test
 	public void test() {
-		List<Category> c = catMap.getCategoryList();
+		List<CategoryEntity> c = catMap.getCategoryList();
 		assertNotNull(c);
 		System.out.println(categoryUnderTest);
-		for (Category cat : c) {
-			System.out.println("Major Category: " + cat.getDisplayName() + " : " + cat.getUrlAddress());
-			for (SubCategory subCat : cat.getSubCategories()) {
-				System.out.println("\tSubCategory: " + subCat.getDisplayName() + " : " + subCat.getIdName());
+		for (CategoryEntity cat : c) {
+			System.out.println("Major Category: " + cat.getName() + " : " + cat.getUrlAddress());
+			for (SubCategoryEntity subCat : cat.getSubCats()) {
+				System.out.println("\tSubCategory: " + subCat.getDisplayName() + " : " + subCat.getUrlAddress());
 			}
 		}
 	}
