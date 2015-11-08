@@ -4,38 +4,118 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Test</title>
-    <link href="resources/css/productbox.css" type="text/css" rel="stylesheet"/>
+    <link href="/resources/css/productbox.css" type="text/css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="/resources/FONTS/GG-Logo-BW.png">
 
-
+    <!-- JTIPPED DEMO -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="/js/tipped/tipped.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/tipped/tipped.css" />
+    <!-- END JTIPPED INCLUDE-->
 </head>
 
 <body>
-    <!-- ProductBOX-->
-    <div class="productbox">
-        <div style="display: inline-block; vertical-align: top;">
-            <img src="../../resources/images/blueberriesbagels.jpg" />
-        </div>
-        <div style="display: inline-block;">
-            Product Title
-        </div>
-    </div>
 
+    <div class="productHeaderContainer">
+        <span class="productHeaderLabel">Product Header Label</span>
+    </div>
+<br>
+    Found in productbox.css<br>
+     &lt;div class=&quot;productHeaderContainer&quot;&gt;<br>
+        &lt;span class=&quot;productHeaderLabel&quot;&gt;Product Header Label&lt;/span&gt;<br>
+    &lt;/div&gt;
+    
     <div class="productClear"> </div>
 
     <!-- ProductBOX-->
     <div class="productbox">
-        <div class="productImage">
+        <div class="productImageContainer simple-tooltip" title="This is a description of the product">
             <img src="../../resources/images/blueberriesbagels.jpg" />
         </div>
         <div class="productTitle">
             Product Title
         </div>
+        <div class="productDetailsContainer">
+            <div class="priceContainer">
+                <span class="priceLabel">Price  </span>
+                <span class="priceAmount">$4.99</span>
+            </div>
+            <div class="productClear"></div>
+            <!-- This is code from simply groceries -->
+
+            <div class="addToCartContainer">
+                <form action="/add_to_cart" method="post" accept-charset="utf-8">
+                    <div class="hiddenCartDetails">
+                        <input type="hidden" name="cartkey" value="" />
+                        <input type="hidden" name="id" value="1788" />
+                    </div>
+                    <div class="productQuantityContainer">
+                        <span class=quantityLabel>Quantity  </span>
+                        <input class="productQuantityBox" type="text" name="quantity" value="1" />
+                    </div>
+                    <div class="addToCartButtonContainer">
+                        <input class="addtocartButton" type="submit" value="Add to Cart" />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- This ends code from simply groceries -->
+        <div class="pricingSeperator">
+        </div>
     </div>
-    
- <div class="productClear"> </div>
-    
-    <div style="display: inline-block;">Content1</div>
-    <div style="display: inline-block;">Content2</div>
+
+
+    <div class="productClear"> </div>
+
+    <!-- ProductBOX-->
+    <div class="productbox">
+        <div class="productImageContainer simple-tooltip" title="This is a description of the product">
+            <img src="../../resources/images/blueberriesbagels.jpg" />
+        </div>
+        <div class="productTitle">
+            Product Title
+        </div>
+        <div class="productDetailsContainer">
+            <div class="priceContainer">
+                <span class="priceLabel">Price  </span>
+                <span class="priceAmount">$4.99</span>
+            </div>
+            <div class="productClear"></div>
+            <!-- This is code from simply groceries -->
+
+            <div class="addToCartContainer">
+                <form action="/add_to_cart" method="post" accept-charset="utf-8">
+                    <div class="hiddenCartDetails">
+                        <input type="hidden" name="cartkey" value="" />
+                        <input type="hidden" name="id" value="1788" />
+                    </div>
+                    <div class="productQuantityContainer">
+                        <span class=quantityLabel>Quantity  </span>
+                        <input class="productQuantityBox" type="text" name="quantity" value="1" />
+                    </div>
+                    <div class="addToCartButtonContainer">
+                        <input class="addtocartButton" type="submit" value="Add to Cart" />
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- This ends code from simply groceries -->
+        <div class="pricingSeperator">
+        </div>
+    </div>
+
+
+    <div class="productClear"> </div>
+
+    <!-- JSCRIPT SECTION -->
+    <script type="text/javascript">
+        $(document.ready(function () {
+                    Tipped.create('.simple-tooltip');
+                });
+    </script>
+
 
 </body>
 
