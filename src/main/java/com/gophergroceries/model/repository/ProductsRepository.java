@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-import com.gophergroceries.model.entities.Product;
+import com.gophergroceries.model.entities.ProductEntity;
 
-public interface ProductsRepository extends PagingAndSortingRepository<Product, Integer> {
-	List<Product> findByPopularIgnoreCase(String popular);
-	List<Product> findAllByOrderByNameAsc();
-	List<Product> findAllByOrderByPriceAsc();
+public interface ProductsRepository extends PagingAndSortingRepository<ProductEntity, Integer> {
+	List<ProductEntity> findByPopularIgnoreCase(String popular);
+	List<ProductEntity> findAllByOrderByNameAsc();
+	List<ProductEntity> findAllByOrderByPriceAsc();
+	List<ProductEntity> findByCategoryOrderByNameAsc(String category);
 }

@@ -8,4 +8,6 @@ import com.gophergroceries.model.entities.CategoryEntity;
 
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer> {
 	List<CategoryEntity> findAll();
+
+	List<CategoryEntity> findAllByOrderByName();
 }

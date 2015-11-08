@@ -8,7 +8,7 @@
   </head>
   <body>
     <div>
-      <img src="resources/images/error.jpg" alt="Unimplemented web call">
+      <img src="resources/images/errorguy.jpg" alt="Unimplemented web call">
       Sorry you have reached an unimplemented webcall - there is no where to go!
     </div>
     <div>

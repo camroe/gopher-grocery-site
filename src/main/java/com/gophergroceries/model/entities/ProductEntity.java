@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Entity
 @Table(name = "product")
-public class Product {
+public class ProductEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,8 +39,8 @@ public class Product {
 	@Column(name = "popular")
 	private String popular;
 
-	@Column(name = "image")
-	private String image;
+	@Column(name = "imageFile")
+	private String imageFile;
 
 	@Column(name = "category")
 	private String category;
@@ -102,12 +102,12 @@ public class Product {
 		this.popular = popular;
 	}
 
-	public String getImage() {
-		return image;
+	public String getImageFile() {
+		return imageFile;
 	}
 
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageFile(String imageFile) {
+		this.imageFile = imageFile;
 	}
 
 	public String getCategory() {

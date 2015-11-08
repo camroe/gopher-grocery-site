@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.gophergroceries.model.entities.Product;
+import com.gophergroceries.model.entities.ProductEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/META-INF/spring/root-context.xml")
 public class ProductRepositoryTest {
 
-	Product product = new Product();
+	ProductEntity product = new ProductEntity();
 
 	@Autowired
 	ProductsRepository repository;
@@ -32,7 +32,7 @@ public class ProductRepositoryTest {
 		product.setPrice(new BigDecimal("1.99"));
 		product.setInventory(1);
 		product.setPopular("Y");
-		product.setImage("Test Image Location");
+		product.setImageFile("Test Image Location");
 		product.setCategory("TestCategory");
 		System.out.println(product);
 	}
@@ -42,17 +42,18 @@ public class ProductRepositoryTest {
 
 		repository.save(product);
 
-		Product dbProduct = repository.findOne(product.getId());
+		ProductEntity dbProduct = repository.findOne(product.getId());
 		assertNotNull(dbProduct);
 		System.out.println(product);
 		assertNotNull(product);
+		repository.delete(dbProduct.getId());
 	}
 
 	@Test
 	public void testCreateDelete() {
 		repository.save(product);
 
-		Product dbProduct = repository.findOne(product.getId());
+		ProductEntity dbProduct = repository.findOne(product.getId());
 		assertNotNull(dbProduct);
 		System.out.println("PRODUCT: " + product);
 		System.out.println("DBPRODUCT:" + dbProduct);
@@ -63,8 +64,8 @@ public class ProductRepositoryTest {
 
 	@Test
 	public void testFindByPopular() {
-		List<Product> returnList = repository.findByPopularIgnoreCase("Y");
-		for (Product product : returnList) {
+		List<ProductEntity> returnList = repository.findByPopularIgnoreCase("Y");
+		for (ProductEntity product : returnList) {
 			System.out.println("POPULAR PRODUCT: " + product);
 		}
 	}

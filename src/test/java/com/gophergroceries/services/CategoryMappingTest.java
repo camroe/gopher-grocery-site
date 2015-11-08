@@ -21,7 +21,7 @@ public class CategoryMappingTest {
 
 	@Resource
 	@Qualifier("categoryMapping")
-	CategoryMapping catMap;
+	CategoryMappingService catMap;
 
 	private String categoryUnderTest = "Baking";
 

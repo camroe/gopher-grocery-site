@@ -1,0 +1,5 @@
+[{"id":1, "sku":"SK01", "name":"White Bread", "description":"Enriched White Bread", "price":1.0, "inventory":0, "popular":"Y", "image":"/resources/images/errorguy.jpg", "category":"bread"},
+ {"id":2, "sku":"SK02", "name":"Brown Bread", "description":"Brown Wonder Bread", "price":1.0, "inventory":0, "popular":"Y", "image":"/resources/images/errorguy.jpg", "category":"bread"},
+ {"id":3, "sku":"SK03", "name":"White Buns - 6 cnt", "description":"White Dinner Buns", "price":1.0, "inventory":0, "popular":"Y", "image":"/resources/images/errorguy.jpg", "category":"buns"},
+ {"id":4, "sku":"SK04", "name":"Brown Dinner Buns - CNT 6", "description":"Brown Dinner Rolls - 6 pack", "price":2.0, "inventory":0, "popular":"N", "image":"/resources/images/errorguy.jpg", "category":"buns"},
+ {"id":5, "sku":"SK05", "name":"White Buns - 12 CNT", "description":"White Dinner Buns", "price":3.0, "inventory":0, "popular":"Y", "image":"/resources/images/errorguy.jpg", "category":"buns"}]

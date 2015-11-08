@@ -1,144 +1,160 @@
 @font-face {
-    font-family: japan;
-    src: url(../FONTS/Japan.tff);
+	font-family: japan;
+	src: url(../FONTS/Japan.tff);
 }
 
 @font-face {
-    font-family: gothamBold;
-    src: url(../FONTS/Gotham.otf);
+	font-family: gothamBold;
+	src: url(../FONTS/Gotham.otf);
 }
 
 @font-face {
-    font-family: gothamMedium;
-    src: url(../FONTS/GothamMedium.ttf);
+	font-family: gothamMedium;
+	src: url(../FONTS/GothamMedium.ttf);
 }
 
 .productbox {
-    width: 100%;
-    border-style: solid;
-    border-color: lightgrey;
-    border-width: 1px;
-    border-radius: 5px;
-    position: relative;
-    top: 5px;
-    overflow: hidden;
-    /*force outer container to wrap inner containers. */
+	width: 100%;
+	border-style: solid;
+	border-color: lightgrey;
+	border-width: 1px;
+	border-radius: 5px;
+	position: relative;
+	top: 5px;
+	overflow: hidden;
+	height: auto;
+	min-height: 145px;
+	/*force outer container to wrap inner containers. */
 }
 
-
 /* To manage images, make a container set the size and then reference the image within the container
-to fill the container. You can then adjust the container to adjust the size of the image*/
+ to fill the container. You can then adjust the container to adjust the size of the image*/
 
 .productImageContainer {
-    float: left;
-    width: 120px;
-    position: relative;
-    top: 5px;
-    left: 5px;
-    margin: 5px;
+	float: left;
+	width: 120px;
+	position: relative;
+	top: 5px;
+	left: 5px;
+	margin: 5px;
 }
 
 .productImageContainer img {
-    width: 100%;
-    height: auto;
+	width: 100%;
+	height: auto;
 }
 
 .productTitle {
-    font-family: gothamBold;
-    float: left;
-    margin-top: 5px;
-    color: black;
-    width: 20%;
+	font-family: gothamBold;
+	float: left;
+	margin-top: 5px;
+	color: black;
+	width: 20%;
 }
 
 .priceContainer {
-    float: left;
-    width: 120px;
+	float: left;
+	width: 120px;
 }
 
 .priceLabel {
-    font-family: gothamMedium;
-    color:red;
+	font-family: gothamMedium;
+	color: red;
 }
 
 .productPrice {
-    white-space: nowrap;
-    font-family: gothamMedium;
+	white-space: nowrap;
+	font-family: gothamMedium;
 }
 
 .product-Old-Price {
-    text-decoration: line-through;
+	text-decoration: line-through;
 }
 
 .productClear {
-    clear: both;
+	clear: both;
 }
 
-.productDetailsContainer,
-pricingSeperator {
-    float: right;
-    width: 200px;
-    position: relative;
-    top: 40px;
+.productDetailsContainer, pricingSeperator {
+	float: right;
+	width: 200px;
+	position: relative;
+	top: 40px;
 }
 
 .addToCartContainer {
-    clear: both;
-    float: left;
-    width: 120px;
+	clear: both;
+	float: left;
+	width: 120px;
 }
 
 .hiddenCartDetails {
-    float: none;
+	float: none;
 }
 
 .productQuantityBox {
-    float: right;
-    width: 20px;
-    text-align: right;
-    border-radius: 1px;
+	float: right;
+	width: 20px;
+	text-align: right;
+	border-radius: 1px;
 }
 
 .addtocartButton {
-    background-color: red;
-    position: relative;
-    top: 15px;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: gothamMedium;
-    border: none;
-    color: white;
-    height: 30px;
+	background-color: red;
+	position: relative;
+	top: 15px;
+	cursor: pointer;
+	font-weight: bold;
+	font-family: gothamMedium;
+	border: none;
+	color: white;
+	height: 30px;
 }
 
 .productQuantityContainer {
-    clear: both;
-    float: left;
-    width: 120px;
+	clear: both;
+	float: left;
+	width: 120px;
 }
 
 .priceAmount {
-    float: right;
-    color:red;
-        text-decoration: underline;
-
+	float: right;
+	color: red;
 }
 
 .addToCartButtonContainer {
-    float: right;
-    height: 40px;
+	float: right;
+	height: 40px;
 }
 
 .pricingSeperator {
-    float: right;
-    width: 20px;
-    height: 60px;
-    border-left: solid 1px grey;
-    position: relative;
-    top: 50px;
+	float: right;
+	width: 20px;
+	height: 60px;
+	border-left: solid 1px grey;
+	position: relative;
+	top: 50px;
 }
 
 .quantityLabel {
-    font-family: gothamMedium;
-    float: left;
+	font-family: gothamMedium;
+	float: left;
+}
+
+.productHeaderContainer {
+	background-color: none;
+	width: 100%;
+	border-radius: 5px;
+	position: relative;
+	top: 15px;
+	overflow: hidden;
+	/*force outer container to wrap inner containers. */
+}
+
+.productHeaderLabel {
+	font-family: gothamMedium;
+	float: left;
+	font-size: 28px;
+	height: 28px;
+	vertical-align: bottom;
 }

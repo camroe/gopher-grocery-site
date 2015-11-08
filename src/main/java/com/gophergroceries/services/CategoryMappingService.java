@@ -9,7 +9,7 @@ import com.gophergroceries.model.entities.CategoryEntity;
 import com.gophergroceries.model.repository.CategoryRepository;
 
 @Service("categoryMapping")
-public class CategoryMapping {
+public class CategoryMappingService {
 
 	@Autowired
 	CategoryRepository categoryRepository;
