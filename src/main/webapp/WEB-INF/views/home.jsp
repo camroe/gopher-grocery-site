@@ -188,7 +188,20 @@
 						console.log(target);
 						console.log($(this).attr('id'));
 						//Call product function here
-						window.location.href = callURL;
+						// 						window.location.href = callURL;
+						$.ajax({
+							url : "v1/products/category/"
+									.concat(selectedSubCategory),
+							type : "GET",
+							dataType : "html",
+							success : function(data) {
+								$('.results').replaceWith(
+										$('.results').html(data));
+							},
+							error : function(xhr, status) {
+								alert("Sorry, there was a problem!");
+							}
+						});
 					});
 		</script>
 </body>
