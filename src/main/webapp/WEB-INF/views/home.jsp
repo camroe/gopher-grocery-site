@@ -233,11 +233,6 @@
 				console.log("SKU:",sku);
 				console.log("Quantity:",quantity);
 				console.log("Cart Key:",cartkey);
-				
-				
-				
-				
-				
 			});
 		</script>
 </body>
