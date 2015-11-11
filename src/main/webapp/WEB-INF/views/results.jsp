@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
 
+<base href=""/>
   <div class="productHeaderContainer">
     <span class="productHeaderLabel">${subCategoryName}</span>
   </div>
@@ -9,7 +10,7 @@
   <c:forEach items="${selectedProducts}" var="selectedProducts">
     <div class="productbox">
       <div class="productImageContainer simple-tooltip" title='${selectedProducts.description}'>
-        <img src='/${selectedProducts.imageFile}' />
+        <img src='${selectedProducts.imageFile}' />
       </div>
       <div class="productTitle">${selectedProducts.name}</div>
       <div class="productDetailsContainer">

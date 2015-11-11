@@ -32,7 +32,7 @@ public class ProductRepositoryTest {
 		product.setPrice(new BigDecimal("1.99"));
 		product.setInventory(1);
 		product.setPopular("Y");
-		product.setImageFile("Test Image Location");
+		product.setImageFile("resources/images/errorguy.jpg");
 		product.setCategory("TestCategory");
 		System.out.println(product);
 	}
@@ -57,9 +57,9 @@ public class ProductRepositoryTest {
 		assertNotNull(dbProduct);
 		System.out.println("PRODUCT: " + product);
 		System.out.println("DBPRODUCT:" + dbProduct);
-		repository.delete(product.getId());
+//		repository.delete(product.getId());
 		product = repository.findOne(dbProduct.getId());
-		assert (null == product);
+//		assert (null == product);
 	}
 
 	@Test

@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -27,6 +28,7 @@ public class CategoryEntity {
 	private String urlAddress;
 
 	@OneToMany(mappedBy = "cat", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OrderBy("displayName")
 	@JsonManagedReference
 	private Set<SubCategoryEntity> subCats;
 
