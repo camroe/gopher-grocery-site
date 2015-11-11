@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page session="false"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
 <%-- <c:set var="req" value="${paaeContext.request}"/> --%>
 <%-- <c:set var="uri" value="${req.requestURI}" /> --%>
@@ -28,7 +28,7 @@
 <meta name="Description"
   content="Gopher-Groceries: online grocery shopping and delivery to the Big Cottonwood Canyon resorts!"
 />
-    
+
 <!-- ACCORDION -->
 <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css"
   rel="stylesheet" type="text/css"
@@ -42,11 +42,11 @@
 <link href="resources/css/styles.css" type="text/css" rel="stylesheet" />
 <link href="resources/css/results.css" type="text/css" rel="stylesheet" />
 <link href="resources/css/productbox.css" type="text/css" rel="stylesheet" />
-<link href="resources/FONTS/GG-Logo-BW.png" type="image/png" rel="icon"/>
+<link href="resources/FONTS/GG-Logo-BW.png" type="image/png" rel="icon" />
 
 <!-- JTIPPED  -->
 <script src="resources/js/tipped.js" type="text/javascript"></script>
-<link href="resources/css/tipped.css" type="text/css" rel="stylesheet"/>
+<link href="resources/css/tipped.css" type="text/css" rel="stylesheet" />
 
 </head>
 <body>
@@ -140,11 +140,13 @@
               <!-- This is code from simply groceries -->
 
               <div class="addToCartContainer">
-                <form action="/add_to_cart" method="post" accept-charset="utf-8">
+                <form class="addtocart" action="/site/v1/addtocart" method="post"
+                  accept-charset="utf-8"
+                >
                   <div class="hiddenCartDetails">
-                    <input type="hidden" name="cartkey" value="" /> <input type="hidden" name="id"
-                      value='${popularProducts.sku}'
-                    />
+                    <input type="hidden" name="cartkey" value="CartKey" /> <input type="hidden"
+                      name="id" value='${popularProducts.id}'
+                    /> <input type="hidden" name="sku" value='${popularProducts.sku}' />
                   </div>
                   <div class="productQuantityContainer">
                     <span class=quantityLabel>Quantity </span> <input class="productQuantityBox"
@@ -216,6 +218,27 @@
 							}
 						});
 					});
+			//Intercept Form Submission
+			$(".addtocart").submit(function(event) {
+				event.preventDefault();
+				// Get the submit button element
+				var inputform = $(event.target);
+				var data = inputform.serialize();
+				console.log(data);
+				var id = $("[name='id']",inputform).val();
+				var sku = $("[name='sku']",inputform).val();
+				var quantity = $("[name='quantity']",inputform).val();
+				var cartkey = $("[name='cartkey']",inputform).val();
+				console.log("ID:",id);
+				console.log("SKU:",sku);
+				console.log("Quantity:",quantity);
+				console.log("Cart Key:",cartkey);
+				
+				
+				
+				
+				
+			});
 		</script>
 </body>
 </html>
