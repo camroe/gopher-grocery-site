@@ -3,6 +3,7 @@
 <%@ page session="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%-- <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%> --%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%-- <c:set var="req" value="${paaeContext.request}"/> --%>
 <%-- <c:set var="uri" value="${req.requestURI}" /> --%>
 <%-- <c:set var="url">${req.requestURL}</c:set> --%>

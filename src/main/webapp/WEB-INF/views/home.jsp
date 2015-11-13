@@ -6,6 +6,7 @@
 
 <%@ include file="includes/header.jsp" %>
 
+
 <body>
 
   <div class="full_wrap full_wrap-back">
@@ -102,7 +103,11 @@
               <!-- This is code from simply groceries -->
 
               <div class="addToCartContainer">
+<<<<<<< HEAD
                 <form class="addtocart" action="/site/v1/addtocart"
+=======
+                <form class="addtocart" action="/v1/addtocart"
+>>>>>>> development
                   method="post" accept-charset="utf-8">
                   <div class="hiddenCartDetails">
                     <input type="hidden" name="cartkey" value="CartKey" />
@@ -200,6 +205,20 @@
 				console.log("SKU:", sku);
 				console.log("Quantity:", quantity);
 				console.log("Cart Key:", cartkey);
+<<<<<<< HEAD
+=======
+				$.ajax({
+					url : "v1/addtocart",
+					type : "POST",
+					data : data,
+					success : function(data) {
+						console.log(data);
+					},
+					error : function(xhr, status) {
+						alert("Error Returned from 'addtocart'");
+					}
+				});
+>>>>>>> development
 			});
 		</script>
 </body>

@@ -15,14 +15,15 @@ import com.gophergroceries.model.AddToCartForm;
 public class AddToCartController {
 	private static final Logger logger = LoggerFactory.getLogger(AddToCartController.class);
 
+	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody String getCart() {
 		return ("This is the Get Cart PAGE");
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody void greetingSubmit(@RequestParam("cartkey") String cartkey,
-			@RequestParam("quantity") String quantity, @RequestParam("id") String id, @RequestParam("sku") String sku) {
+	public @ResponseBody void greetingSubmit(@RequestParam("quantity") String quantity,
+			@RequestParam("cartkey") String cartkey, @RequestParam("id") String id, @RequestParam("sku") String sku) {
 		AddToCartForm atcf = new AddToCartForm();
 		atcf.setCartkey(cartkey);
 		atcf.setId(id);
