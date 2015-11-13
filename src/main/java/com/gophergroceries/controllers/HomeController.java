@@ -7,6 +7,7 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +22,13 @@ import com.gophergroceries.services.ProductsService;
 @Controller
 public class HomeController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger		 logger	= LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	private CategoryMappingService catMap;
 
 	@Autowired
-	private ProductsService productService;
+	private ProductsService				 productService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -49,10 +50,10 @@ public class HomeController {
 		// servlet-context.xml
 		return "home";
 	}
-	
+
 	@RequestMapping(value = "/*ot*et*mplemented*", method = RequestMethod.GET)
 	public String notYetImplemented() {
 		return "notyetimplemented";
 	}
-	
+
 }

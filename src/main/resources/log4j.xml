@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.gophergroceries.site">
+	<logger name="com.gophergroceries">
 		<level value="info" />
 	</logger>
 	

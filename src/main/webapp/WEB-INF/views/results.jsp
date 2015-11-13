@@ -19,7 +19,7 @@
       </div>
       <div class="productClear"></div>
       <div class="addToCartContainer">
-        <form action="/site/v1/addtocart" method="post" accept-charset="utf-8">
+        <form action="/v1/addtocart" method="post" accept-charset="utf-8">
           <div class="hiddenCartDetails">
             <input type="hidden" name="cartkey" value="" /> <input type="hidden" name="id"
               value='${popularProducts.id}'
