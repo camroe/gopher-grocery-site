@@ -4,38 +4,38 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%-- <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%> --%>
 
-<%@ include file="includes/header.jsp" %>
+<%@ include file="includes/header.jsp"%>
 
 
 <body>
 
   <div class="full_wrap full_wrap-back">
     <div id="header" class="wide_wrap">
-<%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
+      <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
 
       <div class="cart" style="float: right">
         <div class="moduletable">
           <div style="float: left; color: #41BECF; margin-left: 28px">
             <div class="vmCartModule">
-              Now in your cart <a style="text-decoration: none"
-                href="NotYetImplemented.html"><b>0 Items</b></a>
+              Now in your cart <a style="text-decoration: none" href="NotYetImplemented.html"><b>0
+                  Items</b></a>
             </div>
           </div>
         </div>
       </div>
       <div id="search_form" class="right">
-        <form action="NotYetImplmented.html" method="post"
-          accept-charset="utf-8">
-          <input type="text" name="term"
-            placeholder="Enter search Keywords here"
-            onkeyup="searchProducts(this.value)" autocomplete="off" />
+        <form action="NotYetImplmented.html" method="post" accept-charset="utf-8">
+          <input type="text" name="term" placeholder="Enter search Keywords here"
+            onkeyup="searchProducts(this.value)" autocomplete="off"
+          />
           <button style="border-radius: 0px" type="submit">Search</button>
         </form>
       </div>
       <a href="NotYetImplemented.html"> <img class="logo-marginn"
         src="resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
-        width="110px">
+        width="110px"
+      >
       </a>
     </div>
   </div>
@@ -69,8 +69,7 @@
                 <a href='${mainCategory.urlAddress}'>${mainCategory.name}</a>
               </div>
               <ul class=subcategory>
-                <c:forEach items="${mainCategory.getSubCats()}"
-                  var="subCategory">
+                <c:forEach items="${mainCategory.getSubCats()}" var="subCategory">
                   <li id='${subCategory.urlAddress}'><a href=#>${subCategory.displayName}</a>
                 </c:forEach>
               </ul>
@@ -89,41 +88,34 @@
         <c:forEach items="${popularProducts}" var="popularProducts">
           <!-- ProductBOX-->
           <div class="productbox">
-            <div class="productImageContainer simple-tooltip"
-              title='${popularProducts.description}'>
+            <div class="productImageContainer simple-tooltip" title='${popularProducts.description}'>
               <img src='${popularProducts.imageFile}' />
             </div>
             <div class="productTitle">${popularProducts.name}</div>
             <div class="productDetailsContainer">
               <div class="priceContainer">
-                <span class="priceLabel">Price </span> <span
-                  class="priceAmount">$${popularProducts.price}</span>
+                <span class="priceLabel">Price </span> <span class="priceAmount">$${popularProducts.price}</span>
               </div>
               <div class="productClear"></div>
               <!-- This is code from simply groceries -->
 
               <div class="addToCartContainer">
-<<<<<<< HEAD
-                <form class="addtocart" action="/site/v1/addtocart"
-=======
-                <form class="addtocart" action="/v1/addtocart"
->>>>>>> development
-                  method="post" accept-charset="utf-8">
+
+                <form class="addtocart" action="/v1/addtocart" method="post" accept-charset="utf-8">
                   <div class="hiddenCartDetails">
-                    <input type="hidden" name="cartkey" value="CartKey" />
-                    <input type="hidden" name="id"
-                      value='${popularProducts.id}' /> <input
-                      type="hidden" name="sku"
-                      value='${popularProducts.sku}' />
+                    <input type="hidden" name="cartkey" value="CartKey" /> <input type="hidden"
+                      name="id" value='${popularProducts.id}'
+                    /> <input type="hidden" name="sku" value='${popularProducts.sku}' /> <input
+                      type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"
+                    />
                   </div>
                   <div class="productQuantityContainer">
-                    <span class=quantityLabel>Quantity </span> <input
-                      class="productQuantityBox" type="text"
-                      name="quantity" value="1" />
+                    <span class=quantityLabel>Quantity </span> <input class="productQuantityBox"
+                      type="text" name="quantity" value="1"
+                    />
                   </div>
                   <div class="addToCartButtonContainer">
-                    <input class="addtocartButton" type="submit"
-                      value="Add to Cart" />
+                    <input class="addtocartButton" type="submit" value="Add to Cart" />
 
                   </div>
                 </form>
@@ -142,84 +134,89 @@
     </div>
   </div>
 
-
-
   <!-- JAVASCRIPT SECTION  -->
+
+
+
   <script type="text/javascript">
-			// 	$("#accordion > li > div").click(function() {
-			$(".category").click(function() {
-				console.log("cat clicked")
+      // 	$("#accordion > li > div").click(function() {
+      $(".category").click(function() {
+        console.log("cat clicked")
 
-				if (false == $(this).next().is(':visible')) {
-					$('#accordion ul').slideUp(200);
-				}
-				$(this).next().slideToggle(200);
-			});
+        if (false == $(this).next().is(':visible')) {
+          $('#accordion ul').slideUp(200);
+        }
+        $(this).next().slideToggle(200);
+      });
 
-			$(".subcategory li")
-					.click(
-							function(e) {
-								console.log("subcat clicked");
-								var target = $(e.target);
-								var origin = (target.context.origin);//http://localhost:8080
-								var pathname = (target.context.pathname);
-								// 			var selectedSubCategory = target.context.innerText;
-								var selectedSubCategory = $(this).attr('id');
-								var callURL = origin.concat(pathname
-										.concat(selectedSubCategory));
+      $(".subcategory li")
+          .click(
+              function(e) {
+                console.log("subcat clicked");
+                var target = $(e.target);
+                var origin = (target.context.origin);//http://localhost:8080
+                var pathname = (target.context.pathname);
+                // 			var selectedSubCategory = target.context.innerText;
+                var selectedSubCategory = $(this).attr('id');
+                var callURL = origin.concat(pathname
+                    .concat(selectedSubCategory));
 
-								console.log(selectedSubCategory);
-								console.log(callURL);
-								console.log(target);
-								console.log($(this).attr('id'));
-								//Call product function here
-								// 						window.location.href = callURL;
-								$
-										.ajax({
-											url : "v1/products/category/"
-													.concat(selectedSubCategory),
-											type : "GET",
-											dataType : "html",
-											success : function(data) {
-												$('.results').replaceWith(
-														$('.results')
-																.html(data));
-											},
-											error : function(xhr, status) {
-												alert("Sorry, there was a problem! I was unable to access this URL. \n This problem has been logged as a problem.");
-											}
-										});
-							});
-			//Intercept Form Submission
-			$(".addtocart").submit(function(event) {
-				event.preventDefault();
-				// Get the submit button element
-				var inputform = $(event.target);
-				var data = inputform.serialize();
-				console.log(data);
-				var id = $("[name='id']", inputform).val();
-				var sku = $("[name='sku']", inputform).val();
-				var quantity = $("[name='quantity']", inputform).val();
-				var cartkey = $("[name='cartkey']", inputform).val();
-				console.log("ID:", id);
-				console.log("SKU:", sku);
-				console.log("Quantity:", quantity);
-				console.log("Cart Key:", cartkey);
-<<<<<<< HEAD
-=======
-				$.ajax({
-					url : "v1/addtocart",
-					type : "POST",
-					data : data,
-					success : function(data) {
-						console.log(data);
-					},
-					error : function(xhr, status) {
-						alert("Error Returned from 'addtocart'");
-					}
-				});
->>>>>>> development
-			});
-		</script>
+                console.log(selectedSubCategory);
+                console.log(callURL);
+                console.log(target);
+                console.log($(this).attr('id'));
+                //Call product function here
+                // 						window.location.href = callURL;
+                $
+                    .ajax({
+                      url : "v1/products/category/".concat(selectedSubCategory),
+                      type : "GET",
+                      dataType : "html",
+                      success : function(data) {
+                        $('.results').replaceWith($('.results').html(data));
+                      },
+                      error : function(xhr, status) {
+                        alert("Sorry, there was a problem! I was unable to access this URL. \n This problem has been logged as a problem.");
+                      }
+                    });
+              });
+      //Intercept Form Submission
+      $(".addtocart")
+          .submit(
+              function(event) {
+                event.preventDefault();
+                // Get the submit button element
+                var inputform = $(event.target);
+                var data = inputform.serialize();
+                console.log(data);
+                var id = $("[name='id']", inputform).val();
+                var sku = $("[name='sku']", inputform).val();
+                var quantity = $("[name='quantity']", inputform).val();
+                var cartkey = $("[name='cartkey']", inputform).val();
+                //         console.log("ID:", id);
+                //         console.log("SKU:", sku);
+                //         console.log("Quantity:", quantity);
+                //         console.log("Cart Key:", cartkey);
+                $
+                    .ajax({
+                      url : 'v1/addtocart',
+                      type : 'POST',
+                      data : data,
+                      dataType : 'text',
+
+                      success : function(data) {
+                        //             console.log("Add to Cart Success: ");
+                      },
+                      error : function(xhr, textStatus, errorThrown) {
+                        console.log(xhr.status);
+                        if (xhr.status === 404) {
+                          alert("We're very sorry, an invalid call was made and we got back a \'Not found\' message. Please make sure you are logged in and try it again. '");
+                        } else if (xhr.status === 403) {
+                          alert("You have made a call to a page you do not have access to. Please make sure you are logged in");
+                        }
+                      }
+                    });//AJAX CALL
+              });//ADD TO CART EVENT
+    </script>
 </body>
 </html>

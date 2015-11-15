@@ -158,3 +158,10 @@
 	height: 28px;
 	vertical-align: bottom;
 }
+
+/* For the modal dialog box on add to cart. */
+.ui-dialog-osx {
+    -moz-border-radius: 0 0 8px 8px;
+    -webkit-border-radius: 0 0 8px 8px;
+    border-radius: 0 0 8px 8px; border-width: 0 8px 8px 8px;
+}
