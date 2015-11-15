@@ -17,6 +17,7 @@
 <!-- <base href=""/> -->
 <meta http-equiv="Content-Type" Content="text/html;charset=utf-8" />
 <meta content="utf-8" http-equiv="encoding">
+<meta charset="utf-8" />
 <title>Gopher-Groceries | Order your Groceries Online Today for a GREAT Ski Holiday</title>
 
 <meta name="Keywords"

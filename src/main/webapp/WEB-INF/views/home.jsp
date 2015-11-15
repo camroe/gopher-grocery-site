@@ -17,8 +17,9 @@
         <div class="moduletable">
           <div style="float: left; color: #41BECF; margin-left: 28px">
             <div class="vmCartModule">
-              Now in your cart <a style="text-decoration: none" href="NotYetImplemented.html"><b>0
-                  Items</b></a>
+              Now in your cart <a style="text-decoration: none" href="NotYetImplemented.html"><b><span
+                  id="cartItemsCount"
+                >0</span> Items</b></a>
             </div>
           </div>
         </div>
@@ -139,7 +140,6 @@
 
 
   <script type="text/javascript">
-      // 	$("#accordion > li > div").click(function() {
       $(".category").click(function() {
         console.log("cat clicked")
 
@@ -175,48 +175,31 @@
                       success : function(data) {
                         $('.results').replaceWith($('.results').html(data));
                       },
-                      error : function(xhr, status) {
-                        alert("Sorry, there was a problem! I was unable to access this URL. \n This problem has been logged as a problem.");
+                      error : function(jqXHR, textStatus, errorThrown) {
+                        alert("Sorry, there was a problem! I was unable to access this URL. \n This problem has been logged.");
                       }
                     });
               });
-      //Intercept Form Submission
-      $(".addtocart")
-          .submit(
-              function(event) {
-                event.preventDefault();
-                // Get the submit button element
-                var inputform = $(event.target);
-                var data = inputform.serialize();
-                console.log(data);
-                var id = $("[name='id']", inputform).val();
-                var sku = $("[name='sku']", inputform).val();
-                var quantity = $("[name='quantity']", inputform).val();
-                var cartkey = $("[name='cartkey']", inputform).val();
-                //         console.log("ID:", id);
-                //         console.log("SKU:", sku);
-                //         console.log("Quantity:", quantity);
-                //         console.log("Cart Key:", cartkey);
-                $
-                    .ajax({
-                      url : 'v1/addtocart',
-                      type : 'POST',
-                      data : data,
-                      dataType : 'text',
-
-                      success : function(data) {
-                        //             console.log("Add to Cart Success: ");
-                      },
-                      error : function(xhr, textStatus, errorThrown) {
-                        console.log(xhr.status);
-                        if (xhr.status === 404) {
-                          alert("We're very sorry, an invalid call was made and we got back a \'Not found\' message. Please make sure you are logged in and try it again. '");
-                        } else if (xhr.status === 403) {
-                          alert("You have made a call to a page you do not have access to. Please make sure you are logged in");
-                        }
-                      }
-                    });//AJAX CALL
-              });//ADD TO CART EVENT
+      //Intercept Form Submission, Tie the event handler to the document so we
+      //can replace the .results with other results.
+      $(document).on('submit', ".addtocart", (function(event) {
+        event.preventDefault();
+        // Get the submit button element
+        var inputform = $(event.target);
+        var data = inputform.serialize();
+        console.log("addtocart event caught");
+        console.log(data);
+        var URL = inputform.attr("action");
+        $.post(URL, data, function(data, textStatus, jqXHR) {
+          //data
+          //Replace number of items in cart here. 
+          console.log(data);
+          var text = $('#cartItemsCount').html(data);
+          console.log(text);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+          alert(errorThrown);
+        });
+      }));
     </script>
 </body>
 </html>

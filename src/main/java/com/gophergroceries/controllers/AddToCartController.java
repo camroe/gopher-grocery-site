@@ -1,5 +1,7 @@
 package com.gophergroceries.controllers;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,14 +17,13 @@ import com.gophergroceries.model.AddToCartForm;
 public class AddToCartController {
 	private static final Logger logger = LoggerFactory.getLogger(AddToCartController.class);
 
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public @ResponseBody String getCart() {
 		return ("This is the Get Cart PAGE");
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public @ResponseBody void greetingSubmit(@RequestParam("quantity") String quantity,
+	public @ResponseBody Integer greetingSubmit(@RequestParam("quantity") String quantity,
 			@RequestParam("cartkey") String cartkey, @RequestParam("id") String id, @RequestParam("sku") String sku) {
 		AddToCartForm atcf = new AddToCartForm();
 		atcf.setCartkey(cartkey);
@@ -31,7 +32,8 @@ public class AddToCartController {
 		atcf.setSku(sku);
 		logger.info(atcf.toString());
 		System.out.println(atcf.toString());
-
+		//return a random cart count for now.
+		return (ThreadLocalRandom.current().nextInt(1, 99 + 1));
 	}
 
 }

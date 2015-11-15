@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page session="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
-<base href="" />
 <div class="productHeaderContainer">
   <span class="productHeaderLabel">${subCategoryName}</span>
 </div>
@@ -19,11 +19,13 @@
       </div>
       <div class="productClear"></div>
       <div class="addToCartContainer">
-        <form action="/v1/addtocart" method="post" accept-charset="utf-8">
+        <form class="addtocart" action="/v1/addtocart" method="post" accept-charset="utf-8">
           <div class="hiddenCartDetails">
-            <input type="hidden" name="cartkey" value="" /> <input type="hidden" name="id"
-              value='${popularProducts.id}'
-            /> <input type="hidden" name="sku" value='${popularProducts.sku}' />
+            <input type="hidden" name="cartkey" value="CartKey" /> <input type="hidden" name="id"
+              value='${selectedProducts.id}'
+            /> <input type="hidden" name="sku" value='${selectedProducts.sku}' /> <input
+              type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"
+            >
           </div>
           <div class="productQuantityContainer">
             <span class=quantityLabel>Quantity </span> <input class="productQuantityBox" type="text"
