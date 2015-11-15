@@ -50,7 +50,8 @@ public class HomeController {
 		// servlet-context.xml
 		return "home";
 	}
-
+	
+	@Secured("USER")
 	@RequestMapping(value = "/*ot*et*mplemented*", method = RequestMethod.GET)
 	public String notYetImplemented() {
 		return "notyetimplemented";

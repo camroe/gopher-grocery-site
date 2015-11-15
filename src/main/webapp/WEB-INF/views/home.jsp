@@ -2,7 +2,7 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page session="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%-- <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%> --%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <%@ include file="includes/header.jsp"%>
 
@@ -54,6 +54,7 @@
         <li><a href="NotYetImplemented.html">Resort Delivery</a></li>
         <li><a href="NotYetImplemented.html">FAQs</a></li>
         <li><a href="contacts.html">Contacts</a></li>
+        <li><a href="NotYetImplemented.html"><span id="loginlogoutlabel">Login</span></a></li>
       </ul>
     </div>
 
@@ -140,33 +141,18 @@
 
 
   <script type="text/javascript">
+      //**********************************************************************
       $(".category").click(function() {
-        console.log("cat clicked")
-
         if (false == $(this).next().is(':visible')) {
           $('#accordion ul').slideUp(200);
         }
         $(this).next().slideToggle(200);
       });
-
+      //**********************************************************************
       $(".subcategory li")
           .click(
-              function(e) {
-                console.log("subcat clicked");
-                var target = $(e.target);
-                var origin = (target.context.origin);//http://localhost:8080
-                var pathname = (target.context.pathname);
-                // 			var selectedSubCategory = target.context.innerText;
+              function(event) {
                 var selectedSubCategory = $(this).attr('id');
-                var callURL = origin.concat(pathname
-                    .concat(selectedSubCategory));
-
-                console.log(selectedSubCategory);
-                console.log(callURL);
-                console.log(target);
-                console.log($(this).attr('id'));
-                //Call product function here
-                // 						window.location.href = callURL;
                 $
                     .ajax({
                       url : "v1/products/category/".concat(selectedSubCategory),
@@ -180,8 +166,10 @@
                       }
                     });
               });
-      //Intercept Form Submission, Tie the event handler to the document so we
-      //can replace the .results with other results.
+      //**********************************************************************
+      //Intercept 'addtocart' Form Submission, Tie the event handler to the document 
+      //so we can replace the .results with other results.
+      //**********************************************************************
       $(document).on('submit', ".addtocart", (function(event) {
         event.preventDefault();
         // Get the submit button element
@@ -195,10 +183,23 @@
           //Replace number of items in cart here. 
           console.log(data);
           var text = $('#cartItemsCount').html(data);
-          console.log(text);
         }).fail(function(jqXHR, textStatus, errorThrown) {
           alert(errorThrown);
         });
+      }));
+      //**********************************************************************
+      //Intercept the Login/Logout nav bar selection
+      //**********************************************************************
+      $(document).on('click', "#loginlogoutlabel", (function(event) {
+        event.preventDefault();
+        selection = $(event.target);
+        label = $(selection).text();
+        //just toggle for now.
+        if (label === "Login") {
+          $(selection).html("Logout");
+        } else {
+          $(selection).html("Login");
+        }
       }));
     </script>
 </body>
