@@ -15,9 +15,12 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='This is the main product table for gophergroceries';
 
 
-INSERT INTO `product` VALUES (1,'SK01','White Bread','Enriched White Bread',1.00,NULL,'Y','resources/images/errorguy.jpg','bread'),
+LOCK TABLES gophergroceries.product WRITE;
+INSERT INTO gophergroceries.product(id,sku, name, description, price,inventory,popular,imageFile,category)  
+VALUES (1,'SK01','White Bread','Enriched White Bread',1.00,NULL,'Y','resources/images/errorguy.jpg','bread'),
 (2,'SK02','Brown Bread','Brown Wonder Bread',1.00,NULL,'Y','resources/images/brownbread.jpg','bread'),
 (3,'SK03','White Buns - 6 cnt','White Dinner Buns',1.00,NULL,'Y','resources/images/errorguy.jpg','buns'),
 (4,'SK04','Brown Dinner Buns - CNT 6','Brown Dinner Rolls - 6 pack',2.00,NULL,'N','resources/images/errorguy.jpg','buns'),
 (5,'SK05','White Buns - 12 CNT','White Dinner Buns. This is a really long description just to see how it works on a single really long line. &#13; This is the 2nd line I think.',3.00,NULL,'Y','resources/images/errorguy.jpg','buns'),
 (6,'SK06','Coors Light','MMMMmmmmm Beeeeerrrr. ',10.00,NULL,'Y','resources/images/errorguy.jpg','lightbeer');
+UNLOCK TABLES;
