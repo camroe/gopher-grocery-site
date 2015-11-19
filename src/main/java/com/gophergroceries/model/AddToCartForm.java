@@ -65,6 +65,7 @@ public class AddToCartForm {
 				.append("\nQuantity: ").append(getQuantity())
 				.append("\nCartKey").append(getCartkey())
 				.append("\nUserName:").append(getUsername())
+				.append("\nSession: " ).append(getSessionID())
 				.append("\n");
 		return sb.toString();
 	}

@@ -15,6 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 import com.gophergroceries.model.AddToCartForm;
 import com.gophergroceries.results.AddToOrderResult;
+import com.gophergroceries.results.OrderSummaryResult;
 import com.gophergroceries.services.OrderService;
 
 @Controller
@@ -45,6 +46,13 @@ public class AddToCartController {
 		atcf.setSessionID(session);
 		logger.info(atcf.toString());
 		return (orderService.addItemToOrder(atcf));
+	}
+
+	// v1/addtocart/ordersummary
+	@RequestMapping(value = "/ordersummary", method = RequestMethod.GET)
+	public @ResponseBody OrderSummaryResult getOrderSummary() {
+
+		return orderService.getOrderSummary();
 	}
 
 }

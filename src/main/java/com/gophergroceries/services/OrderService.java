@@ -5,15 +5,20 @@ import java.util.HashSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import com.gophergroceries.model.AddToCartForm;
 import com.gophergroceries.model.Order;
 import com.gophergroceries.model.dao.OrderSummary;
 import com.gophergroceries.model.entities.OrderLinesEntity;
 import com.gophergroceries.model.entities.OrdersEntity;
+import com.gophergroceries.model.entities.OrdersEntityFactory;
 import com.gophergroceries.model.repository.OrdersRepository;
 import com.gophergroceries.results.AddToOrderResult;
+import com.gophergroceries.results.OrderSummaryResult;
 
 @Service
 public class OrderService {
@@ -32,8 +37,6 @@ public class OrderService {
 	private final String CONFIRMATION_ID = "TestConfirmation";
 
 	public OrdersEntity getOrderWithSessionID(String sessionid) {
-		logger.debug("Called with session id " + sessionid + ", but using " + SESSION_ID);
-		sessionid = SESSION_ID;
 		return ordersRepository.findOneBySessionID(sessionid);
 	}
 
@@ -70,6 +73,7 @@ public class OrderService {
 			ator.setErrorMsg("Attempted to add unknown product to cart");
 		}
 		else {
+			ator.setError(false);
 			OrderSummary os = new OrderSummary(order);
 			ator.setOrderSummary(os);
 		}
@@ -89,13 +93,39 @@ public class OrderService {
 
 		// Try to add atcf to order.
 		if (order.add(atcf)) {
+			ator.setError(false);
+			ator.setErrorMsg("Success");
 		}
-		else
+		else {
 			ator.setError(true);
-		ator.setErrorMsg("Error Adding to Cart. We are looking into it.");
-		logger.error("Failed to add to cart in OrderService : atcf =>" + atcf);
-		;
+			ator.setErrorMsg("Error Adding to Cart. We are looking into it.");
+			logger.error("Failed to add to cart in OrderService : atcf =>" + atcf);
+		}
 		return ator;
+	}
+
+	public OrderSummaryResult getOrderSummary() {
+		OrderSummaryResult osr = new OrderSummaryResult();
+		String session = RequestContextHolder.currentRequestAttributes().getSessionId();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName();
+		OrdersEntity oe = getOEBasedOn(name, session);
+		if (null == oe){
+			oe = OrdersEntityFactory.empty();
+		}
+		order.setOrderEntity(oe);
+		OrderSummary os = new OrderSummary(order);
+		osr.setError(false);
+		osr.setErrorMsg("Success");
+		osr.setOrderSummary(os);
+		return osr;
+	}
+
+	private OrdersEntity getOEBasedOn(String name, String session) {
+		if (name.equals("anonymousUser"))
+			return getOrderWithSessionID(session);
+		else
+			return getOrderWithUserName(name);
 	}
 
 }

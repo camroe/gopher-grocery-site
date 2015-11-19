@@ -13,7 +13,11 @@
   <div class="full_wrap full_wrap-back">
     <div id="header" class="wide_wrap">
       <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
-
+      <a href="NotYetImplemented.html"> <img class="logo-marginn"
+        src="resources/FONTS/GG-Logo-Color.png"
+        alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
+        width="160px">
+      </a>
       <div class="cart" style="float: right">
         <div class="moduletable">
           <div style="float: left; color: #41BECF; margin-left: 28px">
@@ -29,16 +33,15 @@
         <form action="NotYetImplmented.html" method="post"
           accept-charset="utf-8">
           <input type="text" name="term"
+            placeholder="Search is coming soon"
             placeholder="Enter search Keywords here"
             onkeyup="searchProducts(this.value)" autocomplete="off" />
-          <button style="border-radius: 0px" type="submit">Search</button>
+          <button style="border-radius: 0px" >Search</button>
+          <!--           Add 'type="submit"' to line above when ready -->
         </form>
       </div>
-      <a href="NotYetImplemented.html"> <img class="logo-marginn"
-        src="resources/FONTS/GG-Logo-Color.png"
-        alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
-        width="110px">
-      </a>
+      <!-- end search_form -->
+
     </div>
   </div>
 
@@ -179,39 +182,45 @@
       //Intercept 'addtocart' Form Submission, Tie the event handler to the document 
       //so we can replace the .results with other results.
       //**********************************************************************
-      $(document).on(
-          'submit',
-          ".addtocart",
-          (function(event) {
-            event.preventDefault();
-            // Get the submit button element
-            var inputform = $(event.target);
-            var data = inputform.serialize();
-            console.log("addtocart event caught");
-            console.log(data);
-            var URL = inputform.attr("action");
-            $.post(
-                URL,
-                data,
-                function(data, textStatus, jqXHR) {
-                  //data - In the form of an AddToCartResult
-                  //Replace number of items in cart here. 
-                  if (data.error) {
-                    alert(data.errorMsg);
-                  } else {
-                    console.log(data);
-                    alert("Successfully Added to Cart\nTotal Number of Items: "
-                        + data.orderSummary.numberOfItems
-                        + "\n Total in Cart = $" + data.orderSummary.total);
-                    var text = $('#cartItemsCount').html(
-                        data.orderSummary.numberOfItems);
+      $(document)
+          .on(
+              'submit',
+              ".addtocart",
+              (function(event) {
+                event.preventDefault();
+                // Get the submit button element
+                var inputform = $(event.target);
+                var data = inputform.serialize();
+                console.log("addtocart event caught");
+                console.log(data);
+                var URL = inputform.attr("action");
+                $
+                    .post(
+                        URL,
+                        data,
+                        function(data, textStatus, jqXHR) {
+                          //data - In the form of an AddToCartResult
+                          //Replace number of items in cart here. 
+                          if (data.error) {
+                            alert(data.errorMsg);
+                          } else {
+                            console.log(data);
+                            alert("Successfully Added to Cart\nTotal Number of Items: "
+                                + data.orderSummary.numberOfItems
+                                + "\n Total in Cart = $"
+                                + data.orderSummary.total);
+                            var text = $('#cartItemsCount').html(
+                                data.orderSummary.numberOfItems);
 
-                  }
+                          }
 
-                }).fail(function(jqXHR, textStatus, errorThrown) {
-              alert(errorThrown);
-            });
-          }));
+                        })
+                    .fail(
+                        function(jqXHR, textStatus, errorThrown) {
+                          alert("Sorry, there was a problem! I was unable to access this URL. \n"
+                              + errorThrown);
+                        });
+              }));
       //**********************************************************************
       //Intercept the Login/Logout nav bar selection
       //**********************************************************************
@@ -226,6 +235,27 @@
           $(selection).html("Login");
         }
       }));
+      function getOrderSummary() {
+        $
+            .ajax({
+              url : "v1/addtocart/ordersummary",
+              type : "GET",
+              success : function(data) {
+                var text = $('#cartItemsCount').html(
+                    data.orderSummary.numberOfItems);
+              },
+              error : function(jqXHR, textStatus, errorThrown) {
+                alert("Sorry, there was a problem! I was unable to access this URL. \n"
+                    + errorThrown);
+              }
+            });
+      }
+      function searchProducts(searchValue) {
+        alert("The function to search for "
+            + searchValue
+            + " is coming soon. Thank you for your patience while we work on this.");
+      }
+      $(document).ready(getOrderSummary);
     </script>
 </body>
 </html>
