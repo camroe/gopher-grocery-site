@@ -179,29 +179,39 @@
       //Intercept 'addtocart' Form Submission, Tie the event handler to the document 
       //so we can replace the .results with other results.
       //**********************************************************************
-      $(document).on('submit', ".addtocart", (function(event) {
-        event.preventDefault();
-        // Get the submit button element
-        var inputform = $(event.target);
-        var data = inputform.serialize();
-        console.log("addtocart event caught");
-        console.log(data);
-        var URL = inputform.attr("action");
-        $.post(URL, data, function(data, textStatus, jqXHR) {
-          //data - In the form of an AddToCartResult
-          //Replace number of items in cart here. 
-          if (data.error) {
-            alert(data.errorMsg);
-          } else {
-            alert("Successfully Added to Cart");
-          }
+      $(document).on(
+          'submit',
+          ".addtocart",
+          (function(event) {
+            event.preventDefault();
+            // Get the submit button element
+            var inputform = $(event.target);
+            var data = inputform.serialize();
+            console.log("addtocart event caught");
+            console.log(data);
+            var URL = inputform.attr("action");
+            $.post(
+                URL,
+                data,
+                function(data, textStatus, jqXHR) {
+                  //data - In the form of an AddToCartResult
+                  //Replace number of items in cart here. 
+                  if (data.error) {
+                    alert(data.errorMsg);
+                  } else {
+                    console.log(data);
+                    alert("Successfully Added to Cart\nTotal Number of Items: "
+                        + data.orderSummary.numberOfItems
+                        + "\n Total in Cart = $" + data.orderSummary.total);
+                    var text = $('#cartItemsCount').html(
+                        data.orderSummary.numberOfItems);
 
-          //If I just return a number, this works. 
-          //           var text = $('#cartItemsCount').html(data);
-        }).fail(function(jqXHR, textStatus, errorThrown) {
-          alert(errorThrown);
-        });
-      }));
+                  }
+
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+              alert(errorThrown);
+            });
+          }));
       //**********************************************************************
       //Intercept the Login/Logout nav bar selection
       //**********************************************************************

@@ -1,7 +1,6 @@
 package com.gophergroceries.services;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,8 +19,8 @@ import com.gophergroceries.results.AddToOrderResult;
 public class OrderServiceTest {
 
 	private final String SESSION_ID = "TestSessionID";
-	private final String EMAIL = "camroe@gmail.com";
-	private final String PAYPAL_CONFIRMATION = "Test PayPal Confirmation";
+	// private final String EMAIL = "camroe@gmail.com";
+	// private final String PAYPAL_CONFIRMATION = "Test PayPal Confirmation";
 	private final String CONFIRMATION_ID = "TestConfirmation";
 
 	@Autowired

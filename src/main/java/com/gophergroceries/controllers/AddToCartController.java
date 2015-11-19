@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,18 +35,16 @@ public class AddToCartController {
 			@RequestParam("cartkey") String cartkey, @RequestParam("id") String id, @RequestParam("sku") String sku) {
 		AddToCartForm atcf = new AddToCartForm();
 		String session = RequestContextHolder.currentRequestAttributes().getSessionId();
-		logger.info("Session: " + session);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName(); // get logged in username
+		atcf.setUsername(name);
 		atcf.setCartkey(cartkey);
 		atcf.setId(id);
 		atcf.setQuantity(quantity);
 		atcf.setSku(sku);
 		atcf.setSessionID(session);
 		logger.info(atcf.toString());
-		System.out.println(atcf.toString());
-		AddToOrderResult ator = orderService.addItemToOrder(atcf);
-		// return a random cart count for now.
-		// return (ThreadLocalRandom.current().nextInt(1, 99 + 1));
-		return (ator);
+		return (orderService.addItemToOrder(atcf));
 	}
 
 }

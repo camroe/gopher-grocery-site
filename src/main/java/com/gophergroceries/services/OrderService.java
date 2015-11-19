@@ -1,5 +1,7 @@
 package com.gophergroceries.services;
 
+import java.util.HashSet;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.gophergroceries.model.AddToCartForm;
 import com.gophergroceries.model.Order;
 import com.gophergroceries.model.dao.OrderSummary;
+import com.gophergroceries.model.entities.OrderLinesEntity;
 import com.gophergroceries.model.entities.OrdersEntity;
 import com.gophergroceries.model.repository.OrdersRepository;
 import com.gophergroceries.results.AddToOrderResult;
@@ -20,24 +23,38 @@ public class OrderService {
 	@Autowired
 	private Order order;
 
+	@Autowired
+	private OrdersRepository ordersRepository;
+
 	private final String SESSION_ID = "TestSessionID";
 	// private final String EMAIL = "camroe@gmail.com";
 	// private final String PAYPAL_CONFIRMATION = "Test PayPal Confirmation";
 	private final String CONFIRMATION_ID = "TestConfirmation";
 
-	@Autowired
-	private OrdersRepository ordersRepository;
-
 	public OrdersEntity getOrderWithSessionID(String sessionid) {
-		return ordersRepository.findOneBySessionID(SESSION_ID);
+		logger.debug("Called with session id " + sessionid + ", but using " + SESSION_ID);
+		sessionid = SESSION_ID;
+		return ordersRepository.findOneBySessionID(sessionid);
 	}
 
 	public OrdersEntity getOrderWithConfirmationID(String confirmationID) {
-		return ordersRepository.findOneByConfirmationID(CONFIRMATION_ID);
+		logger.debug("Called with confirmationID " + confirmationID + ", but using " + CONFIRMATION_ID);
+		confirmationID = CONFIRMATION_ID;
+		return ordersRepository.findOneByConfirmationID(confirmationID);
+	}
+
+	public OrdersEntity getOrderWithUserName(String username) {
+		return ordersRepository.findOneByUsername(username);
 	}
 
 	public AddToOrderResult addItemToOrder(AddToCartForm atcf) {
-		OrdersEntity orderEntity = ordersRepository.findOneBySessionID(atcf.getSessionID());
+		OrdersEntity orderEntity = null;
+		if (atcf.getUsername().equals("anonymousUser")) {
+			orderEntity = getOrderWithSessionID(atcf.getSessionID());
+		}
+		else {
+			orderEntity = getOrderWithUserName(atcf.getUsername());
+		}
 		if (null == orderEntity) {
 			return createNewOrder(atcf);
 		}
@@ -61,8 +78,23 @@ public class OrderService {
 
 	private AddToOrderResult createNewOrder(AddToCartForm atcf) {
 		AddToOrderResult ator = new AddToOrderResult();
-		ator.setError(true);
-		ator.setErrorMsg("Create New Order Has not been implemented yet");
+		// Set up new OrdersEntity
+		OrdersEntity oe = new OrdersEntity();
+		// TODO: Get and Set EMail if available
+		oe.setSessionID(atcf.getSessionID());
+		oe.setUsername(atcf.getUsername());
+		oe.setItems(new HashSet<OrderLinesEntity>()); // Empty
+		// Set up new OrderLinesEntity
+		order.setOrderEntity(oe);
+
+		// Try to add atcf to order.
+		if (order.add(atcf)) {
+		}
+		else
+			ator.setError(true);
+		ator.setErrorMsg("Error Adding to Cart. We are looking into it.");
+		logger.error("Failed to add to cart in OrderService : atcf =>" + atcf);
+		;
 		return ator;
 	}
 

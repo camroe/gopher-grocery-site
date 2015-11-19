@@ -55,7 +55,7 @@ public class OrderSummary {
 	private Integer calcNumberOfItems(Order order) {
 		Integer numberOfItems = 0;
 		for (OrderLinesEntity ole : order.getOrderEntity().getOrderLines()) {
-			numberOfItems = +ole.getQuantity();
+			numberOfItems = numberOfItems + ole.getQuantity();
 		}
 		return numberOfItems;
 	}
@@ -63,7 +63,8 @@ public class OrderSummary {
 	private BigDecimal calcTotal(Order order) {
 		BigDecimal runningTotal = new BigDecimal(0);
 		for (OrderLinesEntity ole : order.getOrderEntity().getOrderLines()) {
-			runningTotal
+
+			runningTotal = runningTotal
 					.add((ole.getPrice()
 							.multiply(new BigDecimal(ole.getQuantity()))));
 		}

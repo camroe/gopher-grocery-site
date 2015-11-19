@@ -22,26 +22,29 @@ public class OrdersEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
-	private Integer								id;
+	private Integer id;
 
 	@Column(name = "email")
-	private String								email;
+	private String email;
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonManagedReference
-	private Set<OrderLinesEntity>	orderLines;		 // will be a collection
+	private Set<OrderLinesEntity> orderLines; // will be a collection
 
 	@Column(name = "creationDate")
-	private Date									creationDate;
+	private Date creationDate;
 
 	@Column(name = "sessionid")
-	private String								sessionID;
+	private String sessionID;
 
 	@Column(name = "confirmationid")
-	private String								confirmationID;
+	private String confirmationID;
 
 	@Column(name = "paypaynumber")
-	private String								payPalNumber;
+	private String payPalNumber;
+
+	@Column(name = "username")
+	private String username;
 
 	public Integer getId() {
 		return id;
@@ -97,6 +100,14 @@ public class OrdersEntity {
 
 	public void setPayPalNumber(String payPalNumber) {
 		this.payPalNumber = payPalNumber;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

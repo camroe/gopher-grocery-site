@@ -22,13 +22,13 @@ import com.gophergroceries.services.ProductsService;
 @Controller
 public class HomeController {
 
-	private static final Logger		 logger	= LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	private CategoryMappingService catMap;
 
 	@Autowired
-	private ProductsService				 productService;
+	private ProductsService productService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -50,7 +50,7 @@ public class HomeController {
 		// servlet-context.xml
 		return "home";
 	}
-	
+
 	@Secured("USER")
 	@RequestMapping(value = "/*ot*et*mplemented*", method = RequestMethod.GET)
 	public String notYetImplemented() {
