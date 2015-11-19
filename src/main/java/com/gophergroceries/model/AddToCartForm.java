@@ -6,6 +6,7 @@ public class AddToCartForm {
 	private String id;
 	private String sku;
 	private String quantity;
+	private String setSessionID;
 
 	public String getCartkey() {
 		return cartkey;
@@ -39,10 +40,18 @@ public class AddToCartForm {
 		this.quantity = quantity;
 	}
 
+	public String getSessionID() {
+		return setSessionID;
+	}
+
+	public void setSessionID(String setSessionID) {
+		this.setSessionID = setSessionID;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("ID:").append(getId()).append("\nSKU: ").append(getSku()).append("\nQuantity: ").append(getQuantity())
+		sb.append("\nID:").append(getId()).append("\nSKU: ").append(getSku()).append("\nQuantity: ").append(getQuantity())
 				.append("\nCartKey").append(getCartkey()).append("\n");
 		return sb.toString();
 	}

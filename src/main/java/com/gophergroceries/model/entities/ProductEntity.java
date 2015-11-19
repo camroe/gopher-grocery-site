@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -127,6 +130,37 @@ public class ProductEntity {
 			e.printStackTrace();
 			return "{}"; // empty JSON object.
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder(17, 19)
+				.append(id.intValue())
+				.append(sku)
+				.append(imageFile)
+				.append(category)
+				.append(name)
+				.append(description)
+				.toHashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof ProductEntity))
+			return false;
+		if (obj == this) {
+			return true;
+		}
+		// Right-Hand-Side (rhs)
+		ProductEntity rhs = (ProductEntity) obj;
+		return new EqualsBuilder()
+				.append(id.intValue(), rhs.getId().intValue())
+				.append(sku, rhs.getSku())
+				.append(imageFile, rhs.getImageFile())
+				.append(category, rhs.getCategory())
+				.append(name, rhs.getName())
+				.append(description, rhs.getDescription())
+				.isEquals();
 	}
 
 }
