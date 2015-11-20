@@ -30,14 +30,15 @@
         </div>
       </div>
       <div id="search_form" class="right">
-        <form action="NotYetImplmented.html" method="post"
-          accept-charset="utf-8">
+        <form id="searchButton" action="NotYetImplmented.html"
+          method="post" accept-charset="utf-8">
           <input type="text" name="term"
             placeholder="Search is coming soon"
             placeholder="Enter search Keywords here"
             onkeyup="searchProducts(this.value)" autocomplete="off" />
-          <button style="border-radius: 0px" >Search</button>
-          <!--           Add 'type="submit"' to line above when ready -->
+          <button style="border-radius: 0px" type="submit">Search</button>
+          <input type="hidden" name="${_csrf.parameterName}"
+            value="${_csrf.token}" />
         </form>
       </div>
       <!-- end search_form -->
@@ -211,15 +212,32 @@
                                 + data.orderSummary.total);
                             var text = $('#cartItemsCount').html(
                                 data.orderSummary.numberOfItems);
-
                           }
-
                         })
                     .fail(
                         function(jqXHR, textStatus, errorThrown) {
                           alert("Sorry, there was a problem! I was unable to access this URL. \n"
                               + errorThrown);
                         });
+              }));
+      //**********************************************************************
+      //Intercept 'Search' Form Submission, Tie the event handler to the document 
+      //so we can replace the .results with other results.
+      //**********************************************************************
+      $(document)
+          .on(
+              'submit',
+              "#searchButton",
+              (function(event) {
+                event.preventDefault();
+                // Get the submit button element
+                var term = $('input[name="term"]').val();
+                var searchValue = $(event.target);
+                var data = searchValue.serialize();
+                console.log("Search event caught");
+                console.log("Serialized DATA: " + data);
+                console.log("Search Term: " + term);
+                alert("The function to search is coming soon. Thank you for your patience while we work on this.");
               }));
       //**********************************************************************
       //Intercept the Login/Logout nav bar selection
@@ -235,6 +253,7 @@
           $(selection).html("Login");
         }
       }));
+
       function getOrderSummary() {
         $
             .ajax({
@@ -251,9 +270,7 @@
             });
       }
       function searchProducts(searchValue) {
-        alert("The function to search for "
-            + searchValue
-            + " is coming soon. Thank you for your patience while we work on this.");
+        //NO OP
       }
       $(document).ready(getOrderSummary);
     </script>

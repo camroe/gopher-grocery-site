@@ -31,7 +31,7 @@ public class OrderService {
 	@Autowired
 	private OrdersRepository ordersRepository;
 
-	private final String SESSION_ID = "TestSessionID";
+	// private final String SESSION_ID = "TestSessionID";
 	// private final String EMAIL = "camroe@gmail.com";
 	// private final String PAYPAL_CONFIRMATION = "Test PayPal Confirmation";
 	private final String CONFIRMATION_ID = "TestConfirmation";
@@ -74,9 +74,11 @@ public class OrderService {
 		}
 		else {
 			ator.setError(false);
+			ator.setErrorMsg("Success: Add to existing order");
 			OrderSummary os = new OrderSummary(order);
 			ator.setOrderSummary(os);
 		}
+		logger.debug("ATOR: " + ator);
 		return ator;
 	}
 
@@ -94,13 +96,14 @@ public class OrderService {
 		// Try to add atcf to order.
 		if (order.add(atcf)) {
 			ator.setError(false);
-			ator.setErrorMsg("Success");
+			ator.setErrorMsg("Success: Create new Order");
 		}
 		else {
 			ator.setError(true);
 			ator.setErrorMsg("Error Adding to Cart. We are looking into it.");
 			logger.error("Failed to add to cart in OrderService : atcf =>" + atcf);
 		}
+		logger.debug("ATOR: " + ator);
 		return ator;
 	}
 
@@ -110,7 +113,7 @@ public class OrderService {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
 		OrdersEntity oe = getOEBasedOn(name, session);
-		if (null == oe){
+		if (null == oe) {
 			oe = OrdersEntityFactory.empty();
 		}
 		order.setOrderEntity(oe);

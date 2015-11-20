@@ -18,8 +18,7 @@ public class OrderSummary {
 
 	public OrderSummary(Order order) {
 		this.order = order;
-		this.total = calcTotal(order);
-		this.numberOfItems = calcNumberOfItems(order);
+		recalculate();
 		if (total.longValueExact() == 0l) {
 			logger.warn("Order Summary Constructed with '0' total");
 		}
@@ -50,6 +49,13 @@ public class OrderSummary {
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+	public void recalculate() {
+		if (!(null == this.order)) {
+			this.numberOfItems = calcNumberOfItems(this.order);
+			this.total = calcTotal(this.order);
+		}
 	}
 
 	private Integer calcNumberOfItems(Order order) {
