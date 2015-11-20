@@ -22,7 +22,7 @@ public class OrderSummary {
 		if (total.longValueExact() == 0l) {
 			logger.warn("Order Summary Constructed with '0' total");
 		}
-		else if (numberOfItems.intValue() == 0) {
+		if (numberOfItems.intValue() == 0) {
 			logger.warn("Order Summary Constructed with '0' items");
 		}
 	}

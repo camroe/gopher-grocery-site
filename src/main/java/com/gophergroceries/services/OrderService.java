@@ -103,6 +103,8 @@ public class OrderService {
 			ator.setErrorMsg("Error Adding to Cart. We are looking into it.");
 			logger.error("Failed to add to cart in OrderService : atcf =>" + atcf);
 		}
+		OrderSummary os = new OrderSummary(order);
+		ator.setOrderSummary(os);
 		logger.debug("ATOR: " + ator);
 		return ator;
 	}
