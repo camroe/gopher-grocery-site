@@ -43,4 +43,5 @@
 		<session-timeout>15</session-timeout>
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
+
 </web-app>
