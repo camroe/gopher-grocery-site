@@ -14,7 +14,7 @@
     <div id="header" class="wide_wrap">
       <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
       <a href="NotYetImplemented.html"> <img class="logo-marginn"
-        src="resources/FONTS/GG-Logo-Color.png"
+        src="/resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
         width="160px">
       </a>
@@ -23,7 +23,7 @@
           <div style="float: left; color: #41BECF; margin-left: 28px">
             <div class="vmCartModule">
               Now in your cart <a style="text-decoration: none"
-                href="NotYetImplemented.html"><b><span
+                href="/v1/orderAPI/orders"><b><span
                   id="cartItemsCount">0</span> Items</b></a>
             </div>
           </div>
