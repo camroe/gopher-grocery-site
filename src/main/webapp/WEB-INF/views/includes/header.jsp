@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page session="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%-- <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%> --%>
@@ -51,7 +52,7 @@
 <link href="/resources/css/productbox.css" type="text/css"
   rel="stylesheet" />
 <link href="/resources/FONTS/GG-Logo-BW.png" type="image/png" rel="icon" />
-
+<link href="/resources/css/order.css" type="text/css" rel="stylesheet" />
 <!-- JTIPPED  -->
 <script src="/resources/js/tipped.js" type="text/javascript"></script>
 <link href="/resources/css/tipped.css" type="text/css" rel="stylesheet" />

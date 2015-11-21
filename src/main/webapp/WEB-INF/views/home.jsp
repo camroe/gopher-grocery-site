@@ -49,44 +49,47 @@
   <div id="results" class="results" style="display: none;"></div>
 
   <!-- Main Section -->
-  <div class="main-nav-bar">
-    <div class="cat-headimg">
-      <h3>Categories</h3>
-    </div>
-    <div class="nav-bar">
-      <ul>
-        <li><a href="/">Online store</a></li>
-        <li><a href="NotYetImplemented.html">Resort Delivery</a></li>
-        <li><a href="NotYetImplemented.html">FAQs</a></li>
-        <li><a href="contacts.html">Contacts</a></li>
-        <li><a href="NotYetImplemented.html"><span
-            id="loginlogoutlabel">Login</span></a></li>
-      </ul>
-    </div>
+  <!--   <div class="main-nav-bar"> -->
+  <!--     <div class="cat-headimg"> -->
+  <!--       <h3>Categories</h3> -->
+  <!--     </div> -->
+  <!--     <div class="nav-bar"> -->
+  <!--       <ul> -->
+  <!--         <li><a href="/">Online store</a></li> -->
+  <!--         <li><a href="NotYetImplemented.html">Resort Delivery</a></li> -->
+  <!--         <li><a href="NotYetImplemented.html">FAQs</a></li> -->
+  <!--         <li><a href="contacts.html">Contacts</a></li> -->
+  <!--         <li><a href="NotYetImplemented.html"><span -->
+  <!--             id="loginlogoutlabel">Login</span></a></li> -->
+  <!--       </ul> -->
+  <!--     </div> -->
 
-    <div class="clear"></div>
-  </div>
+  <!--     <div class="clear"></div> -->
+  <!--   </div> -->
+
+  <%@ include file="includes/mainNavBarWithCategories.jsp"%>
 
   <div class="full_wrap ">
     <div class="wide_wrap">
-      <div>
-        <ul id="accordion">
-          <c:forEach items="${catMap}" var="mainCategory">
-            <li>
-              <div class="category">
-                <a href='${mainCategory.urlAddress}'>${mainCategory.name}</a>
-              </div>
-              <ul class=subcategory>
-                <c:forEach items="${mainCategory.getSubCats()}"
-                  var="subCategory">
-                  <li id='${subCategory.urlAddress}'><a href=#>${subCategory.displayName}</a>
-                </c:forEach>
-              </ul>
-            </li>
-          </c:forEach>
-        </ul>
-      </div>
+      <!--       <div> -->
+      <!--         <ul id="accordion"> -->
+      <%--           <c:forEach items="${catMap}" var="mainCategory"> --%>
+      <!--             <li> -->
+      <!--               <div class="category"> -->
+      <%--                 <a href='${mainCategory.urlAddress}'>${mainCategory.name}</a> --%>
+      <!--               </div> -->
+      <!--               <ul class=subcategory> -->
+      <%--                 <c:forEach items="${mainCategory.getSubCats()}" --%>
+      <%--                   var="subCategory"> --%>
+      <%--                   <li id='${subCategory.urlAddress}'><a href=#>${subCategory.displayName}</a> --%>
+      <%--                 </c:forEach> --%>
+      <!--               </ul> -->
+      <!--             </li> -->
+      <%--           </c:forEach> --%>
+      <!--         </ul> -->
+      <!--       </div> -->
 
+      <%@ include file="includes/categories.jsp"%>
 
       <div class="results">
 
@@ -150,9 +153,7 @@
   </div>
 
   <!-- JAVASCRIPT SECTION  -->
-
-
-
+  <script type="text/javascript" src="/resources/js/gopher.js"></script>
   <script type="text/javascript">
       //**********************************************************************
       $(".category").click(function() {
@@ -168,7 +169,8 @@
                 var selectedSubCategory = $(this).attr('id');
                 $
                     .ajax({
-                      url : "v1/products/category/".concat(selectedSubCategory),
+                      url : "/v1/products/category/"
+                          .concat(selectedSubCategory),
                       type : "GET",
                       dataType : "html",
                       success : function(data) {
@@ -239,20 +241,6 @@
                 console.log("Search Term: " + term);
                 alert("The function to search is coming soon. Thank you for your patience while we work on this.");
               }));
-      //**********************************************************************
-      //Intercept the Login/Logout nav bar selection
-      //**********************************************************************
-      $(document).on('click', "#loginlogoutlabel", (function(event) {
-        event.preventDefault();
-        selection = $(event.target);
-        label = $(selection).text();
-        //just toggle for now.
-        if (label === "Login") {
-          $(selection).html("Logout");
-        } else {
-          $(selection).html("Login");
-        }
-      }));
 
       function getOrderSummary() {
         $

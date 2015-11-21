@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.gophergroceries.model.dao.OrderSummary;
+import com.gophergroceries.results.OrderSummaryResult;
+import com.gophergroceries.services.CategoryMappingService;
 import com.gophergroceries.services.OrderService;
 
 @Controller
@@ -19,13 +22,18 @@ public class OrdersController {
 	@Autowired
 	private OrderService orderService;
 
+	@Autowired
+	private CategoryMappingService catMap;
+
 	@RequestMapping(value = "/v1/orderAPI/orders", method = RequestMethod.GET)
 	public String displayOrderPage(Locale locale, Model model) {
 		logger.info("OrderPage The client locale is {}.", locale);
-
-		model.addAttribute("orderSummary", orderService.getOrderSummary());
-
-		// This maps to webapp/WEB-INF/views/order.jsp based on config in
+		OrderSummaryResult os = orderService.getOrderSummary();
+		if(os.isError()){
+			//TODO:Can I do something here? 
+		}
+			model.addAttribute("orderSummaryResult", orderService.getOrderSummary());
+	// This maps to webapp/WEB-INF/views/order.jsp based on config in
 		// servlet-context.xml
 		return "order";
 	}

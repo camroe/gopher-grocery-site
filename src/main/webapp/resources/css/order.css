@@ -1,0 +1,122 @@
+@CHARSET "UTF-8";
+
+@font-face {
+	font-family: japan;
+	src: url(../FONTS/Japan.tff);
+}
+
+@font-face {
+	font-family: gothamBold;
+	src: url(../FONTS/GothamBold.otf);
+}
+
+@font-face {
+	font-family: gothamMedium;
+	src: url(../FONTS/GothamMedium.ttf);
+}
+
+.orders {
+	clear: both;
+	background: none repeat scroll 0 0 #FFFFFF;
+	color: #7F7F7F;
+	float: left;
+	line-height: 20px;
+	position: relative;
+	list-style: none outside none;
+	margin: 0 0 0 0px;
+	padding: 0 !important;
+	top: 40px !important;
+	width: 100% !important;
+	max-width: 700px;
+	z-index: 400;
+	border-bottom: 1px solid #E8E8E8;
+	border-left: 1px solid #E8E8E8;
+	border-right: 1px solid #E8E8E8;
+	float: left;
+	line-height: 20px;
+	position: relative;
+	list-style: none outside none;
+	margin: 0 0 0 0px;
+	padding: 0 !important;
+	top: 40px !important;
+	width: 100% !important;
+	max-width: 700px;
+	z-index: 400;
+	border-bottom: 1px solid #E8E8E8;
+	border-left: 1px solid #E8E8E8;
+	border-right: 1px solid #E8E8E8;
+	margin-left: 248px;
+	list-style: none outside none;
+}
+
+.ordersHeaderContainer {
+	background-color: none;
+	width: 100%;
+	border-radius: 5px;
+	position: relative;
+	top: 15px;
+	overflow: hidden;
+	/*force outer container to wrap inner containers. */
+}
+
+.ordersHeaderLabel {
+	font-family: gothamMedium;
+	float: left;
+	font-size: 28px;
+	height: 28px;
+	vertical-align: bottom;
+}
+
+table {
+	
+}
+
+/* Apply Striping to table - alternate rows */
+tr:nth-of-type(even) {
+	background-color: #F3F3F3;
+}
+
+tr:nth-of-type(odd) {
+	background-color: #ddd;
+}
+
+/* Text align right all but the first column of the table, including the header row */
+td:nth-child(n+2), th:nth-child(n+2) {
+	text-align: right;
+}
+/* increase size of last data in the last line */
+tr:last-child td:last-child {
+	font-size: 20px;
+	text-align: right;
+}
+/* Bold the last column */
+td:last-child {
+	font-weight: bolder;
+}
+
+/*Bold the last line */
+tr:last-child {
+	font-weight: bolder;
+}
+
+tr:nth-last-child(-n+1) td {
+	text-align: right;
+}
+
+#totalLabel {
+	color: red;
+}
+
+#updateButton{
+	height: 30px;
+	background-color: white;
+}
+#updateButtonEnabled {
+	height: 30px;
+	background-color: red;
+}
+
+.spinner {
+	width: 20px;
+	text-align: right
+}
