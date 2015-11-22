@@ -2,7 +2,9 @@ package com.gophergroceries.model.entities;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "orderlines")
@@ -19,27 +22,27 @@ public class OrderLinesEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer				id;
+	private Integer id;
 
 	/*
 	 * The @ManyToOne side is always the owner of the relationship. There is no
 	 * way to use the mapped by attribute inside the @ManyToOne annotation
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "order_FK")
 	@JsonBackReference
-	private OrdersEntity				order;
+	private OrdersEntity order;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "product_FK")
-	@JsonBackReference
-	private ProductEntity	product; // Foreign key to product table for specific
+	@JsonManagedReference
+	private ProductEntity product; // Foreign key to product table for specific
 	// product;
 
-	private Integer				quantity;
+	private Integer quantity;
 
-	private BigDecimal		price;	 // need price here to record the price that the
-																 // customer saw.
+	private BigDecimal price; // need price here to record the price that the
+														// customer saw.
 
 	public Integer getId() {
 		return id;

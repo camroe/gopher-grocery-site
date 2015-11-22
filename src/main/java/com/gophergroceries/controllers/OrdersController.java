@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.gophergroceries.model.dao.OrderSummary;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gophergroceries.results.OrderSummaryResult;
-import com.gophergroceries.services.CategoryMappingService;
 import com.gophergroceries.services.OrderService;
 
 @Controller
@@ -22,20 +22,35 @@ public class OrdersController {
 	@Autowired
 	private OrderService orderService;
 
-	@Autowired
-	private CategoryMappingService catMap;
-
 	@RequestMapping(value = "/v1/orderAPI/orders", method = RequestMethod.GET)
 	public String displayOrderPage(Locale locale, Model model) {
-		logger.info("OrderPage The client locale is {}.", locale);
+		logger.info("OrderPage(GET) The client locale is {}.", locale);
 		OrderSummaryResult os = orderService.getOrderSummary();
-		if(os.isError()){
-			//TODO:Can I do something here? 
+		model.addAttribute("orderSummaryResult", os);
+		ObjectMapper objectMapper = new ObjectMapper();
+		String osJson ="";
+		try {
+			osJson = objectMapper.writeValueAsString(os);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-			model.addAttribute("orderSummaryResult", orderService.getOrderSummary());
-	// This maps to webapp/WEB-INF/views/order.jsp based on config in
+		logger.info("JSON IS: " + osJson);
+		model.addAttribute("osJson",osJson);				
+		// This maps to webapp/WEB-INF/views/order.jsp based on config in
 		// servlet-context.xml
 		return "order";
 	}
 
+	@RequestMapping(value="/v1/orderAPI/orders", method= RequestMethod.POST)
+	public String displayUpdatedOrderPage(Locale locale, Model model) {
+		logger.info("OrderPage(GET) The client locale is {}.", locale);
+		logger.info("Model as is:" + model.toString());
+		//Same as Get
+		OrderSummaryResult os = orderService.getOrderSummary();
+		model.addAttribute("orderSummaryResult", os);
+
+		return "order";
+	}
+	
 }

@@ -19,34 +19,17 @@
 	clear: both;
 	background: none repeat scroll 0 0 #FFFFFF;
 	color: #7F7F7F;
-	float: left;
-	line-height: 20px;
+	float: right;
+	top: 40px;
 	position: relative;
 	list-style: none outside none;
 	margin: 0 0 0 0px;
 	padding: 0 !important;
-	top: 40px !important;
-	width: 100% !important;
-	max-width: 700px;
-	z-index: 400;
+	width: 866px;
 	border-bottom: 1px solid #E8E8E8;
 	border-left: 1px solid #E8E8E8;
 	border-right: 1px solid #E8E8E8;
-	float: left;
 	line-height: 20px;
-	position: relative;
-	list-style: none outside none;
-	margin: 0 0 0 0px;
-	padding: 0 !important;
-	top: 40px !important;
-	width: 100% !important;
-	max-width: 700px;
-	z-index: 400;
-	border-bottom: 1px solid #E8E8E8;
-	border-left: 1px solid #E8E8E8;
-	border-right: 1px solid #E8E8E8;
-	margin-left: 248px;
-	list-style: none outside none;
 }
 
 .ordersHeaderContainer {
@@ -68,7 +51,7 @@
 }
 
 table {
-	
+
 }
 
 /* Apply Striping to table - alternate rows */
@@ -107,7 +90,7 @@ tr:nth-last-child(-n+1) td {
 	color: red;
 }
 
-#updateButton{
+#updateButton {
 	height: 30px;
 	background-color: white;
 }
@@ -119,4 +102,8 @@ tr:nth-last-child(-n+1) td {
 .spinner {
 	width: 20px;
 	text-align: right
+}
+
+.hiddenTableColumn {
+	display: none;
 }
