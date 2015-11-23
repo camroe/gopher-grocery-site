@@ -4,12 +4,11 @@
 <%@ page session="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-
 <%@ include file="includes/header.jsp"%>
 
 
 <body>
-
+  <input type="hidden" id="csrf-token" name="${_csrf.parameterName}" value="${_csrf.token}" />
   <div class="full_wrap full_wrap-back">
     <div id="header" class="wide_wrap">
       <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
@@ -87,6 +86,13 @@
   <!-- Page Specific Javascript HERE -->
   <script type="text/javascript" src="/resources/js/gopher.js"></script>
   <script type="text/javascript">
+      var token1 = $("input#csrf-token").attr("value");
+      console.log(token1);
+      $.ajaxSetup({
+        headers : {
+          'X-CSRF-Token' : token1
+        }
+      });
       var errorMsg = "${orderSummaryResult.errorMsg}";
       console.log(errorMsg);
       $("#updateButton").prop("disabled", true);
@@ -97,13 +103,16 @@
         }
       });
       var osJson = $.parseJSON('${osJson}'); //Page scoped osJson
-      console.log(osJson);
       canIReadIt(osJson);
 
       /* Change the quantity in the OrderLineEntity */
-      function changeQuantity(ole, olid, newQuantity) {
+      function changeQuantity(olid, newQuantity) {
         /* Find the OrderLineEntity in the osJson object identifed by the olid */
         var orderLines = osJson.orderSummary.order.orderEntity.orderLines;
+        var olidNum = olid.replace('"', '');
+        olidNum = olid.replace('"', '');
+        olidNum = parseInt(olidNum);
+        console.log("olidNum " + olidNum);
         /*Check for undefined or null (falsy) */
         if (orderLines == null) {
           console
@@ -112,57 +121,57 @@
           /* Search through orderLines until you find the id 
           - Could try to manage the index into the arrary but for now
           just brute hunt */
-          $.each(or.orderLines, function(i, ole) {
-            if (ole.id == olid) {
+          $.each(orderLines, function(i, ole) {
+            console.log("OLE.id : " + ole.id + " .vs " + "olidNum : " + olidNum);
+            if (ole.id == olidNum) {
               ole.quantity = newQuantity;
-              console.log("Updated OLE: " + olid + " to " + newQuantity);
+              console.log("Updated OLE: " + olidNum + " to " + newQuantity);
               return false;
             }
           });
         }
       }
 
-      function canIReadIt(jsonObject) {
-        if (jsonObject === null) {
-          console.log("JSON object is null");
-        } else {
-          console.log("Error: " + jsonObject.error);
-          console.log("Error Msg: " + jsonObject.errorMsg);
-          var os = jsonObject.orderSummary;
-          console.log("OS-NumberOfItems: " + os.numberOfItems);
-          console.log("OS-Total: $" + os.total);
-          var order = os.order;
-          var oe = order.orderEntity;
-          console.log("UserName: " + oe.username);
-          console.log("SessionID: " + oe.sessionID);
-          console.log("EMAIL: " + oe.email);
-          console.log("ConfirmationID: " + oe.confirmationID);
-          console.log("CreationDate: " + oe.creationDate);
-          console.log("PayPalNumber: " + oe.payPalNumber);
-          console.log("OrderLines: " + oe.orderLines);
-          console.log("-----------------------------------------");
-          $.each(oe.orderLines, function(i, ole) {
-            console.log("     Product: " + ole.product.name);
-            console.log("     Quantity: " + ole.quantity);
-            console.log("-----------------------------------------");
+      $(document)
+          .on(
+              "click",
+              "#updateButtonEnabled",
+              function(event) {
+                var eTarget = $(event.target);
+                var data = JSON
+                    .stringify(osJson.orderSummary.order.orderEntity);
+                console.log("ABOUT TO SEND : " + data);
+                $("#updateButtonEnabled").tooltip("close");
+                var URL = "/v1/orderAPI/orders";
 
-          });
-        }
-      }
-
-      $(document).on(
-          "click",
-          "#updateButtonEnabled",
-          function(event) {
-            var inputForm = $(event.target);
-            var data = inputForm.serialize();
-            console.log(data);
-            $("#updateButton").attr("title",
-                "Quantity has changed, update enabled. ");
-            alert("Update Button pushed");
-          });
-
-  
+                $
+                    .ajax({
+                      url : URL,
+                      type : "POST",
+                      data : data,
+                      contentType : "application/json; charset=utf-8",
+                      success : function(data, textStatus, jqXHR) {
+                        //data - In the form of an AddToCartResult
+                        //Replace number of items in cart here. 
+                        if (data.error) {
+                          alert(data.errorMsg);
+                        } else {
+                          //Change Update Button Back
+                          $("#updateButtonEnabled").attr("id", "updateButton");
+                          $("#updateButton").prop('disabled', true);
+                          //For some reason need to remove the attr first. 
+                          $("#updateButton").removeAttr("title");
+                          $("#updateButton")
+                              .attr("title",
+                                  "This button is disabled until you change a quantity");
+                        }
+                      },
+                      error : function(jqXHR, textStatus, errorThrown) {
+                        alert("Sorry, there was a problem! I was unable to access this URL. \n"
+                            + errorThrown);
+                      }
+                    });
+              });
 
       $(function() {
         $(".spinner").spinner(
@@ -185,8 +194,8 @@
                 var $olidField = $(this).closest("tr") //Finds the closest row
                 .find(".tdOrderLineID"); //Gets the descendent with the class = .orderLineID
                 var $olid = $olidField.text(); //Retrieves the text with the <td>
-                console.log("Change Quantity on orderLine : " + $olid + " to "
-                    + ui.value);
+                console.log("Spinner:Change Quantity on orderLine : " + $olid
+                    + " to " + ui.value);
                 var $price = $(this).closest("tr").find(".tdPrice").text()
                     .replace('$', '');
                 console.log("Price: " + $price);
@@ -205,6 +214,8 @@
                   }
                 });
                 $("#grandTotal").text("$" + sum.toFixed(2));
+                //Now change the json
+                changeQuantity($olid, ui.value);
               }
             });
       });
@@ -230,8 +241,8 @@
                 var $olidField = $(this).closest("tr") //Finds the closest row
                 .find(".tdOrderLineID"); //Gets the descendent with the class = .orderLineID
                 var $olid = $olidField.text(); //Retrieves the text with the <td>
-                console.log("Change Quantity on orderLine : " + $olid + " to "
-                    + this.value);
+                console.log("Change:Change Quantity on orderLine : " + $olid
+                    + " to " + this.value);
                 var $price = $(this).closest("tr").find(".tdPrice").text()
                     .replace('$', '');
                 console.log("Price: " + $price);
@@ -250,6 +261,7 @@
                   }
                 });
                 $("#grandTotal").text("$" + sum.toFixed(2));
+                changeQuantity($olid, this.value);
               }
             });
       });

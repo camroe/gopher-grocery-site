@@ -15,3 +15,31 @@
           $(selection).html("Login");
         }
       }));
+      
+      function canIReadIt(jsonObject) {
+        if (jsonObject === null) {
+          console.log("JSON object is null");
+        } else {
+          console.log("Error: " + jsonObject.error);
+          console.log("Error Msg: " + jsonObject.errorMsg);
+          var os = jsonObject.orderSummary;
+          console.log("OS-NumberOfItems: " + os.numberOfItems);
+          console.log("OS-Total: $" + os.total);
+          var order = os.order;
+          var oe = order.orderEntity;
+          console.log("UserName: " + oe.username);
+          console.log("SessionID: " + oe.sessionID);
+          console.log("EMAIL: " + oe.email);
+          console.log("ConfirmationID: " + oe.confirmationID);
+          console.log("CreationDate: " + oe.creationDate);
+          console.log("PayPalNumber: " + oe.payPalNumber);
+          console.log("OrderLines: " + oe.orderLines);
+          console.log("-----------------------------------------");
+          $.each(oe.orderLines, function(i, ole) {
+            console.log("     Product: " + ole.product.name);
+            console.log("     Quantity: " + ole.quantity);
+            console.log("-----------------------------------------");
+
+          });
+        }
+      }

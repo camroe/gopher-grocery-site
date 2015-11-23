@@ -13,23 +13,33 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "orders")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class OrdersEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
 	private Integer id;
 
 	@Column(name = "email")
 	private String email;
 
-	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
 	@JsonManagedReference
 	private Set<OrderLinesEntity> orderLines; // will be a collection
+
+	public void setOrderLines(Set<OrderLinesEntity> orderLines) {
+		this.orderLines = orderLines;
+	}
+
+	public void setConfirmationID(String confirmationID) {
+		this.confirmationID = confirmationID;
+	}
 
 	@Column(name = "creationDate")
 	private Date creationDate;

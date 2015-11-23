@@ -1,6 +1,8 @@
 package com.gophergroceries.services;
 
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,8 +56,7 @@ public class OrderService {
 		OrdersEntity orderEntity = null;
 		if (atcf.getUsername().equals("anonymousUser")) {
 			orderEntity = getOrderWithSessionID(atcf.getSessionID());
-		}
-		else {
+		} else {
 			orderEntity = getOrderWithUserName(atcf.getUsername());
 		}
 		if (null == orderEntity) {
@@ -71,8 +72,7 @@ public class OrderService {
 			logger.warn("Product Not Found: actf = " + atcf.toString());
 			ator.setError(true);
 			ator.setErrorMsg("Attempted to add unknown product to cart");
-		}
-		else {
+		} else {
 			ator.setError(false);
 			ator.setErrorMsg("Success: Add to existing order");
 			OrderSummary os = new OrderSummary(order);
@@ -97,8 +97,7 @@ public class OrderService {
 		if (order.add(atcf)) {
 			ator.setError(false);
 			ator.setErrorMsg("Success: Create new Order");
-		}
-		else {
+		} else {
 			ator.setError(true);
 			ator.setErrorMsg("Error Adding to Cart. We are looking into it.");
 			logger.error("Failed to add to cart in OrderService : atcf =>" + atcf);
@@ -131,6 +130,56 @@ public class OrderService {
 			return getOrderWithSessionID(session);
 		else
 			return getOrderWithUserName(name);
+	}
+
+	public OrderSummaryResult updateOrder(OrdersEntity modifiedOrdersEntity) {
+		OrderSummaryResult returnResult = new OrderSummaryResult();
+
+		OrdersEntity oe = ordersRepository.getOne(modifiedOrdersEntity.getId());
+		if (null == oe) {
+			// order not found by id
+			returnResult.setErrorMsg("Could not find Order: " + modifiedOrdersEntity.getId());
+			return returnResult; // break out of method.
+		}
+		for (OrderLinesEntity ol : oe.getOrderLines()) {
+			Integer newQuantity = findMatchingOrderLineQuantity(ol.getId(), modifiedOrdersEntity);
+			logger.trace("OldQuantity: " + ol.getQuantity());
+			logger.trace("NewQuantity: " + newQuantity);
+			ol.setQuantity(newQuantity);
+		}
+		removeZeroQuantityOrderLines(oe);
+		ordersRepository.save(oe);
+
+		returnResult.setOrderSummary(new OrderSummary(new Order(oe)));
+
+		return returnResult;
+
+	}
+
+	private void removeZeroQuantityOrderLines(OrdersEntity oe) {
+		Set<OrderLinesEntity> setOfOLEs = oe.getOrderLines();
+
+		Iterator<OrderLinesEntity> iterator = setOfOLEs.iterator();
+		while (iterator.hasNext()) {
+			OrderLinesEntity ole = iterator.next();
+			if (ole.getQuantity() == 0) {
+				iterator.remove();
+			}
+		}
+		oe.setItems(setOfOLEs);
+	}
+
+	private Integer findMatchingOrderLineQuantity(Integer id, OrdersEntity modifiedOrdersEntity) {
+		Integer returnValue = new Integer(0);
+		Set<OrderLinesEntity> setOfOLEs = modifiedOrdersEntity.getOrderLines();
+
+		for (OrderLinesEntity ole : setOfOLEs) {
+			if (ole.getId().equals(id)) {
+				returnValue = new Integer(ole.getQuantity());
+
+			}
+		}
+		return returnValue;
 	}
 
 }

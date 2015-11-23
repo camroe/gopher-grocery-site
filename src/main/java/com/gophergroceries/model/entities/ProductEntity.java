@@ -12,17 +12,26 @@ import javax.persistence.Table;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Entity
 @Table(name = "product")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class ProductEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
+	// @JsonBackReference
+	// @JsonIgnore
 	private Integer id;
+
+	// @ManyToOne
+	// @JoinColumn(name="ole", referencedColumnName="product")
+	// @JsonBackReference
+	// private OrderLinesEntity ole;
 
 	@Column(name = "sku")
 	private String sku;
@@ -56,6 +65,14 @@ public class ProductEntity {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	// public OrderLinesEntity getOle() {
+	// return ole;
+	// }
+	//
+	// public void setOle(OrderLinesEntity ole) {
+	// this.ole = ole;
+	// }
 
 	public String getSku() {
 		return sku;

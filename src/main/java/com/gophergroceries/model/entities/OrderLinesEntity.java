@@ -10,18 +10,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "orderlines")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class OrderLinesEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
 
 	/*
@@ -33,9 +33,9 @@ public class OrderLinesEntity {
 	@JsonBackReference
 	private OrdersEntity order;
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "product_FK")
-	@JsonManagedReference
+	// @JsonManagedReference
 	private ProductEntity product; // Foreign key to product table for specific
 	// product;
 

@@ -38,7 +38,13 @@ public class Order {
 
 	private OrdersEntity orderEntity;
 
+	public Order () {
+		// Default
+	}
 	
+	public Order(OrdersEntity oe) {
+		this.orderEntity=oe;
+	}
 		public OrdersEntity getOrderEntity() {
 		return orderEntity;
 	}
