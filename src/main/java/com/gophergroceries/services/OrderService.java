@@ -1,6 +1,5 @@
 package com.gophergroceries.services;
 
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -56,7 +55,8 @@ public class OrderService {
 		OrdersEntity orderEntity = null;
 		if (atcf.getUsername().equals("anonymousUser")) {
 			orderEntity = getOrderWithSessionID(atcf.getSessionID());
-		} else {
+		}
+		else {
 			orderEntity = getOrderWithUserName(atcf.getUsername());
 		}
 		if (null == orderEntity) {
@@ -72,7 +72,8 @@ public class OrderService {
 			logger.warn("Product Not Found: actf = " + atcf.toString());
 			ator.setError(true);
 			ator.setErrorMsg("Attempted to add unknown product to cart");
-		} else {
+		}
+		else {
 			ator.setError(false);
 			ator.setErrorMsg("Success: Add to existing order");
 			OrderSummary os = new OrderSummary(order);
@@ -85,11 +86,7 @@ public class OrderService {
 	private AddToOrderResult createNewOrder(AddToCartForm atcf) {
 		AddToOrderResult ator = new AddToOrderResult();
 		// Set up new OrdersEntity
-		OrdersEntity oe = new OrdersEntity();
-		// TODO: Get and Set EMail if available
-		oe.setSessionID(atcf.getSessionID());
-		oe.setUsername(atcf.getUsername());
-		oe.setItems(new HashSet<OrderLinesEntity>()); // Empty
+		OrdersEntity oe = OrdersEntityFactory.empty();
 		// Set up new OrderLinesEntity
 		order.setOrderEntity(oe);
 
@@ -97,7 +94,8 @@ public class OrderService {
 		if (order.add(atcf)) {
 			ator.setError(false);
 			ator.setErrorMsg("Success: Create new Order");
-		} else {
+		}
+		else {
 			ator.setError(true);
 			ator.setErrorMsg("Error Adding to Cart. We are looking into it.");
 			logger.error("Failed to add to cart in OrderService : atcf =>" + atcf);
@@ -148,10 +146,11 @@ public class OrderService {
 			ol.setQuantity(newQuantity);
 		}
 		removeZeroQuantityOrderLines(oe);
-		ordersRepository.save(oe);
+		ordersRepository.saveAndFlush(oe);
 
 		returnResult.setOrderSummary(new OrderSummary(new Order(oe)));
-
+		returnResult.setError(false);
+		returnResult.setErrorMsg("Success");
 		return returnResult;
 
 	}
@@ -166,7 +165,7 @@ public class OrderService {
 				iterator.remove();
 			}
 		}
-		oe.setItems(setOfOLEs);
+		oe.setOrderLines(setOfOLEs);
 	}
 
 	private Integer findMatchingOrderLineQuantity(Integer id, OrdersEntity modifiedOrdersEntity) {

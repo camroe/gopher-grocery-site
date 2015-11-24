@@ -1,6 +1,6 @@
 package com.gophergroceries.model.entities;
 
-import java.util.HashSet;
+import java.util.TreeSet;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +15,7 @@ public class OrdersEntityFactory {
 		OrdersEntity oe = new OrdersEntity();
 		oe.setSessionID(session);
 		oe.setUsername(name);
-		oe.setItems(new HashSet<OrderLinesEntity>()); // Empty
+		oe.setOrderLines(new TreeSet<OrderLinesEntity>()); // Empty
 		return oe;
 	}
 }

@@ -71,7 +71,7 @@ public class Order {
 		if (found) {
 			// product matched exsiting one in order so we are done
 			return true;
-		}
+		}  
 		else {
 			// product new to order
 			OrderLinesEntity ole = new OrderLinesEntity();

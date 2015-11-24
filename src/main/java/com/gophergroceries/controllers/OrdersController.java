@@ -65,10 +65,10 @@ public class OrdersController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		orderService.updateOrder(oe);
+		OrderSummaryResult os = orderService.updateOrder(oe);
 
 		logger.info("OrderPage(POST) The client locale is {}.", locale);
-		OrderSummaryResult os = orderService.getOrderSummary();
+		// OrderSummaryResult os = orderService.getOrderSummary();
 		model.addAttribute("orderSummaryResult", os);
 		String osJson = "";
 		try {
@@ -77,7 +77,12 @@ public class OrdersController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		logger.info("JSON IS: " + osJson);
+		try {
+			logger.info("OutGoing JSON IS: " + objectMapper.writerWithDefaultPrettyPrinter()
+					.writeValueAsString(objectMapper.readValue(osJson, Object.class)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		model.addAttribute("osJson", osJson);
 		// This maps to webapp/WEB-INF/views/order.jsp based on config in
 		// servlet-context.xml

@@ -2,7 +2,6 @@ package com.gophergroceries.model.entities;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name = "orderlines")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-public class OrderLinesEntity {
+public class OrderLinesEntity implements Comparable<OrderLinesEntity> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -33,7 +32,7 @@ public class OrderLinesEntity {
 	@JsonBackReference
 	private OrdersEntity order;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne()
 	@JoinColumn(name = "product_FK")
 	// @JsonManagedReference
 	private ProductEntity product; // Foreign key to product table for specific
@@ -43,6 +42,7 @@ public class OrderLinesEntity {
 
 	private BigDecimal price; // need price here to record the price that the
 														// customer saw.
+
 
 	public Integer getId() {
 		return id;
@@ -82,6 +82,14 @@ public class OrderLinesEntity {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	
+
+	@Override
+	public int compareTo(OrderLinesEntity o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

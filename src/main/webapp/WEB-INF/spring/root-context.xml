@@ -34,6 +34,8 @@
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceProviderClass" value="org.hibernate.ejb.HibernatePersistence" />
+		<!-- <property name="persistenceProviderClass" -->
+		<!-- value="org.hibernate.jpa.HibernatePersistenceProvider" /> -->
 		<property name="dataSource" ref="gophergroceriesMySQL" />
 		<property name="persistenceUnitName" value="gophergroceriesPU" />
 		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />

@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "orders")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class OrdersEntity {
 
 	@Id
@@ -29,17 +29,12 @@ public class OrdersEntity {
 	@Column(name = "email")
 	private String email;
 
-	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
-	private Set<OrderLinesEntity> orderLines; // will be a collection
-
-	public void setOrderLines(Set<OrderLinesEntity> orderLines) {
-		this.orderLines = orderLines;
-	}
-
-	public void setConfirmationID(String confirmationID) {
-		this.confirmationID = confirmationID;
-	}
+	private Set<OrderLinesEntity> orderLines; // will
+																						// be
+																						// a
+																						// collection
 
 	@Column(name = "creationDate")
 	private Date creationDate;
@@ -76,7 +71,7 @@ public class OrdersEntity {
 		return orderLines;
 	}
 
-	public void setItems(Set<OrderLinesEntity> orderLines) {
+	public void setOrderLines(Set<OrderLinesEntity> orderLines) {
 		this.orderLines = orderLines;
 	}
 
@@ -100,7 +95,7 @@ public class OrdersEntity {
 		return confirmationID;
 	}
 
-	public void setConfirmationId(String confirmationID) {
+	public void setConfirmationID(String confirmationID) {
 		this.confirmationID = confirmationID;
 	}
 

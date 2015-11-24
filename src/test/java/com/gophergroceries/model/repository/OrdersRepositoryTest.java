@@ -23,19 +23,19 @@ import com.gophergroceries.model.entities.ProductEntity;
 public class OrdersRepositoryTest {
 
 	@Autowired
-	OrdersRepository							repository;
+	OrdersRepository repository;
 
 	@Autowired
-	ProductsRepository						productRepository;
+	ProductsRepository productRepository;
 
-	private OrdersEntity					order								= new OrdersEntity();
-	private OrdersEntity					orderDB							= new OrdersEntity();
+	private OrdersEntity order = new OrdersEntity();
+	private OrdersEntity orderDB = new OrdersEntity();
 
-	private Set<OrderLinesEntity>	orderLines					= new HashSet<OrderLinesEntity>();
-	private final String					SESSION_ID					= "TestSessionID";
-	private final String					EMAIL								= "camroe@gmail.com";
-	private final String					PAYPAL_CONFIRMATION	= "Test PayPal Confirmation";
-	private final String					CONFIRMATION_ID			= "TestConfirmation";
+	private Set<OrderLinesEntity> orderLines = new HashSet<OrderLinesEntity>();
+	private final String SESSION_ID = "TestSessionID";
+	private final String EMAIL = "camroe@gmail.com";
+	private final String PAYPAL_CONFIRMATION = "Test PayPal Confirmation";
+	private final String CONFIRMATION_ID = "TestConfirmation";
 
 	@Before
 	public void setupBeforeAll() {
@@ -54,10 +54,10 @@ public class OrdersRepositoryTest {
 			}
 			// Set up order
 
-			order.setConfirmationId(CONFIRMATION_ID);
+			order.setConfirmationID(CONFIRMATION_ID);
 			order.setCreationDate(new Date(System.currentTimeMillis()));
 			order.setEmail(EMAIL);
-			order.setItems(orderLines);
+			order.setOrderLines(orderLines);
 			order.setPayPalNumber(PAYPAL_CONFIRMATION);
 			order.setSessionID(SESSION_ID);
 			orderDB = repository.save(order);
