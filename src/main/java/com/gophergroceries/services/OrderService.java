@@ -2,6 +2,7 @@ package com.gophergroceries.services;
 
 import java.util.Iterator;
 import java.util.Set;
+import java.util.SortedSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -156,7 +157,7 @@ public class OrderService {
 	}
 
 	private void removeZeroQuantityOrderLines(OrdersEntity oe) {
-		Set<OrderLinesEntity> setOfOLEs = oe.getOrderLines();
+		SortedSet<OrderLinesEntity> setOfOLEs = oe.getOrderLines();
 
 		Iterator<OrderLinesEntity> iterator = setOfOLEs.iterator();
 		while (iterator.hasNext()) {

@@ -1,7 +1,7 @@
 package com.gophergroceries.model.entities;
 
 import java.sql.Date;
-import java.util.Set;
+import java.util.SortedSet;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.SortNatural;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -31,10 +33,12 @@ public class OrdersEntity {
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
-	private Set<OrderLinesEntity> orderLines; // will
-																						// be
-																						// a
-																						// collection
+//	@Sort(type = SortType.NATURAL)
+	@SortNatural
+	private SortedSet<OrderLinesEntity> orderLines; // will
+	// be
+	// a
+	// collection
 
 	@Column(name = "creationDate")
 	private Date creationDate;
@@ -67,11 +71,11 @@ public class OrdersEntity {
 		this.email = email;
 	}
 
-	public Set<OrderLinesEntity> getOrderLines() {
+	public SortedSet<OrderLinesEntity> getOrderLines() {
 		return orderLines;
 	}
 
-	public void setOrderLines(Set<OrderLinesEntity> orderLines) {
+	public void setOrderLines(SortedSet<OrderLinesEntity> orderLines) {
 		this.orderLines = orderLines;
 	}
 

@@ -3,9 +3,9 @@ package com.gophergroceries.model.repository;
 import static org.junit.Assert.assertNotNull;
 
 import java.sql.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class OrdersRepositoryTest {
 	private OrdersEntity order = new OrdersEntity();
 	private OrdersEntity orderDB = new OrdersEntity();
 
-	private Set<OrderLinesEntity> orderLines = new HashSet<OrderLinesEntity>();
+	private SortedSet<OrderLinesEntity> orderLines = new TreeSet<OrderLinesEntity>();
 	private final String SESSION_ID = "TestSessionID";
 	private final String EMAIL = "camroe@gmail.com";
 	private final String PAYPAL_CONFIRMATION = "Test PayPal Confirmation";

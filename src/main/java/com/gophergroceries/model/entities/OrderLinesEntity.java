@@ -43,7 +43,6 @@ public class OrderLinesEntity implements Comparable<OrderLinesEntity> {
 	private BigDecimal price; // need price here to record the price that the
 														// customer saw.
 
-
 	public Integer getId() {
 		return id;
 	}
@@ -84,12 +83,9 @@ public class OrderLinesEntity implements Comparable<OrderLinesEntity> {
 		this.price = price;
 	}
 
-	
-
 	@Override
 	public int compareTo(OrderLinesEntity o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (this.getProduct().getName().compareTo(o.getProduct().getName()));
 	}
 
 }
