@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%-- <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%> --%>
@@ -53,9 +53,22 @@
   rel="stylesheet" />
 <link href="/resources/FONTS/GG-Logo-BW.png" type="image/png" rel="icon" />
 <link href="/resources/css/order.css" type="text/css" rel="stylesheet" />
+<link href="/resources/css/delivery.css" type="text/css"
+  rel="stylesheet" />
+
 <!-- JTIPPED  -->
 <script src="/resources/js/tipped.js" type="text/javascript"></script>
 <link href="/resources/css/tipped.css" type="text/css" rel="stylesheet" />
-
-
+<!-- Validation -->
+<!-- <script src="/resources/js/mockjax.js" type="text/javascript"></script> -->
+<!--include jQuery Validation Plugin-->
+<script
+  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"
+  type="text/javascript"></script>
+<script
+  src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/additional-methods.min.js"
+  type="text/javascript"></script>
+<script
+  src="//ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"
+  type="text/javascript"></script>
 </head>

@@ -33,7 +33,7 @@ public class OrdersEntity {
 
 	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
-//	@Sort(type = SortType.NATURAL)
+	// @Sort(type = SortType.NATURAL)
 	@SortNatural
 	private SortedSet<OrderLinesEntity> orderLines; // will
 	// be
@@ -54,6 +54,19 @@ public class OrdersEntity {
 
 	@Column(name = "username")
 	private String username;
+
+	private String firstName;
+	private String lastName;
+	private String unit;
+	private String address1;
+	private String address2;
+	private String city = "Salt Lake City";
+	private String state = "UT";
+	private String zipCode = "84121";
+	private String phone;
+
+	@Column(name = "comment", length = 500)
+	private String comment;
 
 	public Integer getId() {
 		return id;
@@ -117,6 +130,86 @@ public class OrdersEntity {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public String getAddress1() {
+		return address1;
+	}
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 }
