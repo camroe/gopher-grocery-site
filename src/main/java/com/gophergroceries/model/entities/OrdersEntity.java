@@ -35,10 +35,7 @@ public class OrdersEntity {
 	@JsonManagedReference
 	// @Sort(type = SortType.NATURAL)
 	@SortNatural
-	private SortedSet<OrderLinesEntity> orderLines; // will
-	// be
-	// a
-	// collection
+	private SortedSet<OrderLinesEntity> orderLines; // will be a collection
 
 	@Column(name = "creationDate")
 	private Date creationDate;
@@ -58,8 +55,7 @@ public class OrdersEntity {
 	private String firstName;
 	private String lastName;
 	private String unit;
-	private String address1;
-	private String address2;
+	private String location;
 	private String city = "Salt Lake City";
 	private String state = "UT";
 	private String zipCode = "84121";
@@ -156,20 +152,12 @@ public class OrdersEntity {
 		this.unit = unit;
 	}
 
-	public String getAddress1() {
-		return address1;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setAddress1(String address1) {
-		this.address1 = address1;
-	}
-
-	public String getAddress2() {
-		return address2;
-	}
-
-	public void setAddress2(String address2) {
-		this.address2 = address2;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public String getCity() {
