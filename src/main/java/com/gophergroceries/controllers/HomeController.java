@@ -67,27 +67,6 @@ public class HomeController {
 		return "delivery";
 	}
 
-	@RequestMapping(value = "/delivery", method = RequestMethod.POST)
-	public String postDelivery(@RequestParam("first_name") String firstName,
-			@RequestParam("last_name") String lastName,
-			@RequestParam("location") String location,
-			@RequestParam("unit") String unit,
-			@RequestParam("phone") String phone,
-			@RequestParam("email") String email,
-			@RequestParam("comment") String comment)
-
-	{
-		logger.trace(firstName);
-		logger.trace(lastName);
-		logger.trace(location);
-		logger.trace(unit);
-		logger.trace(phone);
-		logger.trace(email);
-		logger.trace(comment);
-
-		return "delivery";
-	}
-
 	@Secured("USER")
 	@RequestMapping(value = "/*ot*et*mplemented*", method = RequestMethod.GET)
 	public String notYetImplemented() {
