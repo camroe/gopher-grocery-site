@@ -1,0 +1,93 @@
+@CHARSET "UTF-8";
+
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+
+@font-face {
+	font-family: japan;
+	src: url(../FONTS/Japan.tff);
+}
+
+@font-face {
+	font-family: gothamBold;
+	src: url(../FONTS/GothamBold.otf);
+}
+
+@font-face {
+	font-family: gothamMedium;
+	src: url(../FONTS/GothamMedium.ttf);
+}
+
+.order-review-summary {
+	/* 	border: solid black 1px; */
+	width: 100%;
+	position: relative;
+	top: 50px;
+	min-height: 300px;
+}
+
+.deliver-to-header {
+	font-family: "Permanent Marker";
+	float: left;
+	font-size: 18px;
+	height: 28px;
+	color: black;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.order-review-left {
+	float: left;
+	width: 200px;
+	/* 	border: solid black 1px; */
+	position: relative;
+	top: 0px;
+	left: 1px;
+}
+
+.delivery-detail-label {
+	clear: both;
+	font-family: "gothamMedium";
+	float: left;
+	font-size: 12px;
+	height: 18px;
+	color: black;
+	font-family: "gothamMedium";
+}
+
+.detail {
+	text-decoration: underline;
+	float: right;
+}
+
+.comment-detail {
+	text-decoration: none;
+	float: left;
+}
+
+hr {
+	display: block;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: auto;
+	margin-right: auto;
+	border-style: inset;
+	border-width: 1px;
+}
+
+.comment {
+	float: left;
+	width: 100%;
+	border: solid 1px;
+	border-color: #d9d9d9;
+	position: relative;
+	top: 0px;
+	position: relative;
+}
+
+.order-review-right {
+	float: right;
+	width: 200px;
+	position: relative;
+	top: 0px;
+	left: 1px;
+}

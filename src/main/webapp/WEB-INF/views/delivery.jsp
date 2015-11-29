@@ -165,8 +165,6 @@
                 </td>
               </tr>
 
-              <!-- ^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$ -->
-
               <tr>
                 <td class="label"><label for="phone">Phone:</label></td>
                 <td><input id="phone" name="phone" type="tel" tabindex="5"
@@ -258,21 +256,6 @@
             //             removejscssfile("somescript.js", "js"); //remove all occurences of "somescript.js" on page
             //             removejscssfile("somestyle.css", "css"); //remove all occurences "somestyle.css" on page
             removejscssfile("order.css", "css");
-            //************************************************************************
-            //        VALIDATION FUNCTIONS
-            //************************************************************************
-
-            //Intercept the form submission
-            //                 $('myform').submit(function() {
-            //                   return false;
-            //                 });
-
-            //Intercept the form submission
-            //                                 $.validator.setDefaults({
-            //                                   submitHandler : function() {
-            //                                     alert("submitted!");
-            //                                   }
-            //                                 });
 
             //Catch the formsubmission on the enter key
             $('#deliveryForm').on('keyup keypress', function(event) {
@@ -283,105 +266,6 @@
               }
             });
 
-            //             $("input[type='submit']").click(function(event) {
-            //               event.preventDefault(); // Do not actually submit
-            //               alert("You entered " + $("#first_name").val());
-            //             });
-
-            //             validate signup form on keyup and submit
-            //                             $("#deliveryForm")
-            //                                 .validate(
-            //                                     {
-            //                                       //turn off the dynamic checking
-            //                                       onkeyup: false,
-            //                                       onclick: false,
-            //                                       onfocusout: false,
-            //                                       rules : {
-            //                                         first_name : {
-            //                                           required : true,
-            //                                           minlength : 3,
-            //                                           maxlenght : 40
-            //                                         },
-            //                                         last_name : {
-            //                                           required : true,
-            //                                           minlength : 3,
-            //                                           maxlenght : 40
-            //                                         },
-            //                                         address1 : {
-            //                                           required : true
-            //                                         },
-            //                                         address2 : {
-            //                                         //None
-            //                                         },
-            //                                         address : {
-            //                                           required : true
-            //                                         },
-            //                                         unit : {
-            //                                           required : true,
-            //                                           maxlength : 4,
-            //                                           number : true
-            //                                         },
-            //                                         phone : {
-            //                                           maxlength : 14,
-            //                                           phone : true,
-            //                                           required : true
-            //                                         },
-            //                                         email : {
-            //                                           required : true,
-            //                                           email : true,
-            //                                           maxlength : 50
-            //                                         },
-            //                                         comments : {
-            //                                           maxlength : 500
-            //                                         }
-            //                                       },
-            //                                       messages : {
-            //                                         first_name : {
-            //                                           required : "First Name is required, Please enter your firstname",
-            //                                           minlength : "First Name must be 3 or more characters",
-            //                                           maxlength : "First Name can be a maximum of 40 characters "
-            //                                         },
-            //                                         last_name : {
-            //                                           required : "Last Name is required, Please enter your firstname",
-            //                                           minlength : "Last Name must be 3 or more characters",
-            //                                           maxlength : "Last Name can be a maximum of 40 characters "
-            //                                         },
-            // //                                         address1 : {
-            // //                                           required : "We must have an address to deliver to. If in doubt, just put the name of the condo unit. Eg.Eagle Springs East, #208"
-            // //                                         },
-            //                                         address : {
-            //                                           required : "Location Required. "
-            //                                         },
-            //                                         unit : {
-            //                                           required : "Unit is required. You can always use the notes to inform us about special circumstances.",
-            //                                           maxlength : "Unit number can only be 4 digits long",
-            //                                           number : "Unit number can only have digits"
-            //                                         },
-            //                                         phone : {
-            //                                           maxlength : "Phone number is too long. 14 numbers max",
-            //                                           phone : "Phone number must follow a phone number format. Eg. (xxx)-xxx-xxxx",
-            //                                           required : "Phone number is required"
-            //                                         },
-            //                                         email : {
-            //                                           maxlength : "Email is too long. 50 characters max",
-            //                                           phone : "Email must follow an Email format. Eg. username@domain.com",
-            //                                           required : "Email is required"
-            //                                         },
-            //                                         comments : {
-            //                                           maxlength : "Comments too long, please keep to under 500 characters"
-            //                                         }
-            //                                       },
-            //                                     //                           onkeyup: function(element) { $(element).valid(); },
-            //                                     //                           onfocusout: function(element) { $(element).valid(); }
-            //                                     });
-
-            //                 $("input").focus(function(event) {
-            //                   var target = event.target;
-            //                   $(this).next("label").remove();
-            //                   $(this).removeClass("error");
-            //                   console.log(this);
-            //                   console.log(target);
-            //                 });
 
           });//on document ready
     </script>

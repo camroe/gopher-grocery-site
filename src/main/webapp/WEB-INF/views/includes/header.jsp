@@ -55,6 +55,8 @@
 <link href="/resources/css/order.css" type="text/css" rel="stylesheet" />
 <link href="/resources/css/delivery.css" type="text/css"
   rel="stylesheet" />
+  <link href="/resources/css/orderreview.css" type="text/css"
+  rel="stylesheet" />
 
 <!-- JTIPPED  -->
 <script src="/resources/js/tipped.js" type="text/javascript"></script>

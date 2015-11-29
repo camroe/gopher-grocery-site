@@ -55,7 +55,9 @@ public class DeliveryController {
 				comment);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		return "delivery";
+		//TODO: We could return to delivery here if we find there is an error in the delivery form
+		//else move to next page.
+		return "orderreview";
 	}
 
 	private String getJSon(OrderSummaryResult osr) {
