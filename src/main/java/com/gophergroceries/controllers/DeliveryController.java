@@ -60,6 +60,16 @@ public class DeliveryController {
 		return "orderreview";
 	}
 
+	@RequestMapping(value = "/v1/delivery/paypal", method = RequestMethod.GET)
+	public String getpaypal(Model model) {
+		OrderSummaryResult osr = orderService.getOrderSummary();
+		String osJson = getJSon(osr);
+		//TODO: Move order to Ordered Table.
+		model.addAttribute("orderSummaryResult", osr);
+		model.addAttribute("osJson", osJson);
+		return "paypal";
+	}
+
 	private String getJSon(OrderSummaryResult osr) {
 		String returnJson = "";
 		ObjectMapper objectMapper = new ObjectMapper();

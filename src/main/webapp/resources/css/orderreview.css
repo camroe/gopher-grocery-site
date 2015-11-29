@@ -37,11 +37,11 @@
 
 .order-review-left {
 	float: left;
-	width: 200px;
+	width: 250px;
 	/* 	border: solid black 1px; */
 	position: relative;
 	top: 0px;
-	left: 1px;
+	left: 75px;
 }
 
 .delivery-detail-label {
@@ -76,12 +76,14 @@ hr {
 
 .comment {
 	float: left;
-	width: 100%;
+	width: 93%;
 	border: solid 1px;
 	border-color: #d9d9d9;
 	position: relative;
 	top: 0px;
 	position: relative;
+	left: 75px;
+	right: 50px;
 }
 
 .order-review-right {
@@ -91,3 +93,64 @@ hr {
 	top: 0px;
 	left: 1px;
 }
+
+/*button {
+	display: inline-block;
+	margin: 0 10px 0 0;
+	padding: 7px 20px;
+	font-size: 24px;
+	font-family: "Bitter", serif;
+	line-height: 1.2;
+	appearance: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+button:focus {
+	outline: none
+}*/
+/*
+.pressadjust {
+	position: relative;
+	top: 15px;
+}
+.pressadjust button {
+	color: #fff;
+	background-color: #6496c8;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 5px #27496d;
+}
+
+.pressadjust button:hover {
+	background-color: #417cb8
+}
+
+.pressadjust button:active{
+	background-color: #417cb8;
+	box-shadow: 0 1px #27496d;
+	transform: translateY(3px);
+}
+
+
+.pressorder {
+	position: relative;
+	top: 15px;
+}
+.pressorder button {
+	color: #white;
+	background-color: #33ff77;
+	border: none;
+	border-radius: 3px;
+	box-shadow: 0 5px #004d1a;
+}
+
+.pressorder button:hover {
+	background-color: #00e64d
+}
+
+.pressorder button:active {
+	background-color: #00e64d;
+	box-shadow: 0 1px #004d1a;
+	transform: translateY(3px);
+}*/

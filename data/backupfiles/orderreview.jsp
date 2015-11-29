@@ -4,7 +4,7 @@
 <%@ page session="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ include file="includes/header.jsp"%>
+<%-- <%@ include file="includes/header.jsp"%> --%>
 
 
 <body>
@@ -25,7 +25,8 @@
     <!-- header -->
   </div>
   <!-- full_wrap  -->
-  <%@ include file="includes/mainNavBar.jsp"%>
+<%--   <%@ include file="includes/mainNavBar.jsp"%> --%>
+    <div id="delivery" class="delivery" style="display: none"></div>
   
   <div class="full_wrap ">
     <div class="wide_wrap">
