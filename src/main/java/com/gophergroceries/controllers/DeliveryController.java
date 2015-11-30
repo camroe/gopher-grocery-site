@@ -61,7 +61,7 @@ public class DeliveryController {
 	}
 
 	@RequestMapping(value = "/v1/delivery/paypal", method = RequestMethod.GET)
-	public String getpaypal(Model model) {
+	public String getPayPal(Model model) {
 		OrderSummaryResult osr = orderService.getOrderSummary();
 		String osJson = getJSon(osr);
 		//TODO: Move order to Ordered Table.
@@ -70,6 +70,18 @@ public class DeliveryController {
 		return "paypal";
 	}
 
+	
+	@RequestMapping(value = "/v1/delivery/contactforpayment", method = RequestMethod.GET)
+	public String getPayLater(Model model) {
+		OrderSummaryResult osr = orderService.getOrderSummary();
+		String osJson = getJSon(osr);
+		//TODO: Move order to Ordered Table.
+		model.addAttribute("orderSummaryResult", osr);
+		model.addAttribute("osJson", osJson);
+		return "contactforpayment";
+	}
+	
+	
 	private String getJSon(OrderSummaryResult osr) {
 		String returnJson = "";
 		ObjectMapper objectMapper = new ObjectMapper();

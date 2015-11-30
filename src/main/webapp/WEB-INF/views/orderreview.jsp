@@ -299,9 +299,13 @@
         class="order-review-left"
         style="top: 50px;"
       >
-        <section class="pressorder">
-          <button onclick="window.location.href='/NotYetImplemented';">Call
-            For Payment</button>
+        <section
+          class="pressorder simple-tooltip"
+          title="Press this button to have us contact you for payment information. We accept all major creditcards(Visa, MasterCard, Amex)"
+        >
+          <button
+            onclick="window.location.href='/v1/delivery/contactforpayment';"
+          >Call For Payment</button>
         </section>
       </div>
       <!-- End Left -->
@@ -311,7 +315,8 @@
         style="top: 50px;"
       >
         <section
-          class="pressorder"
+          class="pressorder simple-tooltip"
+          title="Press this button to have us send you a PayPay invoice once we have reviewed your order. You can pay through paypal in any manner you want, at your convenience."
           style="float: right;"
         >
           <button onclick="window.location.href='/v1/delivery/paypal';">PayPal

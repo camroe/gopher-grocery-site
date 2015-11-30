@@ -77,7 +77,7 @@
   >
     <p style="font-size: 18px;">Thank you for your order!</p>
     <p>We will be reviewing you order for special instructions,
-      contact information, etc. When we are completed this process we
+      contact information, etc. When we have completed this process we
       may contact you with any questions that we have. When it all looks
       good we will send you an invoice through Paypal with a copy of
       your order, delivery instructions, etc.</p>
@@ -85,6 +85,19 @@
       your credit card number or any personal information, and you're
       secure in the knowledge that you have the security of Paypal on
       your side!</p>
-    <p>You will hear from us shortly!</p>
+    <p>You will hear from us within 1 business day!</p>
+    <p
+      class=simple-tooltip
+      title="For more information on PayPal Invoicing, please follow this link"
+    >
+      <a
+        href="https://www.paypal.com/uk/cgi-bin/webscr?cmd=p/sell/invoicing_intro-outside"
+      > <img
+        src="/resources/images/paypal.png"
+        alt="For more information on PayPal invoicing"
+      >
+      </a>
+    </p>
+
   </div>
 </body>
