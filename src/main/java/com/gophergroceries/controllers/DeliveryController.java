@@ -57,7 +57,7 @@ public class DeliveryController {
 		model.addAttribute("osJson", getJSon(osr));
 		//TODO: We could return to delivery here if we find there is an error in the delivery form
 		//else move to next page.
-		return "test";
+		return "orderreview";
 	}
 
 	@RequestMapping(value = "/v1/delivery/paypal", method = RequestMethod.GET)

@@ -30,8 +30,7 @@
 
 
   <div class="clear"></div>
-  <div class="full_wrap ">
-    <div class="wide_wrap">
+  <div class="ordersummary ">
      <br>
         <!-- LEFT HAND SIDE -->
         <div class="order-review-left">
@@ -63,7 +62,6 @@
         </div>
     
     </div>
-  </div>
 
 </body>
 </html>

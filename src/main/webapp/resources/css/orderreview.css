@@ -17,12 +17,14 @@
 	src: url(../FONTS/GothamMedium.ttf);
 }
 
-.xxx {
-	border: solid black 1px; 
-	width: 100%;
+.ordersummary {
+	/* 	border: solid black 1px; */
+	width: 940px;
 	position: relative;
 	top: 50px;
-	min-height: 300px;
+	min-height: 250px;
+	clear: both;
+	margin: auto;
 }
 
 .deliver-to-header {
@@ -94,7 +96,7 @@ hr {
 	left: 1px;
 }
 
-/*button {
+button {
 	display: inline-block;
 	margin: 0 10px 0 0;
 	padding: 7px 20px;
@@ -108,12 +110,13 @@ hr {
 
 button:focus {
 	outline: none
-}*/
-/*
+}
+
 .pressadjust {
 	position: relative;
 	top: 15px;
 }
+
 .pressadjust button {
 	color: #fff;
 	background-color: #6496c8;
@@ -126,17 +129,17 @@ button:focus {
 	background-color: #417cb8
 }
 
-.pressadjust button:active{
+.pressadjust button:active {
 	background-color: #417cb8;
 	box-shadow: 0 1px #27496d;
 	transform: translateY(3px);
 }
 
-
 .pressorder {
 	position: relative;
 	top: 15px;
 }
+
 .pressorder button {
 	color: #white;
 	background-color: #33ff77;
@@ -153,4 +156,4 @@ button:focus {
 	background-color: #00e64d;
 	box-shadow: 0 1px #004d1a;
 	transform: translateY(3px);
-}*/
+}
