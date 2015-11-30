@@ -1,11 +1,15 @@
+<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
 <%@ include file="includes/header.jsp"%>
-
+<link href="/resources/css/delivery.css" type="text/css" rel="stylesheet" />
+</head>
 
 <body>
   <input type="hidden" id="csrf-token" name="${_csrf.parameterName}" value="${_csrf.token}" />
@@ -111,7 +115,8 @@
                 <td class="label"><label for="location">Delivery Address:</label></td>
                 <td><select id="location" name="location" tabindex="3">
 
-                    <option value="NS" <c:out value="${ns}"/>>Choose Solitude Location:(currently select - none)</option>
+                    <option value="NS" <c:out value="${ns}"/>>Choose Solitude
+                      Location:(currently select - none)</option>
                     <option value="Eagle Springs East" <c:out value="${ese}"/>>Eagle
                       Springs East</option>
                     <option value="Eagle Spings West" <c:out value="${esw}"/>>Eagle Springs
@@ -211,10 +216,11 @@
               <tr>
                 <td></td>
                 <td>
-                  <div class="buttonSubmit">
-                    <span></span> <input class="nextButton" type="submit" value="Next" tabindex="7">
-                    <label class="buttonLabel">When you are ready to submit your delivery
-                      information and review your complete order, just click 'Next'.</label>
+                  <div>
+                    <input class="nextButton" type="submit" value="Next" tabindex="7"> <label
+                      class="buttonLabel"
+                    >When you are ready to submit your delivery information and review your
+                      complete order, just click 'Next'.</label>
                   </div>
                 </td>
               </tr>
@@ -228,47 +234,6 @@
   </div>
 
 
-  <!--  Javascript  -->
-  <script type="text/javascript">
-      $(document).ready(
-
-          function() {
-
-            /**
-            Function to allow the removal of javascript and css files from the page. This allows us to redefine css labels
-            and classes for common elements such as tables.
-             */
-            function removejscssfile(filename, filetype) {
-              var targetelement = (filetype == "js") ? "script"
-                  : (filetype == "css") ? "link" : "none" //determine element type to create nodelist from
-              var targetattr = (filetype == "js") ? "src"
-                  : (filetype == "css") ? "href" : "none" //determine corresponding attribute to test for
-              var allsuspects = document.getElementsByTagName(targetelement)
-              for (var i = allsuspects.length; i >= 0; i--) { //search backwards within nodelist for matching elements to remove
-                if (allsuspects[i]
-                    && allsuspects[i].getAttribute(targetattr) != null
-                    && allsuspects[i].getAttribute(targetattr)
-                        .indexOf(filename) != -1)
-                  allsuspects[i].parentNode.removeChild(allsuspects[i]); //remove element by calling parentNode.removeChild()
-              }
-            }
-
-            //             removejscssfile("somescript.js", "js"); //remove all occurences of "somescript.js" on page
-            //             removejscssfile("somestyle.css", "css"); //remove all occurences "somestyle.css" on page
-            removejscssfile("order.css", "css");
-
-            //Catch the formsubmission on the enter key
-            $('#deliveryForm').on('keyup keypress', function(event) {
-              var code = event.keyCode || event.which;
-              if (code == 13) {
-                event.preventDefault();
-                return false;
-              }
-            });
-
-
-          });//on document ready
-    </script>
 
 </body>
 </html>

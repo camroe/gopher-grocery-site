@@ -17,8 +17,8 @@
 	src: url(../FONTS/GothamMedium.ttf);
 }
 
-.order-review-summary {
-	/* 	border: solid black 1px; */
+.xxx {
+	border: solid black 1px; 
 	width: 100%;
 	position: relative;
 	top: 50px;

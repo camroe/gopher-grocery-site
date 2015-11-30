@@ -1,21 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%-- <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%> --%>
-<%-- <c:set var="req" value="${paaeContext.request}"/> --%>
-<%-- <c:set var="uri" value="${req.requestURI}" /> --%>
-<%-- <c:set var="url">${req.requestURL}</c:set> --%>
-
-
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-<%-- <base href="${fn:substring(url, 0, fn:length(url) - fn:length(uri))}${req.contextPath}/" /> --%>
-<!-- <base href="http://localhost:8080/site/"/> -->
-<!-- <base href=""/> -->
 <meta http-equiv="Content-Type" Content="text/html;charset=utf-8" />
 <meta content="utf-8" http-equiv="encoding">
 <meta charset="utf-8" />
@@ -52,11 +34,6 @@
 <link href="/resources/css/productbox.css" type="text/css"
   rel="stylesheet" />
 <link href="/resources/FONTS/GG-Logo-BW.png" type="image/png" rel="icon" />
-<link href="/resources/css/order.css" type="text/css" rel="stylesheet" />
-<link href="/resources/css/delivery.css" type="text/css"
-  rel="stylesheet" />
-  <link href="/resources/css/orderreview.css" type="text/css"
-  rel="stylesheet" />
 
 <!-- JTIPPED  -->
 <script src="/resources/js/tipped.js" type="text/javascript"></script>
@@ -73,4 +50,3 @@
 <script
   src="//ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"
   type="text/javascript"></script>
-</head>
