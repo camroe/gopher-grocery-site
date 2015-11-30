@@ -21,15 +21,15 @@ public class DeliveryController {
 
 	@Autowired
 	DeliveryService deliveryService;
+
 	@Autowired
 	OrderService orderService;
 
 	@RequestMapping(value = "/v1/delivery", method = RequestMethod.GET)
 	public String getDelivery(Model model) {
 		OrderSummaryResult osr = orderService.getOrderSummary();
-		String osJson = getJSon(osr);
 		model.addAttribute("orderSummaryResult", osr);
-		model.addAttribute("osJson", osJson);
+		model.addAttribute("osJson", getJSon(osr));
 		return "delivery";
 	}
 
@@ -55,33 +55,39 @@ public class DeliveryController {
 				comment);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		//TODO: We could return to delivery here if we find there is an error in the delivery form
-		//else move to next page.
+		// TODO: We could return to delivery here if we find there is an error in
+		// the delivery form
+		// else move to next page.
 		return "orderreview";
 	}
 
 	@RequestMapping(value = "/v1/delivery/paypal", method = RequestMethod.GET)
 	public String getPayPal(Model model) {
 		OrderSummaryResult osr = orderService.getOrderSummary();
-		String osJson = getJSon(osr);
-		//TODO: Move order to Ordered Table.
 		model.addAttribute("orderSummaryResult", osr);
-		model.addAttribute("osJson", osJson);
-		return "paypal";
+		model.addAttribute("osJson", getJSon(osr));
+		if (deliveryService.transferOrderToSubmitted()) {
+			return "paypal";
+		}
+		else {
+			return "orderreview";
+		}
 	}
 
-	
 	@RequestMapping(value = "/v1/delivery/contactforpayment", method = RequestMethod.GET)
 	public String getPayLater(Model model) {
 		OrderSummaryResult osr = orderService.getOrderSummary();
-		String osJson = getJSon(osr);
-		//TODO: Move order to Ordered Table.
 		model.addAttribute("orderSummaryResult", osr);
-		model.addAttribute("osJson", osJson);
-		return "contactforpayment";
+		model.addAttribute("osJson", getJSon(osr));
+		if (deliveryService.transferOrderToSubmitted()) {
+			return "contactforpayment";
+		}
+		else {
+
+			return "orderreview";
+		}
 	}
-	
-	
+
 	private String getJSon(OrderSummaryResult osr) {
 		String returnJson = "";
 		ObjectMapper objectMapper = new ObjectMapper();
