@@ -113,6 +113,7 @@ tr:nth-last-child(-n+1) td {
 #updateButton {
 	height: 30px;
 	background-color: #b2ff66;
+	float: left;
 }
 #updateButtonEnabled {
 	height: 30px;
@@ -125,6 +126,11 @@ tr:nth-last-child(-n+1) td {
 }
 
 .hiddenTableColumn {
+	display: none;
+}
+
+.hidden 
+ {
 	display: none;
 }
 

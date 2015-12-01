@@ -81,7 +81,7 @@
             <td id="totalLabel" colspan="5">Total</td>
             <td id="grandTotal">$<fmt:formatNumber value="${salesTotal}" minFractionDigits="2"></fmt:formatNumber></td>
         </table>
-        <input class="simple-tooltip" id="updateButton" name="updateButton" type="button" disabled
+        <input class="hidden simple-tooltip" id="updateButton" name="updateButton" type="button" disabled
           value="Update Changes to Order"
           title="This button is disabled until you change a quantity"
         /> <input class="simple-tooltip" id="nextButton" name="next" type="button"
@@ -138,49 +138,18 @@
                   }
                 }
 
-                //                 $(document)
-                //                     .on(
-                //                         "click",
-                //                         "#nextButton",
-                //                         function(event) {
-                //                           var eTarget = $(event.target);
-                //                           var oeData = JSON
-                //                               .stringify(osJson.orderSummary.order.orderEntity);
-                //                           var URL = "/v1/delivery";
-                //                           $
-                //                               .ajax({
-                //                                 url : URL,
-                //                                 type : "POST",
-                //                                 data : oeData,
-                //                                 contentType : "application/json; charset=utf-8",
-                //                                 headers : {
-                //                                   'X-CSRF-Token' : "${_csrf.token}"
-                //                                 },
-                //                                 success : function(data, textStatus, jqXHR) {
-                //                                   if (data.error) {
-                //                                     alert(data.errorMsg);
-                //                                   } else {
-                //                                     window.location.href = "/v1/delivery";                                  }
-                //                                 },
-                //                                 error : function(jqXHR, textStatus, errorThrown) {
-                //                                   alert("Sorry, there was a problem! I was unable to access this URL. \n"
-                //                                       + errorThrown);
-                //                                 }
-                //                               });
-
-                //                         });
+              
 
                 $(document)
                     .on(
                         "click",
-                        "#updateButtonEnabled",
+                        "#updateButton",
                         function(event) {
                           var eTarget = $(event.target);
                           var data = JSON
                               .stringify(osJson.orderSummary.order.orderEntity);
                           console.log("ABOUT TO SEND : " + data);
 
-                          //                 $("#updateButtonEnabled").tooltip("close");
                           var URL = "/v1/orderAPI/orders";
 
                           $
@@ -224,11 +193,7 @@
                           }
                           // Someone hit the spinner make the update button visible
                           $("#updateButton").prop('disabled', false);
-                          //For some reason need to remove the attr first. 
-                          $("#updateButton").removeAttr("title");
-                          $("#updateButton").attr("title",
-                              "Quantity has changed, update enabled. ");
-                          $("#updateButton").attr("id", "updateButtonEnabled");
+                          $("#updateButton").removeClass("hidden");
                           var $olidField = $(this).closest("tr") //Finds the closest row
                           .find(".tdOrderLineID"); //Gets the descendent with the class = .orderLineID
                           var $olid = $olidField.text(); //Retrieves the text with the <td>
@@ -270,13 +235,9 @@
                             $(this).spinner("value", 0);
                             return false;
                           }
-                          // Someone hit the spinner make the update button visible
+                       // Someone hit the spinner make the update button visible
                           $("#updateButton").prop('disabled', false);
-                          //For some reason need to remove the attr first. 
-                          $("#updateButton").removeAttr("title");
-                          $("#updateButton").attr("title",
-                              "Quantity has changed, update enabled. ");
-                          $("#updateButton").attr("id", "updateButtonEnabled");
+                          $("#updateButton").removeClass("hidden");
                           var $olidField = $(this).closest("tr") //Finds the closest row
                           .find(".tdOrderLineID"); //Gets the descendent with the class = .orderLineID
                           var $olid = $olidField.text(); //Retrieves the text with the <td>
