@@ -35,7 +35,7 @@ public class ConfirmedOrdersEntity {
 	@JsonManagedReference
 	// @Sort(type = SortType.NATURAL)
 	@SortNatural
-	private SortedSet<ConfirmedOrderLinesEntity> orderLines; 
+	private SortedSet<ConfirmedOrderLinesEntity> orderLines;
 
 	@Column(name = "creationDate")
 	private Date creationDate;
@@ -60,6 +60,7 @@ public class ConfirmedOrdersEntity {
 	private String state = "UT";
 	private String zipCode = "84121";
 	private String phone;
+	private String checkinDate;
 
 	@Column(name = "comment", length = 500)
 	private String comment;
@@ -79,7 +80,6 @@ public class ConfirmedOrdersEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public SortedSet<ConfirmedOrderLinesEntity> getOrderLines() {
 		return orderLines;
@@ -191,6 +191,14 @@ public class ConfirmedOrdersEntity {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getCheckinDate() {
+		return checkinDate;
+	}
+
+	public void setCheckinDate(String checkinDate) {
+		this.checkinDate = checkinDate;
 	}
 
 	public String getComment() {

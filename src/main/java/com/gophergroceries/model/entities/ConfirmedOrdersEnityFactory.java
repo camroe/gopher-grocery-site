@@ -28,6 +28,7 @@ public class ConfirmedOrdersEnityFactory {
 		coe.setUnit(oe.getUnit());
 		// No need to set userName
 		coe.setZipCode(oe.getZipCode());
+		coe.setCheckinDate(oe.getCheckinDate());
 
 		for (OrderLinesEntity ole : oe.getOrderLines()) {
 			ConfirmedOrderLinesEntity cole = new ConfirmedOrderLinesEntity();

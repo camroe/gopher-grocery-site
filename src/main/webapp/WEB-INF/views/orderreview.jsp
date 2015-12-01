@@ -144,6 +144,15 @@
 
       <label
         class="delivery-detail-label"
+        for="checkindate"
+      >Check-In Date:</label>
+      <div
+        class="detail"
+        id="checkindate"
+      >${oe.checkinDate}</div>
+
+      <label
+        class="delivery-detail-label"
         for="username"
       >UserName: </label>
       <div

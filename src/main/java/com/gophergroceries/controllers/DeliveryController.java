@@ -41,7 +41,9 @@ public class DeliveryController {
 			@RequestParam("unit") String unit,
 			@RequestParam("phone") String phone,
 			@RequestParam("email") String email,
+			@RequestParam("checkindate") String checkinDate,
 			@RequestParam("comment") String comment)
+
 
 	{
 		logger.trace(firstName);
@@ -50,9 +52,11 @@ public class DeliveryController {
 		logger.trace(unit);
 		logger.trace(phone);
 		logger.trace(email);
+		logger.trace(checkinDate);
 		logger.trace(comment);
+		
 		OrderSummaryResult osr = deliveryService.setDeliveryInformation(firstName, lastName, location, unit, phone, email,
-				comment);
+				checkinDate, comment);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
 		// TODO: We could return to delivery here if we find there is an error in

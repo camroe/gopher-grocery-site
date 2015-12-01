@@ -1,5 +1,7 @@
 package com.gophergroceries.services;
 
+import java.sql.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,7 @@ public class DeliveryService {
 			String unit,
 			String phone,
 			String email,
+			String checkinDate,
 			String comment) {
 		// TODO: For now assume all is valid.
 		OrderSummaryResult osr = orderService.getOrderSummary();
@@ -51,6 +54,7 @@ public class DeliveryService {
 		oe.setUnit(unit);
 		oe.setPhone(phone);
 		oe.setEmail(email);
+		oe.setCheckinDate(checkinDate);
 		oe.setComment(comment);
 		ordersRepository.saveAndFlush(oe);
 		osr.setError(false);

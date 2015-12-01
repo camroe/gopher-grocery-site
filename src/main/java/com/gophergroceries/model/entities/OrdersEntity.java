@@ -60,7 +60,8 @@ public class OrdersEntity {
 	private String state = "UT";
 	private String zipCode = "84121";
 	private String phone;
-
+	private String checkinDate;
+	
 	@Column(name = "comment", length = 500)
 	private String comment;
 
@@ -190,6 +191,16 @@ public class OrdersEntity {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	
+
+	public String getCheckinDate() {
+		return checkinDate;
+	}
+
+	public void setCheckinDate(String checkinDate) {
+		this.checkinDate = checkinDate;
 	}
 
 	public String getComment() {
