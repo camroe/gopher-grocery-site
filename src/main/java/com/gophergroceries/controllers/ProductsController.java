@@ -35,6 +35,6 @@ public class ProductsController {
 	public String getSubCategory(@PathVariable("subCategory") String subCategory, Model model) {
 		model.addAttribute("subCategoryName", WordUtils.capitalize(subCategory));
 		model.addAttribute("selectedProducts", productService.getProductsInCategory(subCategory));
-		return "results";
+		return "productresults";
 	}
 }

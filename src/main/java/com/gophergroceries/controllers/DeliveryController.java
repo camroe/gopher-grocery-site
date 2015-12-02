@@ -70,7 +70,7 @@ public class DeliveryController {
 		OrderSummaryResult osr = orderService.getOrderSummary();
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		if (deliveryService.transferOrderToSubmitted()) {
+		if (deliveryService.transferOrderToSubmitted("paypal")) {
 			return "paypal";
 		}
 		else {
@@ -83,7 +83,7 @@ public class DeliveryController {
 		OrderSummaryResult osr = orderService.getOrderSummary();
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		if (deliveryService.transferOrderToSubmitted()) {
+		if (deliveryService.transferOrderToSubmitted("contact")) {
 			return "contactforpayment";
 		}
 		else {

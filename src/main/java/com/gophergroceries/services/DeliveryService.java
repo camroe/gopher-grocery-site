@@ -61,7 +61,7 @@ public class DeliveryService {
 		return osr;
 	}
 
-	public boolean transferOrderToSubmitted() {
+	public boolean transferOrderToSubmitted(String methodOfPayment) {
 		boolean result = false;
 		String session = RequestContextHolder.currentRequestAttributes().getSessionId();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -73,14 +73,14 @@ public class DeliveryService {
 		else {
 			oe = ordersRepository.findOneBySessionID(session);
 		}
-		ConfirmedOrdersEntity coe = moveToConfirmed(oe);
+		ConfirmedOrdersEntity coe = moveToConfirmed(oe,methodOfPayment);
 		confirmedOrdersRepository.saveAndFlush(coe);
 		ordersRepository.delete(oe.getId());
 		result=true;
 		return result;
 	}
 
-	private ConfirmedOrdersEntity moveToConfirmed(OrdersEntity oe) {
-		return ConfirmedOrdersEnityFactory.createBasedOn(oe);
+	private ConfirmedOrdersEntity moveToConfirmed(OrdersEntity oe, String methodOfPayment) {
+		return ConfirmedOrdersEnityFactory.createBasedOn(oe, methodOfPayment);
 	}
 }

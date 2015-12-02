@@ -317,6 +317,7 @@
               </tr>
               <tr>
                 <td class="label"><label for="state">State:</label></td>
+                <td>UT</td>
               </tr>
               <tr>
                 <td class="label"><label for="zip">Zip:</label></td>

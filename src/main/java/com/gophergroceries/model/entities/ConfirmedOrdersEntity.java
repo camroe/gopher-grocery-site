@@ -61,7 +61,8 @@ public class ConfirmedOrdersEntity {
 	private String zipCode = "84121";
 	private String phone;
 	private String checkinDate;
-
+	private String paymentType;
+	
 	@Column(name = "comment", length = 500)
 	private String comment;
 
@@ -199,6 +200,14 @@ public class ConfirmedOrdersEntity {
 
 	public void setCheckinDate(String checkinDate) {
 		this.checkinDate = checkinDate;
+	}
+
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
 	}
 
 	public String getComment() {

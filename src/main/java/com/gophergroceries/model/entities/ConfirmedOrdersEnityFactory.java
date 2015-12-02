@@ -9,7 +9,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 public class ConfirmedOrdersEnityFactory {
 
-	public static ConfirmedOrdersEntity createBasedOn(OrdersEntity oe) {
+	public static ConfirmedOrdersEntity createBasedOn(OrdersEntity oe, String methodOfPayment) {
 		ConfirmedOrdersEntity coe = ConfirmedOrdersEnityFactory.empty();
 		coe.setCity(oe.getCity());
 		coe.setComment(oe.getComment());
@@ -29,6 +29,7 @@ public class ConfirmedOrdersEnityFactory {
 		// No need to set userName
 		coe.setZipCode(oe.getZipCode());
 		coe.setCheckinDate(oe.getCheckinDate());
+		coe.setPaymentType(methodOfPayment);
 
 		for (OrderLinesEntity ole : oe.getOrderLines()) {
 			ConfirmedOrderLinesEntity cole = new ConfirmedOrderLinesEntity();
