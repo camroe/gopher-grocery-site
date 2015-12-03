@@ -254,6 +254,11 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>4.2.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -292,6 +297,13 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		 <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+        </resource>
+        <!-- you can define here more than one resource -->
+    </resources>
 	</build>
 	<dependencyManagement>
 		<dependencies>
