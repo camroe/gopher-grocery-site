@@ -28,9 +28,9 @@ public class ConfirmedOrderLinesEntity implements Comparable<ConfirmedOrderLines
 	 * way to use the mapped by attribute inside the @ManyToOne annotation
 	 */
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "order_FK")
+	@JoinColumn(name = "confirmedorder_FK")
 	@JsonBackReference
-	private ConfirmedOrdersEntity order;
+	private ConfirmedOrdersEntity confirmedorder;
 
 	@ManyToOne()
 	@JoinColumn(name = "product_FK")
@@ -51,12 +51,12 @@ public class ConfirmedOrderLinesEntity implements Comparable<ConfirmedOrderLines
 		this.id = id;
 	}
 
-	public ConfirmedOrdersEntity getConfirmedOrder() {
-		return order;
+	public ConfirmedOrdersEntity getConfirmedorder() {
+		return confirmedorder;
 	}
 
-	public void setConfirmedOrder(ConfirmedOrdersEntity confirmedOrder) {
-		this.order = confirmedOrder;
+	public void setConfirmedorder(ConfirmedOrdersEntity confirmedorder) {
+		this.confirmedorder = confirmedorder;
 	}
 
 	public ProductEntity getProduct() {

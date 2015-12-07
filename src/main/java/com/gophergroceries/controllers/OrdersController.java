@@ -30,12 +30,12 @@ public class OrdersController {
 	@RequestMapping(value = "/v1/orderAPI/orders", method = RequestMethod.GET)
 	public String displayOrderPage(Locale locale, Model model) {
 		logger.info("OrderPage(POST) The client locale is {}.", locale);
-		OrderSummaryResult os = orderService.getOrderSummary();
-		model.addAttribute("orderSummaryResult", os);
+		OrderSummaryResult osr = orderService.getOrderSummary();
+		model.addAttribute("orderSummaryResult", osr);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String osJson = "";
 		try {
-			osJson = objectMapper.writeValueAsString(os);
+			osJson = objectMapper.writeValueAsString(osr);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
