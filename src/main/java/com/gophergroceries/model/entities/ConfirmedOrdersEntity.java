@@ -31,9 +31,8 @@ public class ConfirmedOrdersEntity {
 	@Column(name = "email")
 	private String email;
 
-	@OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "confirmedorder", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
-	// @Sort(type = SortType.NATURAL)
 	@SortNatural
 	private SortedSet<ConfirmedOrderLinesEntity> orderLines;
 

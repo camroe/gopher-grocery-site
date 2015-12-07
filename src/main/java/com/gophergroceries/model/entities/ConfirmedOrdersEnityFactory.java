@@ -35,7 +35,7 @@ public class ConfirmedOrdersEnityFactory {
 			cole.setPrice(ole.getPrice());
 			cole.setProduct(ole.getProduct());
 			cole.setQuantity(ole.getQuantity());
-			cole.setConfirmedOrder(coe);
+			cole.setConfirmedorder(coe);
 			SortedSet<ConfirmedOrderLinesEntity> set = coe.getOrderLines();
 			set.add(cole);
 			coe.setOrderLines(set);

@@ -105,7 +105,6 @@
         class="detail"
         id="name"
       >${oe.firstName}${oe.lastName}</div>
-
       <label
         class="delivery-detail-label"
         for="location"
