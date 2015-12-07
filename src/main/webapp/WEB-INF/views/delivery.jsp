@@ -44,8 +44,7 @@
       class="wide_wrap"
     >
       <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
-      <a href="/"> <img
-        class="logo-marginn"
+           <a href="/"> <img class="logo-marginn simple-tooltip" title="Click here to return to the home page"
         src="/resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
         width="160px"
@@ -330,7 +329,8 @@
                 <td><input
                     id="checkindate"
                     name="checkindate"
-                    type="date"
+                    type="text"
+                    size="40"
                   ></td>
               </tr>
 
@@ -445,7 +445,15 @@
     </div>
   </div>
 
-
+  <script type="text/javascript">
+      //Set the datepicker format
+      $("#checkindate").datepicker("option", "dateFormat", "DD, d MM, yy");
+      //Set the datepicker event
+      $(function() {
+        $("#checkindate").datepicker();
+        $("#checkindate").datepicker("option", "dateFormat", "DD, d MM, yy");
+      });
+    </script>
 
 </body>
 </html>

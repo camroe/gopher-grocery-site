@@ -58,7 +58,8 @@
       class="wide_wrap"
     >
       <a href="/"> <img
-        class="logo-marginn"
+        class="logo-marginn simple-tooltip"
+        title="Click here to return to the home page"
         src="/resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
         width="160px"
@@ -95,6 +96,7 @@
         class="deliver-to-header simple-tooltip"
         title="Where to deliver the groceries.This will almost always be the condominium/cabin where you will be staying for your holidays.This is NOT your homeaddress."
       >Delivery Information</span>
+      <div style="clear: both;"></div>
       <hr>
 
       <label
@@ -159,6 +161,7 @@
         id="username"
         title="This is the username that you are logged in as. If you have not logged in this will be 'anonymousUser'"
       >${oe.username}</div>
+      <div style="clear: both;"></div>
       <hr>
     </div>
 
@@ -168,6 +171,7 @@
         class="deliver-to-header simple-tooltip"
         title="Order Summary."
       >Order Summary</span>
+      <div style="clear: both;"></div>
       <hr>
 
       <label
@@ -196,6 +200,7 @@
         class="detail"
         id="total"
       >$${os.total}</div>
+      <div style="clear: both;"></div>
       <hr>
     </div>
     <!--  End Right -->

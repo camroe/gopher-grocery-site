@@ -1289,37 +1289,6 @@ h2 {
 #footer_props a{color:#9f9f9f;}
 #footer_props a:hover{color:#9f9f9f; text-decoration:none;}
 
-
-
-/*manual edit*/
-.cart {
-    background: url("../cssImage/cart-bg.png") no-repeat;
-    color: #9E9D9D;
-    font: 12px/17px Arial,Helvetica,sans-serif;
-    height: 49px;
-    letter-spacing: 0;
-    margin: 0;
-    overflow: hidden;
-    padding: 0 0 0 19px;
-    position: absolute;
-    right: -6px;
-    text-transform: none;
-    top: 28px;
-    width: 226px;
-}
-
-.cart .moduletable {
-    background: url("../cssImage/cart-img.png") no-repeat scroll left 12px transparent;
-    float: left;
-    overflow: hidden;
-}
-
-.cart .vmCartModule {
-    background: none repeat scroll 0 0 transparent !important;
-    margin: 0 0 0 0;
-    padding: 11px 0 10px 29px;
-    text-align: left;
-}
 .main-nav-bar{ margin:-19px auto auto auto;width: 940px; position:relative;}
 .main-nav-bar .nav-bar{ float:right; position:absolute; right:-6px; width:706px; height:50px; float:right; background:url("../cssImage/topmenu-bg.png") no-repeat; }
 .main-nav-bar .nav-bar ul{ margin: 11px 0 0 31px; padding:0; list-style:none;}
@@ -2303,11 +2272,7 @@ hr {
     margin: 0;
     padding: 0;
 }
-.cart .moduletable {
-    background: url("../cssImage/cart-img.png") no-repeat scroll left 12px transparent;
-    float: left;
-    overflow: hidden;
-}
+
 .cart .moduletable h3 {
     background: none repeat scroll 0 0 transparent;
     color: #0E0E0E;
@@ -2319,38 +2284,7 @@ hr {
     text-align: left;
     text-transform: none;
 }
-.cart a span {
-    color: #41BECF;
-    cursor: pointer;
-    display: inline-block;
-    font: bold 12px/18px Arial,Helvetica,sans-serif;
-    margin-top: 0 !important;
-    padding: 0 0 0 0;
-    text-align: left;
-    text-decoration: none;
-    text-transform: none;
-}
-.cart .vmCartModule {
-    background: none repeat scroll 0 0 transparent !important;
-    margin: 7px 0 0 0;
-    padding: 10px 0 10px 29px;
-    text-align: left;
-}
-.cart a {
-    color: #41BECF;
-    display: inline-block;
-    font: bold 12px/18px Arial,Helvetica,sans-serif;
-    letter-spacing: 0;
-    margin: 0;
-    padding: 0 3px;
-    text-align: left !important;
-    text-decoration: none;
-    text-transform: none;
-}
-.cart a:hover, .cart a:hover span {
-    color: #424242;
-    text-decoration: none;
-}
+
 .currency .moduletable {
     position: relative;
 }

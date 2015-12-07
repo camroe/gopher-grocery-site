@@ -22,7 +22,8 @@
 
   <div class="full_wrap full_wrap-back">
     <div id="header" class="wide_wrap">
-      <a href="/"> <img class="logo-marginn" src="/resources/FONTS/GG-Logo-Color.png"
+      <a href="/"> <img class="logo-marginn simple-tooltip" title="Click here to return to the home page"
+      src="/resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
         width="160px"
       >

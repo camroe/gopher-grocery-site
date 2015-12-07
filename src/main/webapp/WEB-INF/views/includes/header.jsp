@@ -30,6 +30,7 @@
   rel='stylesheet' type='text/css'>
 <!--  Local files  THE ORDER OF LOADING IS IMPORTANT HERE-->
 <link href="/resources/css/styles.css" type="text/css" rel="stylesheet" />
+<link href="/resources/css/cart.css" type="text/css" rel="stylesheet"/>
 <link href="/resources/css/results.css" type="text/css" rel="stylesheet" />
 <link href="/resources/css/productbox.css" type="text/css"
   rel="stylesheet" />
