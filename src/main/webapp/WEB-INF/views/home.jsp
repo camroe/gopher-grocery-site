@@ -53,7 +53,10 @@
         <!--         > -->
         <div class="moduletable">
           <div style="float: left; color: #41BECF; margin-left: 28px">
-            <div class="vmCartModule">
+            <div
+              class="vmCartModule simple-tooltip"
+              title="Click here to go to your cart and place your order"
+            >
               Now in your cart <b><span id="cartItemsCount">0</span>
                 Items</b>
             </div>

@@ -220,22 +220,46 @@
     <!-- Delivery Adjust Button -->
     <div class="order-review-left">
       <section class="pressadjust">
-        <button onclick="window.location.href='/v1/delivery';">Adjust
-          Delivery</button>
+        <button
+          class="simple-tooltip"
+          title="Click here to got back and adjust your existing order quantities"
+          onclick="window.location.href='/v1/delivery';"
+        >Adjust Delivery</button>
       </section>
     </div>
     <!-- End Left -->
+
     <!-- Order Adjust Button -->
     <div class="order-review-right">
       <section
         class="pressadjust"
         style="float: right;"
       >
-        <button onclick="window.location.href='/v1/orderAPI/orders';">Adjust
-          Order</button>
+        <button
+          class="simple-tooltip"
+          title="Click here to got back and adjust your existing delivery information and instructions"
+          onclick="window.location.href='/v1/orderAPI/orders';"
+        >Adjust Order</button>
       </section>
     </div>
     <!-- End Right -->
+    
+        <!--  MIDDLE - Go back to shopping  -->
+    <!-- Order Adjust Button -->
+    <div class="order-review-middle">
+      <section
+        class="pressadjust"
+        style="float: right;"
+      >
+        <button
+          class="simple-tooltip"
+          title="Click here to got back and adjust your existing delivery information and instructions"
+          onclick="window.location.href='/';"
+        >Go Back To Shopping</button>
+      </section>
+    </div>
+    <!-- End Right -->
+    
     <!--  ORDER Details -->
     <div class="orders">
       <table>
