@@ -8,6 +8,7 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
+	<import resource="mail.xml" />
 
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
@@ -18,7 +19,6 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<bean
@@ -27,9 +27,5 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-
-
-
-
-
 </beans>
+

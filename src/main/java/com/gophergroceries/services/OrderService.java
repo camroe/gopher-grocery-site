@@ -54,7 +54,7 @@ public class OrderService {
 
 	public AddToOrderResult addItemToOrder(AddToCartForm atcf) {
 		OrdersEntity orderEntity = null;
-		if (atcf.getUsername().equals("anonymousUser")) {
+		if ("anonymousUser".equals(atcf.getUsername())) {
 			orderEntity = getOrderWithSessionID(atcf.getSessionID());
 		}
 		else {

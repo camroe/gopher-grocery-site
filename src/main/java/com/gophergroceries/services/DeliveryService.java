@@ -1,5 +1,15 @@
 package com.gophergroceries.services;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.ShortBufferException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +35,16 @@ public class DeliveryService {
 
 	@Autowired
 	private ConfirmedOrdersRepository confirmedOrdersRepository;
-	
+
 	@Autowired
 	private OrderService orderService;
 
-	
-	
+	@Autowired
+	private EmailService emailService;
+
+	@Autowired
+	private EncryptionDecryptionService edService;
+
 	public OrderSummaryResult setDeliveryInformation(
 			String firstName,
 			String lastName,
@@ -73,10 +87,24 @@ public class DeliveryService {
 		else {
 			oe = ordersRepository.findOneBySessionID(session);
 		}
-		ConfirmedOrdersEntity coe = moveToConfirmed(oe,methodOfPayment);
+		ConfirmedOrdersEntity coe = moveToConfirmed(oe, methodOfPayment);
 		confirmedOrdersRepository.saveAndFlush(coe);
 		ordersRepository.delete(oe.getId());
-		result=true;
+		result = true;
+		String testEncryption = "";
+		try {
+			testEncryption = edService.encrypt(coe.getSessionID());
+		} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException
+				| InvalidAlgorithmParameterException | ShortBufferException | IllegalBlockSizeException
+				| BadPaddingException e) {
+			logger.error("Encryption Error: " + coe.getSessionID());
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		logger.info(testEncryption);
+		emailService.sendConfirmationEmail(coe.getEmail());
 		return result;
 	}
 
