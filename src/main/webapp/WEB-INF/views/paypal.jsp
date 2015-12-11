@@ -59,7 +59,9 @@
       class="wide_wrap"
     >
       <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
-            <a href="/"> <img class="logo-marginn simple-tooltip" title="Click here to return to the home page"
+      <a href="/"> <img
+        class="logo-marginn simple-tooltip"
+        title="Click here to return to the home page"
         src="/resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
         width="160px"
@@ -97,6 +99,18 @@
       >
       </a>
     </p>
+
+    <div style="clear: both"></div>
+    <!-- Look at Confirmed Order -->
+    <div class="order-review-left" style="width:400px;">
+      <section class="pressadjust">
+        <button
+          class="simple-tooltip"
+          title="Click here to review and/or print your order information"
+          onclick="window.location.href='/v1/confirmedorders';"
+        >Review or Print your Order Information</button>
+      </section>
+    </div>
 
   </div>
 </body>

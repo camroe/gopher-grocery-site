@@ -43,12 +43,6 @@ public class OrdersEntity {
 	@Column(name = "sessionid")
 	private String sessionID;
 
-	@Column(name = "confirmationid")
-	private String confirmationID;
-
-	@Column(name = "paypaynumber")
-	private String payPalNumber;
-
 	@Column(name = "username")
 	private String username;
 
@@ -61,7 +55,7 @@ public class OrdersEntity {
 	private String zipCode = "84121";
 	private String phone;
 	private String checkinDate;
-	
+
 	@Column(name = "comment", length = 500)
 	private String comment;
 
@@ -103,22 +97,6 @@ public class OrdersEntity {
 
 	public void setSessionID(String sessionID) {
 		this.sessionID = sessionID;
-	}
-
-	public String getConfirmationID() {
-		return confirmationID;
-	}
-
-	public void setConfirmationID(String confirmationID) {
-		this.confirmationID = confirmationID;
-	}
-
-	public String getPayPalNumber() {
-		return payPalNumber;
-	}
-
-	public void setPayPalNumber(String payPalNumber) {
-		this.payPalNumber = payPalNumber;
 	}
 
 	public String getUsername() {
@@ -192,8 +170,6 @@ public class OrdersEntity {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-	
 
 	public String getCheckinDate() {
 		return checkinDate;

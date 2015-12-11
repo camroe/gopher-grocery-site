@@ -21,7 +21,6 @@ public class ConfirmedOrdersEnityFactory {
 		// No need to set id
 		coe.setLastName(oe.getLastName());
 		coe.setLocation(oe.getLocation());
-		coe.setPayPalNumber(oe.getPayPalNumber());
 		coe.setPhone(oe.getPhone());
 		// No need to set session
 		coe.setState(oe.getState());

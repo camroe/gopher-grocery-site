@@ -11,8 +11,6 @@ public interface OrdersRepository extends JpaRepository<OrdersEntity, Integer> {
 
 	OrdersEntity findOneBySessionID(String sessionID);
 
-	OrdersEntity findOneByConfirmationID(String confirmationID);
-
 	List<OrdersEntity> findAllByEmail(String email);
 
 	OrdersEntity findOneByUsername(String username);

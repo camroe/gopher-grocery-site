@@ -20,8 +20,6 @@ public class OrderServiceTest {
 
 	private final String SESSION_ID = "TestSessionID";
 	// private final String EMAIL = "camroe@gmail.com";
-	// private final String PAYPAL_CONFIRMATION = "Test PayPal Confirmation";
-	private final String CONFIRMATION_ID = "TestConfirmation";
 
 	@Autowired
 	OrderService orderService;
@@ -37,12 +35,6 @@ public class OrderServiceTest {
 	@Test
 	public void testGetOrderWithSessionID() {
 		OrdersEntity oe = orderService.getOrderWithSessionID(SESSION_ID);
-		assertNotNull(oe);
-	}
-
-	@Test
-	public void testGetOrderWithConfirmationID() {
-		OrdersEntity oe = orderService.getOrderWithConfirmationID(CONFIRMATION_ID);
 		assertNotNull(oe);
 	}
 

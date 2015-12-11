@@ -34,8 +34,6 @@ public class OrdersRepositoryTest {
 	private SortedSet<OrderLinesEntity> orderLines = new TreeSet<OrderLinesEntity>();
 	private final String SESSION_ID = "TestSessionID";
 	private final String EMAIL = "camroe@gmail.com";
-	private final String PAYPAL_CONFIRMATION = "Test PayPal Confirmation";
-	private final String CONFIRMATION_ID = "TestConfirmation";
 
 	@Before
 	public void setupBeforeAll() {
@@ -54,11 +52,9 @@ public class OrdersRepositoryTest {
 			}
 			// Set up order
 
-			order.setConfirmationID(CONFIRMATION_ID);
 			order.setCreationDate(new Date(System.currentTimeMillis()));
 			order.setEmail(EMAIL);
 			order.setOrderLines(orderLines);
-			order.setPayPalNumber(PAYPAL_CONFIRMATION);
 			order.setSessionID(SESSION_ID);
 			orderDB = repository.save(order);
 
@@ -91,11 +87,4 @@ public class OrdersRepositoryTest {
 		}
 	}
 
-	@Test
-	public void testConfirmationRetrieval() {
-		OrdersEntity order = repository.findOneByConfirmationID(CONFIRMATION_ID);
-		assertNotNull(order);
-		System.out.println("Order: " + order.getId() + " : " + order.getConfirmationID());
-
-	}
 }

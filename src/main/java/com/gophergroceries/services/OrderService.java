@@ -35,20 +35,12 @@ public class OrderService {
 
 	// private final String SESSION_ID = "TestSessionID";
 	// private final String EMAIL = "camroe@gmail.com";
-	// private final String PAYPAL_CONFIRMATION = "Test PayPal Confirmation";
-	private final String CONFIRMATION_ID = "TestConfirmation";
 
 	public OrdersEntity getOrderWithSessionID(String sessionid) {
 		return ordersRepository.findOneBySessionID(sessionid);
 	}
 
-	public OrdersEntity getOrderWithConfirmationID(String confirmationID) {
-		logger.debug("Called with confirmationID " + confirmationID + ", but using " + CONFIRMATION_ID);
-		confirmationID = CONFIRMATION_ID;
-		return ordersRepository.findOneByConfirmationID(confirmationID);
-	}
-
-	public OrdersEntity getOrderWithUserName(String username) {
+		public OrdersEntity getOrderWithUserName(String username) {
 		return ordersRepository.findOneByUsername(username);
 	}
 
