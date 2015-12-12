@@ -4,14 +4,22 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.gophergroceries.cookies.CookieMgr;
+import com.gophergroceries.cookies.GopherCookie;
+import com.gophergroceries.cookies.GopherCookieFactory;
 import com.gophergroceries.services.CategoryMappingService;
 import com.gophergroceries.services.ProductsService;
 
@@ -33,17 +41,32 @@ public class HomeController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale,
+			Model model,
+			@CookieValue(value = GopherCookie.GOPHER_COOKIE_NAME, defaultValue = GopherCookie.GOPHER_COOKIE_NAME_HOLDING_VALUE) String gopherCartId,
+			HttpServletResponse response,
+			HttpServletRequest request) {
+
 		logger.info("Welcome home! The client locale is {}.", locale);
+		logger.info("CartId: " + gopherCartId);
 
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
 		String formattedDate = dateFormat.format(date);
-
+		logger.info("COOKIES: " + CookieMgr.cookieNames(request));
 		model.addAttribute("serverTime", formattedDate);
 		model.addAttribute("catMap", catMap.getCategoryList());
 		model.addAttribute("popularProducts", productService.getPopularProducts());
+		if (gopherCartId.equals(GopherCookie.GOPHER_COOKIE_NAME_HOLDING_VALUE)) {
+			logger.info("Empty Cart");
+			Cookie cookie = GopherCookieFactory.createCookie();
+			response.addCookie(cookie);
+			logger.info("COOKIE: " + CookieMgr.displayInfo(cookie));
+		}
+		else {
+			logger.info("Cart Value: " + gopherCartId);
+		}
 
 		// This maps to webapp/WEB-INF/views/home.jsp based on config in
 		// servlet-context.xml
@@ -65,7 +88,7 @@ public class HomeController {
 		return "delivery";
 	}
 
-//	@Secured("USER")
+	// @Secured("USER")
 	@RequestMapping(value = "/*ot*et*mplemented*", method = RequestMethod.GET)
 	public String notYetImplemented() {
 		return "notyetimplemented";

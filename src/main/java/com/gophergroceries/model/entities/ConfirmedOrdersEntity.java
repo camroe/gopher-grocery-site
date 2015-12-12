@@ -61,7 +61,8 @@ public class ConfirmedOrdersEntity {
 	private String phone;
 	private String checkinDate;
 	private String paymentType;
-	
+	private Integer cartid;
+
 	@Column(name = "comment", length = 500)
 	private String comment;
 
@@ -215,6 +216,14 @@ public class ConfirmedOrdersEntity {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public Integer getCartid() {
+		return cartid;
+	}
+
+	public void setCartid(Integer cartid) {
+		this.cartid = cartid;
 	}
 
 }

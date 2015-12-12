@@ -68,25 +68,6 @@
     </div>
   </div>
 
-  <%--   <%@ include file="includes/mainNavBar.jsp"%> --%>
-
-  <div class="main-nav-bar">
-
-    <div class="nav-bar">
-      <ul>
-        <li><a href="/">Online store</a></li>
-        <li><a href="/NotYetImplemented">How It Works</a></li>
-        <li><a href="/NotYetImplemented">FAQs</a></li>
-        <li><a href="contacts.html">Contacts</a></li>
-        <li><a href="/NotYetImplemented"><span
-              id="loginlogoutlabel"
-            >Login</span></a></li>
-      </ul>
-    </div>
-
-    <div class="clear"></div>
-  </div>
-
 
   <div class="ordersummary ">
     <br>
@@ -176,12 +157,22 @@
 
       <label
         class="delivery-detail-label"
+        for="confirmationid"
+      >Order ID: </label>
+      <div
+        class="detail"
+        id="confirmationid"
+      >${coe.confirmationId}</div>
+
+      <label
+        class="delivery-detail-label"
         for="id"
       >Order ID: </label>
       <div
         class="detail"
         id="id"
       >${coe.id}</div>
+
 
       <label
         class="delivery-detail-label"

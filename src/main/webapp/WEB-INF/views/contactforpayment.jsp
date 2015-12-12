@@ -44,13 +44,14 @@
     value="${_csrf.token}"
   />
   <!--  Set up the page -->
+  <!--  Set up the page -->
   <c:set
-    var="oe"
-    value="${orderSummaryResult.orderSummary.order.orderEntity}"
+    var="coe"
+    value="${confirmedOrderSummaryResult.confirmedOrderSummary.confirmedOrdersEntity}"
   />
   <c:set
-    var="os"
-    value="${orderSummaryResult.orderSummary}"
+    var="cos"
+    value="${confirmedOrderSummaryResult.confirmedOrderSummary}"
   />
 
   <div class="full_wrap full_wrap-back">
@@ -59,7 +60,9 @@
       class="wide_wrap"
     >
       <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
-            <a href="/"> <img class="logo-marginn simple-tooltip" title="Click here to return to the home page"
+      <a href="/"> <img
+        class="logo-marginn simple-tooltip"
+        title="Click here to return to the home page"
         src="/resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
         width="160px"
@@ -74,11 +77,27 @@
     class="ordersummary delivery-detail-label"
     style="left: 50px;"
   >
-    <p style="font-size: 18px;">Thank you for your order!</p>
+    <p style="font-size: 18px;">Thank you for your order!
+      (Confirmation Number: ${coe.confirmationId})</p>
     <p>We will be reviewing you order for special instructions,
       contact information, etc. When we have completed this process we
-      will contact you with any questions that we have as well as get your credit card information over the phone. 
-      We will then email your order, delivery instructions, etc.</p>
+      will contact you with any questions that we have as well as get
+      your credit card information over the phone. We will then email
+      your order, delivery instructions, etc.</p>
     <p>You will hear from us shortly!</p>
-    </div>
+  </div>
+  <div style="clear: both"></div>
+  <!-- Look at Confirmed Order -->
+  <div
+    class="order-review-left"
+    style="width: 400px;"
+  >
+    <section class="pressadjust">
+      <button
+        class="simple-tooltip"
+        title="Click here to review and/or print your order information"
+        onclick="window.location.href='/v1/confirmedorders';"
+      >Review or Print your Order Information</button>
+    </section>
+  </div>
 </body>

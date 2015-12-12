@@ -1,5 +1,7 @@
 package com.gophergroceries.controllers;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,12 +9,14 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import com.gophergroceries.cookies.GopherCookie;
 import com.gophergroceries.model.AddToCartForm;
 import com.gophergroceries.results.AddToOrderResult;
 import com.gophergroceries.results.OrderSummaryResult;
@@ -32,8 +36,13 @@ public class AddToCartController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody AddToOrderResult greetingSubmit(@RequestParam("quantity") String quantity,
-			@RequestParam("cartkey") String cartkey, @RequestParam("id") String id, @RequestParam("sku") String sku) {
+	public @ResponseBody AddToOrderResult greetingSubmit(
+			@RequestParam("quantity") String quantity,
+			@RequestParam("cartkey") String cartkey,
+			@RequestParam("id") String id,
+			@RequestParam("sku") String sku,
+			@CookieValue(value = GopherCookie.GOPHER_COOKIE_NAME, defaultValue = GopherCookie.GOPHER_COOKIE_NAME_HOLDING_VALUE) String gophercartid,
+			HttpServletResponse response) {
 		AddToCartForm atcf = new AddToCartForm();
 		String session = RequestContextHolder.currentRequestAttributes().getSessionId();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -45,7 +54,9 @@ public class AddToCartController {
 		atcf.setSku(sku);
 		atcf.setSessionID(session);
 		logger.info(atcf.toString());
-		return (orderService.addItemToOrder(atcf));
+		AddToOrderResult ator = orderService.addItemToOrder(atcf);
+
+		return (ator);
 	}
 
 	// v1/addtocart/ordersummary

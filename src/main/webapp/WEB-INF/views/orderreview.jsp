@@ -177,7 +177,7 @@
       <label
         class="delivery-detail-label"
         for="id"
-      >Order ID: </label>
+      >Cart ID: </label>
       <div
         class="detail"
         id="id"

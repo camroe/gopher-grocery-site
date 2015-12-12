@@ -14,7 +14,7 @@ public class ConfirmedOrdersEnityFactory {
 		coe.setCity(oe.getCity());
 		coe.setComment(oe.getComment());
 		// Set ConfirmationID to the original OrderID.
-		coe.setConfirmationID(oe.getId().toString());
+		coe.setConfirmationID(generateConfirmationID(oe));
 		coe.setCreationDate(oe.getCreationDate());
 		coe.setEmail(oe.getEmail());
 		coe.setFirstName(oe.getFirstName());
@@ -29,6 +29,7 @@ public class ConfirmedOrdersEnityFactory {
 		coe.setZipCode(oe.getZipCode());
 		coe.setCheckinDate(oe.getCheckinDate());
 		coe.setPaymentType(methodOfPayment);
+		coe.setCartid(oe.getId());
 
 		for (OrderLinesEntity ole : oe.getOrderLines()) {
 			ConfirmedOrderLinesEntity cole = new ConfirmedOrderLinesEntity();
@@ -41,6 +42,17 @@ public class ConfirmedOrdersEnityFactory {
 			coe.setOrderLines(set);
 		}
 		return coe;
+	}
+
+	private static String generateConfirmationID(OrdersEntity oe) {
+		// Confirmation ID is oe.id and the last 4 of the session id
+		StringBuilder sb = new StringBuilder();
+		String sessionid = oe.getSessionID();
+		String last4ofSessionID = sessionid == null || sessionid.length() < 3 ? sessionid
+				: sessionid.substring(sessionid.length() - 3);
+		sb.append(oe.getId().toString());
+		sb.append(last4ofSessionID);
+		return sb.toString();
 	}
 
 	public static ConfirmedOrdersEntity empty() {
