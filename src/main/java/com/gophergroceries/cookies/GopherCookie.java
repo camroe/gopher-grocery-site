@@ -9,17 +9,32 @@ public class GopherCookie {
 	private Cookie cookie = null;
 
 	public GopherCookie(Cookie cookie) {
-		super();
 		this.cookie = cookie;
 	}
 
 	public void setValue(Integer cartid) {
-		// TODO: Put encryption here.
-		this.cookie.setValue(cartid.toString());
+		this.cookie.setValue(encryptedValue(cartid.toString()));
 	}
 
 	public Cookie getCookie() {
+		if (null != this.cookie) {
+			// reset the max age on each get of the cookie
+			this.cookie.setMaxAge(60 * 60 * 24 * 365);
+		}
 		return this.cookie;
 	}
 
+	public String getCookieValue() {
+		if (null != this.cookie) {
+			// TODO: Put Decryption here.s
+			return this.cookie.getValue();
+		} else {
+			return GOPHER_COOKIE_NAME_HOLDING_VALUE;
+		}
+	}
+
+	private String encryptedValue(String string) {
+		// TODO: Put encryption here.
+		return string;
+	}
 }

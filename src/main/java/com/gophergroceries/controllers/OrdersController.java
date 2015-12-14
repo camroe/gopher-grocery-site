@@ -3,7 +3,9 @@ package com.gophergroceries.controllers;
 import java.io.IOException;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -16,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gophergroceries.cookies.CookieMgr;
+import com.gophergroceries.cookies.GopherCookie;
 import com.gophergroceries.model.entities.OrdersEntity;
 import com.gophergroceries.results.OrderSummaryResult;
 import com.gophergroceries.services.OrderService;
@@ -28,9 +32,12 @@ public class OrdersController {
 	private OrderService orderService;
 
 	@RequestMapping(value = "/v1/orderAPI/orders", method = RequestMethod.GET)
-	public String displayOrderPage(Locale locale, Model model) {
-		logger.info("OrderPage(POST) The client locale is {}.", locale);
-		OrderSummaryResult osr = orderService.getOrderSummary();
+	public String displayOrderPage(Locale locale, Model model,
+			HttpServletResponse httpServletResponse,
+			HttpServletRequest httpServletRequest) {
+		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
+		GopherCookie gopherCookie = new GopherCookie(cookie);
+		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		ObjectMapper objectMapper = new ObjectMapper();
 		String osJson = "";
@@ -48,9 +55,9 @@ public class OrdersController {
 	}
 
 	@RequestMapping(value = "/v1/orderAPI/orders", method = RequestMethod.POST)
-	public String displayUpdatedOrderPage(HttpServletRequest request, Locale locale, Model model) {
-		logger.info("OrderPage(GET) The client locale is {}.", locale);
-		logger.info("Model as is:" + model.toString());
+	public String displayUpdatedOrderPage(HttpServletRequest request,
+			Locale locale,
+			Model model) {
 		String jsonBody = "";
 		ObjectMapper objectMapper = new ObjectMapper();
 		OrdersEntity oe = null;
@@ -67,7 +74,6 @@ public class OrdersController {
 		}
 		OrderSummaryResult os = orderService.updateOrder(oe);
 
-		logger.info("OrderPage(POST) The client locale is {}.", locale);
 		// OrderSummaryResult os = orderService.getOrderSummary();
 		model.addAttribute("orderSummaryResult", os);
 		String osJson = "";
@@ -87,7 +93,6 @@ public class OrdersController {
 		// This maps to webapp/WEB-INF/views/order.jsp based on config in
 		// servlet-context.xml
 		return "order";
-
 	}
 
 }

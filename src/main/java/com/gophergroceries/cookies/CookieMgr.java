@@ -1,7 +1,5 @@
 package com.gophergroceries.cookies;
 
-import java.net.CookieManager;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,14 +8,13 @@ import org.slf4j.LoggerFactory;
 
 public class CookieMgr {
 	private static final Logger logger = LoggerFactory.getLogger(CookieMgr.class);
-	private static CookieManager cm;
 
-	public static String displayInfo(Cookie cookie) {
+	public static String prettyPrint(Cookie cookie) {
 		StringBuilder sb = new StringBuilder(100);
 		if (!(cookie == null)) {
 			sb.append("\n")
-					.append("Name: " + cookie.getName())
 					.append("\n")
+					.append("Name: " + cookie.getName())
 					.append("\n")
 					.append("Domain: " + cookie.getDomain())
 					.append("\n")
@@ -30,7 +27,9 @@ public class CookieMgr {
 					.append("Path: " + cookie.getPath())
 					.append("\n")
 					.append("IsSecure: " + cookie.getSecure())
-					.append("Comment: " + cookie.getComment());
+					.append("\n")
+					.append("Comment: " + cookie.getComment())
+					.append("\n");
 		}
 		return sb.toString();
 	}
@@ -52,18 +51,22 @@ public class CookieMgr {
 		Cookie returnCookie = null;
 		int count = 0;
 		Cookie[] cookies = httpServletRequest.getCookies();
-		for (int i = 0; i < cookies.length; i++) {
-			Cookie cookie = cookies[i];
-			String cName = cookie.getName();
-			if (cookieName.equals(cName)) {
-				returnCookie = cookie;
-				count = count + 1;
+		if (null != cookies) {
+			for (int i = 0; i < cookies.length; i++) {
+				Cookie cookie = cookies[i];
+				String cName = cookie.getName();
+				if (cookieName.equals(cName)) {
+					returnCookie = cookie;
+					count = count + 1;
+					logger.info(prettyPrint(cookie));
+				}
 			}
 		}
 		if (count > 1) {
 			// more than one cookie was found with the same name (can have different
 			// paths)
 			logger.warn(count + " Cookies were found in the request with the same name " + cookieName);
+			logger.warn("Returning the Following Cookie" + prettyPrint(returnCookie));
 		}
 		return returnCookie;
 	}

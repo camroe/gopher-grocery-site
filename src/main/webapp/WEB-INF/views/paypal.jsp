@@ -76,7 +76,7 @@
     class="ordersummary delivery-detail-label"
     style="left: 50px;"
   >
-    <p style="font-size: 18px;">Thank you for your order! (Confirmation Number: ${coe.confirmationid})  </p>
+    <p style="font-size: 18px;">Thank you for your order! (Confirmation Number: ${coe.confirmationID})  </p>
     <p>We will be reviewing you order for special instructions,
       contact information, etc. When we have completed this process we
       may contact you with any questions that we have. When it all looks

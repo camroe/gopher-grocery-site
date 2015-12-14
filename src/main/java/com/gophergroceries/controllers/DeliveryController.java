@@ -1,7 +1,8 @@
 package com.gophergroceries.controllers;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.gophergroceries.cookies.CookieMgr;
+import com.gophergroceries.cookies.GopherCookie;
+import com.gophergroceries.cookies.GopherCookieFactory;
 import com.gophergroceries.model.dao.JsonUtils;
 import com.gophergroceries.results.ConfirmedOrderSummaryResult;
 import com.gophergroceries.results.OrderSummaryResult;
@@ -26,6 +29,9 @@ import com.gophergroceries.services.OrderService;
 public class DeliveryController {
 	private static final Logger logger = LoggerFactory.getLogger(DeliveryController.class);
 
+	private static final String PAYMENT_TYPE_PAYPAL = "paypal";
+	private static final String PAYMENT_TYPE_CONTACT = "contactforpayment";
+
 	@Autowired
 	DeliveryService deliveryService;
 
@@ -34,11 +40,14 @@ public class DeliveryController {
 
 	@Autowired
 	ConfirmedOrderService confirmedOrderService;
-	
-	
+
 	@RequestMapping(value = "/v1/delivery", method = RequestMethod.GET)
-	public String getDelivery(Model model) {
-		OrderSummaryResult osr = orderService.getOrderSummary();
+	public String getDelivery(Model model,
+			HttpServletResponse httpServletResponse,
+			HttpServletRequest httpServletRequest) {
+		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
+		GopherCookie gopherCookie = new GopherCookie(cookie);
+		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
 		return "delivery";
@@ -53,10 +62,12 @@ public class DeliveryController {
 			@RequestParam("phone") String phone,
 			@RequestParam("email") String email,
 			@RequestParam("checkindate") String checkinDate,
-			@RequestParam("comment") String comment)
+			@RequestParam("comment") String comment,
+			HttpServletResponse httpServletResponse,
+			HttpServletRequest httpServletRequest) {
 
-
-	{
+		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
+		GopherCookie gopherCookie = new GopherCookie(cookie);
 		logger.trace(firstName);
 		logger.trace(lastName);
 		logger.trace(location);
@@ -65,9 +76,9 @@ public class DeliveryController {
 		logger.trace(email);
 		logger.trace(checkinDate);
 		logger.trace(comment);
-		
+
 		OrderSummaryResult osr = deliveryService.setDeliveryInformation(firstName, lastName, location, unit, phone, email,
-				checkinDate, comment);
+				checkinDate, comment, gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
 		// TODO: We could return to delivery here if we find there is an error in
@@ -77,40 +88,48 @@ public class DeliveryController {
 	}
 
 	@RequestMapping(value = "/v1/delivery/paypal", method = RequestMethod.GET)
-	public String getPayPal(Model model, HttpServletRequest request) {
-		OrderSummaryResult osr = orderService.getOrderSummary();
+	public String payWithPaypal(Model model,
+			HttpServletResponse httpServletResponse,
+			HttpServletRequest httpServletRequest) {
+
+		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
+		GopherCookie gopherCookie = new GopherCookie(cookie);
+		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		if (deliveryService.transferOrderToSubmitted("paypal")) {
+		if (deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_PAYPAL, gopherCookie)
+				.equals(DeliveryService.FAILED_CONFIRMATION)) {
+			return "orderreview";
+		} else {
 			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder();
 			model.addAttribute("confirmedOrderSummaryResult", cosr);
 			model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
-			HttpSession session = request.getSession();
-			session.invalidate();
-			return "paypal";
-		}
-		else {
-			model.addAttribute("orderSummaryResult", osr);
-			model.addAttribute("osJson", getJSon(osr));
-			return "orderreview";
+			httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
+			return DeliveryController.PAYMENT_TYPE_PAYPAL;
 		}
 	}
 
 	@RequestMapping(value = "/v1/delivery/contactforpayment", method = RequestMethod.GET)
-	public String getPayLater(Model model) {
-		OrderSummaryResult osr = orderService.getOrderSummary();
+	public String payWithContactLater(Model model,
+			HttpServletResponse httpServletResponse,
+			HttpServletRequest httpServletRequest) {
+		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
+		GopherCookie gopherCookie = new GopherCookie(cookie);
+		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		if (deliveryService.transferOrderToSubmitted("contact")) {
-			return "contactforpayment";
-		}
-		else {
-
+		if (deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_CONTACT, gopherCookie)
+				.equals(DeliveryService.FAILED_CONFIRMATION)) {
 			return "orderreview";
+		} else {
+			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder();
+			model.addAttribute("confirmedOrderSummaryResult", cosr);
+			model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
+			httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
+			return DeliveryController.PAYMENT_TYPE_CONTACT;
 		}
 	}
 
-	
 	private String getJSon(OrderSummaryResult osr) {
 		String returnJson = "";
 		ObjectMapper objectMapper = new ObjectMapper();

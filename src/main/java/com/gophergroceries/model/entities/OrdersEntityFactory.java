@@ -16,6 +16,8 @@ public class OrdersEntityFactory {
 		oe.setSessionID(session);
 		oe.setUsername(name);
 		oe.setOrderLines(new TreeSet<OrderLinesEntity>()); // Empty
+		// Since we are creating a new Order (or Cart) but don't have the id yet.
+		oe.setCartId(session);
 		return oe;
 	}
 }

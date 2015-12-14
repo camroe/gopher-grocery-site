@@ -58,7 +58,8 @@ public class OrdersEntity {
 
 	@Column(name = "comment", length = 500)
 	private String comment;
-
+	private String cartId;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -185,6 +186,14 @@ public class OrdersEntity {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getCartId() {
+		return cartId;
+	}
+
+	public void setCartId(String cartId) {
+		this.cartId = cartId;
 	}
 
 }

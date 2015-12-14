@@ -1,5 +1,7 @@
 package com.gophergroceries.controllers;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -9,14 +11,15 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import com.gophergroceries.cookies.CookieMgr;
 import com.gophergroceries.cookies.GopherCookie;
+import com.gophergroceries.cookies.GopherCookieFactory;
 import com.gophergroceries.model.AddToCartForm;
 import com.gophergroceries.results.AddToOrderResult;
 import com.gophergroceries.results.OrderSummaryResult;
@@ -36,33 +39,43 @@ public class AddToCartController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody AddToOrderResult greetingSubmit(
+	public @ResponseBody AddToOrderResult addToCart(
 			@RequestParam("quantity") String quantity,
 			@RequestParam("cartkey") String cartkey,
-			@RequestParam("id") String id,
+			@RequestParam("id") String id, // note this is product id
 			@RequestParam("sku") String sku,
-			@CookieValue(value = GopherCookie.GOPHER_COOKIE_NAME, defaultValue = GopherCookie.GOPHER_COOKIE_NAME_HOLDING_VALUE) String gophercartid,
-			HttpServletResponse response) {
+			HttpServletResponse httpServletResponse,
+			HttpServletRequest httpServletRequest) {
 		AddToCartForm atcf = new AddToCartForm();
 		String session = RequestContextHolder.currentRequestAttributes().getSessionId();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName(); // get logged in username
+		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
+		GopherCookie gopherCookie = new GopherCookie(cookie);
 		atcf.setUsername(name);
-		atcf.setCartkey(cartkey);
+		atcf.setCartkey(gopherCookie.getCookieValue());
 		atcf.setId(id);
 		atcf.setQuantity(quantity);
 		atcf.setSku(sku);
 		atcf.setSessionID(session);
 		logger.info(atcf.toString());
 		AddToOrderResult ator = orderService.addItemToOrder(atcf);
-
+		if (gopherCookie.getCookie() == null) {
+			gopherCookie = new GopherCookie(GopherCookieFactory.createCookie());
+			gopherCookie.setValue(new Integer(ator.getOrderSummary().getOrder().getOrderEntity().getId()));
+			httpServletResponse.addCookie(gopherCookie.getCookie());
+		}
 		return (ator);
 	}
 
 	// v1/addtocart/ordersummary
 	@RequestMapping(value = "/ordersummary", method = RequestMethod.GET)
-	public @ResponseBody OrderSummaryResult getOrderSummary() {
-		return orderService.getOrderSummary();
+	public @ResponseBody OrderSummaryResult getOrderSummary(
+			HttpServletResponse httpServletResponse,
+			HttpServletRequest httpServletRequest) {
+		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
+		GopherCookie gopherCookie = new GopherCookie(cookie);
+		return orderService.getOrderSummary(gopherCookie);
 	}
 
 }

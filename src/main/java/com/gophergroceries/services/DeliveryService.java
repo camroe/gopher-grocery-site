@@ -13,11 +13,9 @@ import javax.crypto.ShortBufferException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
 
+import com.gophergroceries.cookies.GopherCookie;
 import com.gophergroceries.model.entities.ConfirmedOrdersEnityFactory;
 import com.gophergroceries.model.entities.ConfirmedOrdersEntity;
 import com.gophergroceries.model.entities.OrdersEntity;
@@ -29,6 +27,8 @@ import com.gophergroceries.results.OrderSummaryResult;
 public class DeliveryService {
 
 	private static final Logger logger = LoggerFactory.getLogger(DeliveryService.class);
+
+	public static final String FAILED_CONFIRMATION = "Failed";
 
 	@Autowired
 	private OrdersRepository ordersRepository;
@@ -53,9 +53,10 @@ public class DeliveryService {
 			String phone,
 			String email,
 			String checkinDate,
-			String comment) {
+			String comment,
+			GopherCookie gopherCookie) {
 		// TODO: For now assume all is valid.
-		OrderSummaryResult osr = orderService.getOrderSummary();
+		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		OrdersEntity oe = osr.getOrderSummary().getOrder().getOrderEntity();
 		oe.setCity("Salt Lake City");
 		oe.setZipCode("84121");
@@ -75,22 +76,15 @@ public class DeliveryService {
 		return osr;
 	}
 
-	public boolean transferOrderToSubmitted(String methodOfPayment) {
-		boolean result = false;
-		String session = RequestContextHolder.currentRequestAttributes().getSessionId();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String userName = auth.getName(); // get logged in username
+	public String transferOrderToSubmitted(String methodOfPayment, GopherCookie gopherCookie) {
+		String confirmationID = DeliveryService.FAILED_CONFIRMATION;
+
 		OrdersEntity oe = null;
-		if (userName != "anonymousUser") {
-			oe = ordersRepository.findOneByUsername(userName);
-		}
-		else {
-			oe = ordersRepository.findOneBySessionID(session);
-		}
+		oe = orderService.getOrderWithCartKey(gopherCookie.getCookieValue());
 		ConfirmedOrdersEntity coe = moveToConfirmed(oe, methodOfPayment);
 		confirmedOrdersRepository.saveAndFlush(coe);
+		confirmationID = coe.getConfirmationID();
 		ordersRepository.delete(oe.getId());
-		result = true;
 		String testEncryption = "";
 		try {
 			testEncryption = edService.encrypt(coe.getSessionID());
@@ -105,7 +99,7 @@ public class DeliveryService {
 		}
 		logger.info(testEncryption);
 		emailService.sendConfirmationEmail(coe.getEmail());
-		return result;
+		return confirmationID;
 	}
 
 	private ConfirmedOrdersEntity moveToConfirmed(OrdersEntity oe, String methodOfPayment) {
