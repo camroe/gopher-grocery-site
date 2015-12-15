@@ -43,7 +43,7 @@ public class ConfirmedOrdersEntity {
 	private String sessionID;
 
 	@Column(name = "confirmationid")
-	private String confirmationID;
+	private String confirmationId;
 
 	@Column(name = "paypaynumber")
 	private String payPalNumber;
@@ -107,11 +107,11 @@ public class ConfirmedOrdersEntity {
 	}
 
 	public String getConfirmationID() {
-		return confirmationID;
+		return confirmationId;
 	}
 
-	public void setConfirmationID(String confirmationID) {
-		this.confirmationID = confirmationID;
+	public void setConfirmationID(String confirmationId) {
+		this.confirmationId = confirmationId;
 	}
 
 	public String getPayPalNumber() {

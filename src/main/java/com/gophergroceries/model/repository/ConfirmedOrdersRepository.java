@@ -11,7 +11,7 @@ public interface ConfirmedOrdersRepository extends JpaRepository<ConfirmedOrders
 
 	ConfirmedOrdersEntity findOneBySessionID(String sessionID);
 
-	ConfirmedOrdersEntity findOneByConfirmationID(String confirmationID);
+	ConfirmedOrdersEntity findOneByConfirmationId(String confirmationID);
 
 	List<ConfirmedOrdersEntity> findAllByEmail(String email);
 

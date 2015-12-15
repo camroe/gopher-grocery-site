@@ -1,6 +1,7 @@
 package com.gophergroceries.controllers;
 
-import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,33 +27,33 @@ public class ConfirmedOrderController {
 	@Autowired
 	EncryptionDecryptionService edService;
 
-	@RequestMapping(value = "/v1/confirmedorders", method = RequestMethod.GET)
-	public String getConfirmedOrder(Locale locale, Model model) {
-		ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder();
-		model.addAttribute("confirmedOrderSummaryResult", cosr);
-		String cosJson = JsonUtils.JsonStringFromObject(cosr);
-		logger.info("JSON IS: " + cosJson);
-		model.addAttribute("cosJson", cosJson);
-		if (cosr.isError()) {
-			// TODO: Return Error Page
-		}
-		return "confirmedorderreview";
-	}
+	// @RequestMapping(value = "/v1/confirmedorders", method = RequestMethod.GET)
+	// public String getConfirmedOrder(Locale locale, Model model,
+	// HttpServletResponse httpServletResponse,
+	// HttpServletRequest httpServletRequest) {
+	//
+	// Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME,
+	// httpServletRequest);
+	// GopherCookie gopherCookie = new GopherCookie(cookie);
+	// ConfirmedOrderSummaryResult cosr =
+	// confirmedOrderService.getConfirmedOrder(gopherCookie);
+	// model.addAttribute("confirmedOrderSummaryResult", cosr);
+	// String cosJson = JsonUtils.JsonStringFromObject(cosr);
+	// logger.info("JSON IS: " + cosJson);
+	// model.addAttribute("cosJson", cosJson);
+	// if (cosr.isError()) {
+	// // TODO: Return Error Page
+	// }
+	// return "confirmedorderreview";
+	// }
 
-	@RequestMapping(value = "/v1/customerconfirmedorders/{confimrationid}", method = RequestMethod.GET)
-	public String getConfirmedWithSession(@PathVariable("confirmationid") String confirmationid, Model model) {
-		/*
-		 * At this point, the customer has supposedly clicked on the email link sent
-		 * to him by the Confirm order.
-		 */
-		String decryptedConfirmationId = "";
-		try {
-			decryptedConfirmationId = edService.decrypt(confirmationid);
-		} catch (Exception e) {
-			logger.error("Trying to Lookup order based on Base64/encrypted sessionID: " + confirmationid);
-			e.printStackTrace();
-		}
-		ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder(decryptedConfirmationId);
+	@RequestMapping(value = "/v1/customerconfirmedorders/{confirmationid}", method = RequestMethod.GET)
+	public String getConfirmedWithSession(@PathVariable("confirmationid") String confirmationid,
+			Model model,
+			HttpServletResponse httpServletResponse,
+			HttpServletRequest httpServletRequest) {
+
+		ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder(confirmationid);
 		model.addAttribute("confirmedOrderSummaryResult", cosr);
 		String cosJson = JsonUtils.JsonStringFromObject(cosr);
 		logger.info("JSON IS: " + cosJson);

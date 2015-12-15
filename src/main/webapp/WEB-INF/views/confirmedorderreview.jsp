@@ -158,11 +158,11 @@
       <label
         class="delivery-detail-label"
         for="confirmationid"
-      >Order ID: </label>
+      >Confirmation ID: </label>
       <div
         class="detail"
         id="confirmationid"
-      >${coe.confirmationId}</div>
+      >${coe.confirmationID}</div>
 
       <label
         class="delivery-detail-label"

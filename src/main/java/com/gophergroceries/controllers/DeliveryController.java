@@ -87,6 +87,17 @@ public class DeliveryController {
 		return "orderreview";
 	}
 
+	/**
+	 * User has clicked the paypal button on the checkout page. Get the order and
+	 * move it to the confirmed order table.
+	 * 
+	 * @param model
+	 *          the page model
+	 * @param httpServletResponse
+	 * @param httpServletRequest
+	 * @return the JSP page to display. Either 'orderreview' if the transfer to
+	 *         the confirmedorder table failed or the 'paypal' page.
+	 */
 	@RequestMapping(value = "/v1/delivery/paypal", method = RequestMethod.GET)
 	public String payWithPaypal(Model model,
 			HttpServletResponse httpServletResponse,
@@ -97,11 +108,13 @@ public class DeliveryController {
 		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		if (deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_PAYPAL, gopherCookie)
-				.equals(DeliveryService.FAILED_CONFIRMATION)) {
+		String confirmationid = deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_PAYPAL,
+				gopherCookie);
+		if (confirmationid.equals(DeliveryService.FAILED_CONFIRMATION)) {
 			return "orderreview";
-		} else {
-			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder();
+		}
+		else {
+			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder(confirmationid);
 			model.addAttribute("confirmedOrderSummaryResult", cosr);
 			model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
 			httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
@@ -113,16 +126,19 @@ public class DeliveryController {
 	public String payWithContactLater(Model model,
 			HttpServletResponse httpServletResponse,
 			HttpServletRequest httpServletRequest) {
+
 		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
 		GopherCookie gopherCookie = new GopherCookie(cookie);
 		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		if (deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_CONTACT, gopherCookie)
-				.equals(DeliveryService.FAILED_CONFIRMATION)) {
+		String confirmationid = deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_CONTACT,
+				gopherCookie);
+		if (confirmationid.equals(DeliveryService.FAILED_CONFIRMATION)) {
 			return "orderreview";
-		} else {
-			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder();
+		}
+		else {
+			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder(confirmationid);
 			model.addAttribute("confirmedOrderSummaryResult", cosr);
 			model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
 			httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));

@@ -20,10 +20,10 @@ public class OrderSummary {
 		this.order = order;
 		recalculate();
 		if (total.longValueExact() == 0l) {
-			logger.warn("Order Summary Constructed with '0' total");
+			logger.trace("Order Summary Constructed with '0' total");
 		}
 		if (numberOfItems.intValue() == 0) {
-			logger.warn("Order Summary Constructed with '0' items");
+			logger.trace("Order Summary Constructed with '0' items");
 		}
 	}
 
