@@ -12,9 +12,9 @@ public class EmailService {
 	@Autowired
 	private EmailAPI emailAPI;
 
-	public boolean sendConfirmationEmail(String customerEmail, String confirmationId) {
+	public boolean sendConfirmationEmail(String customerEmail, String confirmationId, String hostname) {
 		boolean result = false;
-		// TODO: Need to expand on the Customer Email message and make it nice. 
+		// TODO: Need to expand on the Customer Email message and make it nice.
 		// String toAddr = customerEmail;
 		// But for now ......
 		logger.info("Would have sent to: " + customerEmail);
@@ -31,6 +31,16 @@ public class EmailService {
 				.append(") from Gopher-Groceries.")
 				.append("\n")
 				.append("We are reviewing your order and will be in contact shortly");
+
+		body.append("\n")
+				.append(
+						"Click on the following link or cut/paste the URL to your browser address bar to see your confirmed order.")
+				.append("\n");
+		body.append("http://")
+				.append(hostname)
+				.append("/v1/customerconfirmedorders/")
+				.append(confirmationId);
+
 		logger.info("Sending Confirmation Email: "
 				+ "\nTO:" + toAddr
 				+ "\nFrom:" + fromAddr

@@ -73,9 +73,12 @@ public class DeliveryService {
 	 * @param gopherCookie
 	 *          is used to get the cart that is being moved to the confirmed
 	 *          orders table.
+	 * @param hostname
+	 *          The name of the web host to build the confirmed order web call for
+	 *          inclusion in the email.
 	 * @return String - the ConfirmationID of the ordered cart. (not encrypted).
 	 */
-	public String transferOrderToSubmitted(String methodOfPayment, GopherCookie gopherCookie) {
+	public String transferOrderToSubmitted(String methodOfPayment, GopherCookie gopherCookie, String hostname) {
 		String confirmationID = DeliveryService.FAILED_CONFIRMATION;
 
 		OrdersEntity oe = null;
@@ -85,7 +88,7 @@ public class DeliveryService {
 		confirmationID = coe.getConfirmationID();
 		ordersRepository.delete(oe.getId());
 		// TODO: Put email on a queue.
-		emailService.sendConfirmationEmail(coe.getEmail(), coe.getConfirmationID());
+		emailService.sendConfirmationEmail(coe.getEmail(), coe.getConfirmationID(), hostname);
 		return confirmationID;
 	}
 

@@ -102,14 +102,14 @@ public class DeliveryController {
 	public String payWithPaypal(Model model,
 			HttpServletResponse httpServletResponse,
 			HttpServletRequest httpServletRequest) {
-
+		String hostname = httpServletRequest.getHeader("Host");
 		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
 		GopherCookie gopherCookie = new GopherCookie(cookie);
 		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
 		String confirmationid = deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_PAYPAL,
-				gopherCookie);
+				gopherCookie, hostname);
 		if (confirmationid.equals(DeliveryService.FAILED_CONFIRMATION)) {
 			return "orderreview";
 		}
@@ -126,14 +126,14 @@ public class DeliveryController {
 	public String payWithContactLater(Model model,
 			HttpServletResponse httpServletResponse,
 			HttpServletRequest httpServletRequest) {
-
+		String hostname = httpServletRequest.getHeader("Host");
 		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
 		GopherCookie gopherCookie = new GopherCookie(cookie);
 		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
 		String confirmationid = deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_CONTACT,
-				gopherCookie);
+				gopherCookie, hostname);
 		if (confirmationid.equals(DeliveryService.FAILED_CONFIRMATION)) {
 			return "orderreview";
 		}
