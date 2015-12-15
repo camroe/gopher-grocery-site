@@ -8,6 +8,11 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 public class OrdersEntityFactory {
 
+	/**
+	 * This method returns an 'empty' OrdersEntity with the minimal attributes set. 
+	 * Username,, sessionid, empty OrderLines, and cartID set to sessionid for now.
+	 * @return OrdersEntity - An 'empty' OrdersEntity
+	 */
 	public static OrdersEntity empty() {
 		String session = RequestContextHolder.currentRequestAttributes().getSessionId();
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

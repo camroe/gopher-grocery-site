@@ -38,14 +38,15 @@ public class Order {
 
 	private OrdersEntity orderEntity;
 
-	public Order () {
+	public Order() {
 		// Default
 	}
-	
+
 	public Order(OrdersEntity oe) {
-		this.orderEntity=oe;
+		this.orderEntity = oe;
 	}
-		public OrdersEntity getOrderEntity() {
+
+	public OrdersEntity getOrderEntity() {
 		return orderEntity;
 	}
 
@@ -71,7 +72,7 @@ public class Order {
 		if (found) {
 			// product matched existing one in order so we are done
 			return true;
-		}  
+		}
 		else {
 			// product new to order
 			OrderLinesEntity ole = new OrderLinesEntity();
@@ -81,7 +82,7 @@ public class Order {
 			ole.setQuantity(new Integer(atcf.getQuantity()));
 			Set<OrderLinesEntity> setOfOrderLines = orderEntity.getOrderLines();
 			if (setOfOrderLines.add(ole)) {
-				logger.trace("New OrderLinesEntry added to OrderEntity");
+				logger.trace("New OrderLinesEntry " + ole.getId() + "  added to OrderEntity " + orderEntity.getId());
 				this.orderEntity = ordersRepository.save(orderEntity);
 				return true;
 			}

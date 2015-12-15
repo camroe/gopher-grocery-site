@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gophergroceries.model.dao.JsonUtils;
 import com.gophergroceries.results.ConfirmedOrderSummaryResult;
@@ -39,20 +39,20 @@ public class ConfirmedOrderController {
 		return "confirmedorderreview";
 	}
 
-	@RequestMapping(value = "/v1/customerconfirmedorders", method = RequestMethod.GET)
-	public String getConfirmedWithSession(@RequestParam String sessionID, Model model) {
+	@RequestMapping(value = "/v1/customerconfirmedorders/{confimrationid}", method = RequestMethod.GET)
+	public String getConfirmedWithSession(@PathVariable("confirmationid") String confirmationid, Model model) {
 		/*
 		 * At this point, the customer has supposedly clicked on the email link sent
 		 * to him by the Confirm order.
 		 */
-		String lookupSessionID = "";
+		String decryptedConfirmationId = "";
 		try {
-			lookupSessionID = edService.decrypt(sessionID);
+			decryptedConfirmationId = edService.decrypt(confirmationid);
 		} catch (Exception e) {
-			logger.error("Trying to Lookup order based on Base64/encrypted sessionID: " + sessionID);
+			logger.error("Trying to Lookup order based on Base64/encrypted sessionID: " + confirmationid);
 			e.printStackTrace();
 		}
-		ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder(lookupSessionID);
+		ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder(decryptedConfirmationId);
 		model.addAttribute("confirmedOrderSummaryResult", cosr);
 		String cosJson = JsonUtils.JsonStringFromObject(cosr);
 		logger.info("JSON IS: " + cosJson);

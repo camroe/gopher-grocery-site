@@ -48,7 +48,7 @@ public class CookieMgr {
 	}
 
 	public static Cookie getCookie(String cookieName, HttpServletRequest httpServletRequest) {
-		Cookie returnCookie = null;
+		Cookie returnCookie = new Cookie(GopherCookie.GOPHER_COOKIE_NAME, null);
 		int count = 0;
 		Cookie[] cookies = httpServletRequest.getCookies();
 		if (null != cookies) {
@@ -56,9 +56,18 @@ public class CookieMgr {
 				Cookie cookie = cookies[i];
 				String cName = cookie.getName();
 				if (cookieName.equals(cName)) {
-					returnCookie = cookie;
-					count = count + 1;
-					logger.info(prettyPrint(cookie));
+					if (null == returnCookie.getValue()) {
+						returnCookie = cookie;
+						count = count + 1;
+					}
+					else // Get the highest 'value' cookie
+					if ((returnCookie.getValue().compareTo(cookie.getValue())) < 0) {
+						// returnCookie is less than cookie
+						logger.trace("Cookie Value " + returnCookie.getValue() + " is less than " + cookie.getValue());
+						returnCookie = cookie;
+						count = count + 1;
+					}
+					logger.info("Matching Cookie: " + prettyPrint(cookie));
 				}
 			}
 		}
@@ -83,11 +92,10 @@ public class CookieMgr {
 				sb.append(count)
 						.append(". ")
 						.append(cookie.getName())
+						.append("=")
+						.append(cookie.getValue())
 						.append("\n");
 			}
-			sb.append(count)
-					.append(" cookies Listed")
-					.append("\n");
 		}
 		return sb.toString();
 	}

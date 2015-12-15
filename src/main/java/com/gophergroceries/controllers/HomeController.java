@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gophergroceries.cookies.CookieMgr;
 import com.gophergroceries.cookies.GopherCookie;
+import com.gophergroceries.results.OrderSummaryResult;
 import com.gophergroceries.services.CategoryMappingService;
+import com.gophergroceries.services.OrderService;
 import com.gophergroceries.services.ProductsService;
 
 /**
@@ -34,6 +36,9 @@ public class HomeController {
 
 	@Autowired
 	private ProductsService productService;
+	
+	@Autowired 
+	private OrderService orderService;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -47,31 +52,23 @@ public class HomeController {
 
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
+		String hostname = httpServletRequest.getHeader("Host");
+		logger.trace("HOST:" + hostname);
 		String formattedDate = dateFormat.format(date);
 		logger.trace("COOKIES: " + CookieMgr.cookieNames(httpServletRequest));
+		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
+		GopherCookie gopherCookie = new GopherCookie(cookie);
+		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("serverTime", formattedDate);
 		model.addAttribute("catMap", catMap.getCategoryList());
 		model.addAttribute("popularProducts", productService.getPopularProducts());
+		model.addAttribute("items", osr.getOrderSummary().getNumberOfItems());
 		// This maps to webapp/WEB-INF/views/home.jsp based on config in
 		// servlet-context.xml
 		return "home";
 	}
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/delivery", method = RequestMethod.GET)
-	public String getDelivery(Locale locale, Model model) {
-		logger.info("Welcome Delivery! The client locale is {}.", locale);
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		String formattedDate = dateFormat.format(date);
-		model.addAttribute("serverTime", formattedDate);
-		// This maps to webapp/WEB-INF/views/home.jsp based on config in
-		// servlet-context.xml
-		return "delivery";
-	}
+	
 
 	// @Secured("USER")
 	@RequestMapping(value = "/*ot*et*mplemented*", method = RequestMethod.GET)

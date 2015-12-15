@@ -62,9 +62,13 @@ public class AddToCartController {
 		AddToOrderResult ator = orderService.addItemToOrder(atcf);
 		if (gopherCookie.getCookie() == null) {
 			gopherCookie = new GopherCookie(GopherCookieFactory.createCookie());
-			gopherCookie.setValue(new Integer(ator.getOrderSummary().getOrder().getOrderEntity().getId()));
-			httpServletResponse.addCookie(gopherCookie.getCookie());
 		}
+		logger.trace("Setting value of " + GopherCookie.GOPHER_COOKIE_NAME + " cookie to "
+				+ ator.getOrderSummary().getOrder().getOrderEntity().getId());
+		gopherCookie.setValue(new Integer(ator.getOrderSummary().getOrder().getOrderEntity().getId()));
+		logger.trace("Value of cookie after setting is : " + gopherCookie.getCookieValue());
+		httpServletResponse.addCookie(gopherCookie.getCookie());
+
 		return (ator);
 	}
 

@@ -27,7 +27,7 @@
 </head>
 
 <body>
-
+  <c:set var="numberOfItems" scope="page" value= "${items}"/>
   <div class="full_wrap full_wrap-back">
     <div
       id="header"
@@ -57,7 +57,7 @@
               class="vmCartModule simple-tooltip"
               title="Click here to go to your cart and place your order"
             >
-              Now in your cart <b><span id="cartItemsCount">0</span>
+              Now in your cart <b><span id="cartItemsCount"><c:out value="${numberOfItems}"/></span>
                 Items</b>
             </div>
           </div>
@@ -221,7 +221,7 @@
                         $('.results').replaceWith($('.results').html(data));
                       },
                       error : function(jqXHR, textStatus, errorThrown) {
-                        alert("Sorry, there was a problem! I was unable to access this URL. \n This problem has been logged.");
+                        alert("Sorry, there was a problem! Your SESSION could be expired, please try refreshing the page.");
                       }
                     });
               });
@@ -262,7 +262,7 @@
                         })
                     .fail(
                         function(jqXHR, textStatus, errorThrown) {
-                          alert("Sorry, there was a problem! I was unable to access this URL. \n"
+                          alert("Sorry, there was a problem! Your SESSION could be expired, please try refreshing the page. \n"
                               + errorThrown);
                         });
               }));
@@ -296,7 +296,7 @@
                     data.orderSummary.numberOfItems);
               },
               error : function(jqXHR, textStatus, errorThrown) {
-                alert("Sorry, there was a problem! I was unable to access this URL. \n"
+                alert("Sorry, there was a problem!.Your SESSION could be expired, please try refreshing the page.  \n"
                     + errorThrown);
               }
             });

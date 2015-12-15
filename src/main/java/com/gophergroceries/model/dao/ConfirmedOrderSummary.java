@@ -20,10 +20,10 @@ public class ConfirmedOrderSummary {
 		this.confirmedOrdersEntity = confirmedOrdersEntity;
 		recalculate();
 		if (total.longValueExact() == 0l) {
-			logger.warn("Confirmed Order Summary Constructed with '0' total");
+			logger.trace("Confirmed Order Summary Constructed with '0' total");
 		}
 		if (numberOfItems.intValue() == 0) {
-			logger.warn("Confirmed Order Summary Constructed with '0' items");
+			logger.trace("Confirmed Order Summary Constructed with '0' items");
 		}
 	}
 

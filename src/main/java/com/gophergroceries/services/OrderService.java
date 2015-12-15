@@ -7,10 +7,7 @@ import java.util.SortedSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.request.RequestContextHolder;
 
 import com.gophergroceries.cookies.GopherCookie;
 import com.gophergroceries.model.AddToCartForm;
@@ -46,15 +43,25 @@ public class OrderService {
 	}
 
 	public OrdersEntity getOrderWithCartKey(String cartkey) {
-		return ordersRepository.findOne(new Integer(cartkey));
+		if (GopherCookie.GOPHER_COOKIE_NAME_HOLDING_VALUE.equals(cartkey) || "".equals(cartkey)) {
+			return OrdersEntityFactory.empty();
+		}
+		Integer cartkeyInt = 0;
+		try {
+			cartkeyInt = new Integer(cartkey);
+		} catch (NumberFormatException nfe) {
+			logger.warn("Cartkey is not a number: " + cartkey);
+		}
+		return ordersRepository.findOne(cartkeyInt);
 	}
 
 	public AddToOrderResult addItemToOrder(AddToCartForm atcf) {
 		OrdersEntity orderEntity = null;
-		if (atcf.getCartkey().equals(GopherCookie.GOPHER_COOKIE_NAME_HOLDING_VALUE)) {
+		if ((atcf.getCartkey() == null) || (atcf.getCartkey().equals(GopherCookie.GOPHER_COOKIE_NAME_HOLDING_VALUE))) {
 			// No cart saved in cookie.
 			return createNewOrder(atcf);
-		} else
+		}
+		else
 			orderEntity = getOrderWithCartKey(atcf.getCartkey());
 
 		if (null == orderEntity) {
@@ -67,10 +74,8 @@ public class OrderService {
 
 	public OrderSummaryResult getOrderSummary(GopherCookie gopherCookie) {
 		OrderSummaryResult osr = new OrderSummaryResult();
-		String session = RequestContextHolder.currentRequestAttributes().getSessionId();
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getName();
-		OrdersEntity oe = getOEBasedOn(name, session);
+
+		OrdersEntity oe = getOEBasedOnCookie(gopherCookie);
 		if (null == oe) {
 			oe = OrdersEntityFactory.empty();
 		}
@@ -114,7 +119,8 @@ public class OrderService {
 			logger.warn("Product Not Found: actf = " + atcf.toString());
 			ator.setError(true);
 			ator.setErrorMsg("Attempted to add unknown product to cart");
-		} else {
+		}
+		else {
 			ator.setError(false);
 			ator.setErrorMsg("Success: Add to existing order");
 			OrderSummary os = new OrderSummary(order);
@@ -135,7 +141,8 @@ public class OrderService {
 		if (order.add(atcf)) {
 			ator.setError(false);
 			ator.setErrorMsg("Success: Create new Order");
-		} else {
+		}
+		else {
 			ator.setError(true);
 			ator.setErrorMsg("Error Adding to Cart. We are looking into it.");
 			logger.error("Failed to add to cart in OrderService : atcf =>" + atcf);
@@ -146,11 +153,19 @@ public class OrderService {
 		return ator;
 	}
 
-	private OrdersEntity getOEBasedOn(String name, String session) {
-		if (name.equals("anonymousUser"))
-			return getOrderWithSessionID(session);
-		else
-			return getOrderWithUserName(name);
+	// private OrdersEntity getOEBasedOn(String name, String session) {
+	// if (name.equals("anonymousUser"))
+	// return getOrderWithSessionID(session);
+	// else
+	// return getOrderWithUserName(name);
+	// }
+
+	private OrdersEntity getOEBasedOnCookie(GopherCookie gopherCookie) {
+		if (gopherCookie == null) {
+			// No cookie was set or cookies have been cleared.
+			return null;
+		}
+		return getOrderWithCartKey(gopherCookie.getCookieValue());
 	}
 
 	private void removeZeroQuantityOrderLines(OrdersEntity oe) {
