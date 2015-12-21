@@ -20,6 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gophergroceries.cookies.CookieMgr;
 import com.gophergroceries.cookies.GopherCookie;
+import com.gophergroceries.model.dao.JsonUtils;
 import com.gophergroceries.model.entities.OrdersEntity;
 import com.gophergroceries.results.OrderSummaryResult;
 import com.gophergroceries.services.OrderService;
@@ -47,7 +48,7 @@ public class OrdersController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		logger.info("JSON IS: " + osJson);
+		logger.info("Outgoing JSON from /v1/orderAPI/orders:GET is : " + JsonUtils.JsonStringFromObject(osr));
 		model.addAttribute("osJson", osJson);
 		// This maps to webapp/WEB-INF/views/order.jsp based on config in
 		// servlet-context.xml
@@ -84,7 +85,7 @@ public class OrdersController {
 			e.printStackTrace();
 		}
 		try {
-			logger.info("OutGoing JSON IS: " + objectMapper.writerWithDefaultPrettyPrinter()
+			logger.info("OutGoing JSON from /v1/orderAPI/orders:POST : " + objectMapper.writerWithDefaultPrettyPrinter()
 					.writeValueAsString(objectMapper.readValue(osJson, Object.class)));
 		} catch (IOException e) {
 			e.printStackTrace();

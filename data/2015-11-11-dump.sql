@@ -168,7 +168,7 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `creationDate` date DEFAULT NULL,
+  `creationdate` date DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `items` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -196,7 +196,7 @@ CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `category` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `imageFile` varchar(255) DEFAULT NULL,
+  `magefile` varchar(255) DEFAULT NULL,
   `inventory` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `popular` varchar(255) DEFAULT NULL,

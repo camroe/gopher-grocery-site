@@ -40,7 +40,7 @@
           <hr>
 
           <label class="delivery-detail-label" for="name">Name: </label>
-          <div class="detail" id="name">${oe.firstName}${oe.lastName}</div>
+          <div class="detail" id="name">${oe.firstName}${oe.lastname}</div>
 
           <label class="delivery-detail-label" for="location">Location: </label>
           <div class="detail" id="location">${oe.location}</div>
@@ -112,7 +112,7 @@
 
             <c:set var="itemCount" value="1" scope="page" />
             <c:set var="salesTotal" value="0" scope="page" />
-            <c:forEach items="${orderSummaryResult.orderSummary.order.orderEntity.orderLines}"
+            <c:forEach items="${orderSummaryResult.orderSummary.order.orderEntity.orderlines}"
               var="orderLine"
             >
               <c:set var="count" value="${count+1}" scope="page" />

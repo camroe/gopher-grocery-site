@@ -106,7 +106,7 @@
       <div
         class="detail"
         id="name"
-      >${oe.firstName}${oe.lastName}</div>
+      >${oe.firstname}${oe.lastname}</div>
       <label
         class="delivery-detail-label"
         for="location"
@@ -150,7 +150,7 @@
       <div
         class="detail"
         id="checkindate"
-      >${oe.checkinDate}</div>
+      >${oe.checkindate}</div>
 
       <label
         class="delivery-detail-label"
@@ -284,7 +284,7 @@
           scope="page"
         />
         <c:forEach
-          items="${orderSummaryResult.orderSummary.order.orderEntity.orderLines}"
+          items="${orderSummaryResult.orderSummary.order.orderEntity.orderlines}"
           var="orderLine"
         >
           <c:set

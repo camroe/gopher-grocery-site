@@ -8,7 +8,7 @@ CREATE TABLE `product` (
   `price` decimal(5,2) NOT NULL DEFAULT '0.00',
   `inventory` int(11) DEFAULT NULL,
   `popular` varchar(1) DEFAULT 'N' COMMENT 'y or Y = YES\nn or N or null = no\n',
-  `imageFile` varchar(45) NOT NULL DEFAULT 'resources/images/photonotavailable.jpg' COMMENT 'file location of the product image relative to context root',
+  `magefile` varchar(45) NOT NULL DEFAULT 'resources/images/photonotavailable.jpg' COMMENT 'file location of the product image relative to context root',
   `category` varchar(45) NOT NULL DEFAULT 'none' COMMENT 'The Category this product is in. ',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
@@ -16,7 +16,7 @@ CREATE TABLE `product` (
 
 
 LOCK TABLES gophergroceries.product WRITE;
-INSERT INTO gophergroceries.product(id,sku, name, description, price,inventory,popular,imageFile,category)  
+INSERT INTO gophergroceries.product(id,sku, name, description, price,inventory,popular,magefile,category)  
 VALUES (1,'SK01','White Bread','Enriched White Bread',1.00,NULL,'Y','resources/images/photonotavailable.jpg','bread'),
 (2,'SK02','Brown Bread','Brown Wonder Bread',1.00,NULL,'Y','resources/images/brownbread.jpg','bread'),
 (3,'SK03','White Buns - 6 cnt','White Dinner Buns',1.00,NULL,'Y','resources/images/photonotavailable.jpg','buns'),

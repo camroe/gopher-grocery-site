@@ -87,7 +87,7 @@
       <div
         class="detail"
         id="name"
-      >${coe.firstName}${coe.lastName}</div>
+      >${coe.firstname}${coe.lastname}</div>
       <label
         class="delivery-detail-label"
         for="location"
@@ -131,7 +131,7 @@
       <div
         class="detail"
         id="checkindate"
-      >${coe.checkinDate}</div>
+      >${coe.checkindate}</div>
 
       <label
         class="delivery-detail-label"
@@ -158,11 +158,11 @@
       <label
         class="delivery-detail-label"
         for="confirmationid"
-      >Order ID: </label>
+      >Confirmation ID: </label>
       <div
         class="detail"
         id="confirmationid"
-      >${coe.confirmationId}</div>
+      >${coe.confirmationID}</div>
 
       <label
         class="delivery-detail-label"
@@ -231,7 +231,7 @@
           scope="page"
         />
         <c:forEach
-          items="${confirmedOrderSummaryResult.confirmedOrderSummary.confirmedOrdersEntity.orderLines}"
+          items="${confirmedOrderSummaryResult.confirmedOrderSummary.confirmedOrdersEntity.orderlines}"
           var="orderLine"
         >
           <c:set

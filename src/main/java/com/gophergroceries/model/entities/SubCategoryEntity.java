@@ -2,6 +2,7 @@ package com.gophergroceries.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,7 +16,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Table(name = "subcategory")
 public class SubCategoryEntity {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	/*
@@ -27,9 +28,9 @@ public class SubCategoryEntity {
 	@JsonBackReference
 	private CategoryEntity cat;
 
-	private String displayName;
+	private String displayname;
 
-	private String urlAddress;
+	private String urladdress;
 
 	public CategoryEntity getCat() {
 		return cat;
@@ -39,20 +40,30 @@ public class SubCategoryEntity {
 		this.cat = cat;
 	}
 
-	public String getDisplayName() {
-		return displayName;
+	
+
+	public String getDisplayname() {
+		return displayname;
 	}
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public void setDisplayname(String displayname) {
+		this.displayname = displayname;
 	}
 
-	public String getUrlAddress() {
-		return urlAddress;
+	public String getUrladdress() {
+		return urladdress;
 	}
 
-	public void setUrlAddress(String urlAddress) {
-		this.urlAddress = urlAddress;
+	public void setUrladdress(String urladdress) {
+		this.urladdress = urladdress;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override

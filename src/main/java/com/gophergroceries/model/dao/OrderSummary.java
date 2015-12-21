@@ -19,7 +19,7 @@ public class OrderSummary {
 	public OrderSummary(Order order) {
 		this.order = order;
 		recalculate();
-		if (total.longValueExact() == 0l) {
+		if (total.compareTo(BigDecimal.ZERO) == 0) {
 			logger.warn("Order Summary Constructed with '0' total");
 		}
 		if (numberOfItems.intValue() == 0) {
@@ -60,7 +60,7 @@ public class OrderSummary {
 
 	private Integer calcNumberOfItems(Order order) {
 		Integer numberOfItems = 0;
-		for (OrderLinesEntity ole : order.getOrderEntity().getOrderLines()) {
+		for (OrderLinesEntity ole : order.getOrderEntity().getOrderlines()) {
 			numberOfItems = numberOfItems + ole.getQuantity();
 		}
 		return numberOfItems;
@@ -68,7 +68,7 @@ public class OrderSummary {
 
 	private BigDecimal calcTotal(Order order) {
 		BigDecimal runningTotal = new BigDecimal(0);
-		for (OrderLinesEntity ole : order.getOrderEntity().getOrderLines()) {
+		for (OrderLinesEntity ole : order.getOrderEntity().getOrderlines()) {
 
 			runningTotal = runningTotal
 					.add((ole.getPrice()

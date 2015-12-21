@@ -46,28 +46,28 @@ public class DeliveryService {
 	private EncryptionDecryptionService edService;
 
 	public OrderSummaryResult setDeliveryInformation(
-			String firstName,
-			String lastName,
+			String firstname,
+			String lastname,
 			String location,
 			String unit,
 			String phone,
 			String email,
-			String checkinDate,
+			String checkindate,
 			String comment,
 			GopherCookie gopherCookie) {
 		// TODO: For now assume all is valid.
 		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		OrdersEntity oe = osr.getOrderSummary().getOrder().getOrderEntity();
 		oe.setCity("Salt Lake City");
-		oe.setZipCode("84121");
+		oe.setZipcode("84121");
 		oe.setState("Ut");
-		oe.setFirstName(firstName);
-		oe.setLastName(lastName);
+		oe.setFirstname(firstname);
+		oe.setLastname(lastname);
 		oe.setLocation(location);
 		oe.setUnit(unit);
 		oe.setPhone(phone);
 		oe.setEmail(email);
-		oe.setCheckinDate(checkinDate);
+		oe.setCheckindate(checkindate);
 		oe.setComment(comment);
 		ordersRepository.saveAndFlush(oe);
 		osr.setError(false);
@@ -80,25 +80,36 @@ public class DeliveryService {
 		String confirmationID = DeliveryService.FAILED_CONFIRMATION;
 
 		OrdersEntity oe = null;
-		oe = orderService.getOrderWithCartKey(gopherCookie.getCookieValue());
-		ConfirmedOrdersEntity coe = moveToConfirmed(oe, methodOfPayment);
-		confirmedOrdersRepository.saveAndFlush(coe);
-		confirmationID = coe.getConfirmationID();
-		ordersRepository.delete(oe.getId());
-		String testEncryption = "";
 		try {
-			testEncryption = edService.encrypt(coe.getSessionID());
-		} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException
-				| InvalidAlgorithmParameterException | ShortBufferException | IllegalBlockSizeException
-				| BadPaddingException e) {
-			logger.error("Encryption Error: " + coe.getSessionID());
-			e.printStackTrace();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			oe = orderService.getOrderWithCartKey(gopherCookie.getCookieValue());
+			// TODO: If you hit 'back' from the confirm order page, you could get a
+			// null
+			// oe here.
+
+			if (null != oe) {
+				ConfirmedOrdersEntity coe = moveToConfirmed(oe, methodOfPayment);
+				confirmedOrdersRepository.saveAndFlush(coe);
+				confirmationID = coe.getConfirmationID();
+				ordersRepository.delete(oe.getId());
+				String testEncryption = "";
+				try {
+					testEncryption = edService.encrypt(coe.getSessionID());
+				} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException
+						| InvalidAlgorithmParameterException | ShortBufferException | IllegalBlockSizeException
+						| BadPaddingException e) {
+					logger.error("Encryption Error: " + coe.getSessionID());
+					e.printStackTrace();
+				} catch (Exception e) {
+					logger.error("Exception Raised in Delivery Service: Encryption");
+					e.printStackTrace();
+				}
+				logger.info(testEncryption);
+				emailService.sendConfirmationEmail(coe.getEmail());
+			}
+		} catch (Exception ex) {
+			logger.error("Exception raised in Delivery Service");
+			ex.printStackTrace();
 		}
-		logger.info(testEncryption);
-		emailService.sendConfirmationEmail(coe.getEmail());
 		return confirmationID;
 	}
 

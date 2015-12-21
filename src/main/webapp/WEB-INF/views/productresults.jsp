@@ -10,7 +10,7 @@
 <c:forEach items="${selectedProducts}" var="selectedProducts">
   <div class="productbox">
     <div class="productImageContainer simple-tooltip" title='${selectedProducts.description}'>
-      <img src='${selectedProducts.imageFile}' />
+      <img src='${selectedProducts.imagefile}' />
     </div>
     <div class="productTitle">${selectedProducts.name}</div>
     <div class="productDetailsContainer">

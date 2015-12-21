@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ProductEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	// @JsonBackReference
 	// @JsonIgnore
@@ -51,11 +51,14 @@ public class ProductEntity {
 	@Column(name = "popular")
 	private String popular;
 
-	@Column(name = "imageFile")
-	private String imageFile;
+	@Column(name = "magefile")
+	private String imagefile;
 
 	@Column(name = "category")
 	private String category;
+
+	@Column(name = "store")
+	private String store;
 
 	// ********** GETTERS AND SETTERS ************
 	public Integer getId() {
@@ -122,12 +125,12 @@ public class ProductEntity {
 		this.popular = popular;
 	}
 
-	public String getImageFile() {
-		return imageFile;
+	public String getImagefile() {
+		return imagefile;
 	}
 
-	public void setImageFile(String imageFile) {
-		this.imageFile = imageFile;
+	public void setImagefile(String imagefile) {
+		this.imagefile = imagefile;
 	}
 
 	public String getCategory() {
@@ -136,6 +139,14 @@ public class ProductEntity {
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	public String getStore() {
+		return store;
+	}
+
+	public void setStore(String store) {
+		this.store = store;
 	}
 
 	@Override
@@ -154,10 +165,11 @@ public class ProductEntity {
 		return new HashCodeBuilder(17, 19)
 				.append(id.intValue())
 				.append(sku)
-				.append(imageFile)
+				.append(imagefile)
 				.append(category)
 				.append(name)
 				.append(description)
+				.append(store)
 				.toHashCode();
 	}
 
@@ -173,10 +185,11 @@ public class ProductEntity {
 		return new EqualsBuilder()
 				.append(id.intValue(), rhs.getId().intValue())
 				.append(sku, rhs.getSku())
-				.append(imageFile, rhs.getImageFile())
+				.append(imagefile, rhs.getImagefile())
 				.append(category, rhs.getCategory())
 				.append(name, rhs.getName())
 				.append(description, rhs.getDescription())
+				.append(store, rhs.getStore())
 				.isEquals();
 	}
 

@@ -200,7 +200,7 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `confirmationid` varchar(255) DEFAULT NULL,
-  `creationDate` date DEFAULT NULL,
+  `creationdate` date DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `paypaynumber` varchar(255) DEFAULT NULL,
   `sessionid` varchar(255) DEFAULT NULL,
@@ -228,7 +228,7 @@ CREATE TABLE `product` (
   `id` int(11) NOT NULL,
   `category` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `imageFile` varchar(255) DEFAULT NULL,
+  `magefile` varchar(255) DEFAULT NULL,
   `inventory` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `popular` varchar(255) DEFAULT NULL,

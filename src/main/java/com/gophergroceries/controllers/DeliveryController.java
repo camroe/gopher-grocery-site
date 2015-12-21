@@ -55,30 +55,30 @@ public class DeliveryController {
 
 	@RequestMapping(value = "/v1/delivery", method = RequestMethod.POST)
 	public String postDelivery(Model model,
-			@RequestParam("first_name") String firstName,
-			@RequestParam("last_name") String lastName,
+			@RequestParam("first_name") String firstname,
+			@RequestParam("last_name") String lastname,
 			@RequestParam("location") String location,
 			@RequestParam("unit") String unit,
 			@RequestParam("phone") String phone,
 			@RequestParam("email") String email,
-			@RequestParam("checkindate") String checkinDate,
+			@RequestParam("checkindate") String checkindate,
 			@RequestParam("comment") String comment,
 			HttpServletResponse httpServletResponse,
 			HttpServletRequest httpServletRequest) {
 
 		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
 		GopherCookie gopherCookie = new GopherCookie(cookie);
-		logger.trace(firstName);
-		logger.trace(lastName);
+		logger.trace(firstname);
+		logger.trace(lastname);
 		logger.trace(location);
 		logger.trace(unit);
 		logger.trace(phone);
 		logger.trace(email);
-		logger.trace(checkinDate);
+		logger.trace(checkindate);
 		logger.trace(comment);
 
-		OrderSummaryResult osr = deliveryService.setDeliveryInformation(firstName, lastName, location, unit, phone, email,
-				checkinDate, comment, gopherCookie);
+		OrderSummaryResult osr = deliveryService.setDeliveryInformation(firstname, lastname, location, unit, phone, email,
+				checkindate, comment, gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
 		// TODO: We could return to delivery here if we find there is an error in
@@ -91,42 +91,86 @@ public class DeliveryController {
 	public String payWithPaypal(Model model,
 			HttpServletResponse httpServletResponse,
 			HttpServletRequest httpServletRequest) {
-
-		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
-		GopherCookie gopherCookie = new GopherCookie(cookie);
-		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
-		model.addAttribute("orderSummaryResult", osr);
-		model.addAttribute("osJson", getJSon(osr));
-		if (deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_PAYPAL, gopherCookie)
-				.equals(DeliveryService.FAILED_CONFIRMATION)) {
-			return "orderreview";
-		} else {
-			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder();
-			model.addAttribute("confirmedOrderSummaryResult", cosr);
-			model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
-			httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
-			return DeliveryController.PAYMENT_TYPE_PAYPAL;
-		}
+		return handlePayementMethodRequest(httpServletRequest, model, httpServletResponse,
+				DeliveryController.PAYMENT_TYPE_PAYPAL);
 	}
+	//
+	// Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME,
+	// httpServletRequest);
+	// GopherCookie gopherCookie = new GopherCookie(cookie);
+	// OrderSummaryResult osr = orderService
+	// .getOrderSummary(gopherCookie);model.addAttribute("orderSummaryResult",osr);model.addAttribute("osJson",
+	//
+	// getJSon(osr));
+	// String confirmedOrderId =
+	// deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_PAYPAL,
+	// gopherCookie);
+	// if (confirmedOrderId.equals(DeliveryService.FAILED_CONFIRMATION)) {
+	// return "orderreview";
+	// } else {
+	// ConfirmedOrderSummaryResult cosr =
+	// confirmedOrderService.getConfirmedOrderWithConfirmationID(confirmedOrderId);
+	// model.addAttribute("confirmedOrderSummaryResult", cosr);
+	// model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
+	// model.addAttribute("confirmationid", confirmedOrderId);
+	// httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
+	// if (cosr.isError()) {
+	// return "couldNotFindOrder";
+	// }
+	// return DeliveryController.PAYMENT_TYPE_PAYPAL;
+	// }
+	// }
 
 	@RequestMapping(value = "/v1/delivery/contactforpayment", method = RequestMethod.GET)
 	public String payWithContactLater(Model model,
 			HttpServletResponse httpServletResponse,
 			HttpServletRequest httpServletRequest) {
+		return handlePayementMethodRequest(httpServletRequest, model, httpServletResponse,
+				DeliveryController.PAYMENT_TYPE_CONTACT);
+	}
+	// Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME,
+	// httpServletRequest);
+	// GopherCookie gopherCookie = new GopherCookie(cookie);
+	// OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
+	// model.addAttribute("orderSummaryResult", osr);
+	// model.addAttribute("osJson", getJSon(osr));
+	// String confirmedOrderId =
+	// deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_CONTACT,
+	// gopherCookie);
+	// if (confirmedOrderId.equals(DeliveryService.FAILED_CONFIRMATION)) {
+	// return "orderreview";
+	// } else {
+	// ConfirmedOrderSummaryResult cosr =
+	// confirmedOrderService.getConfirmedOrderWithConfirmationID(confirmedOrderId);
+	// model.addAttribute("confirmedOrderSummaryResult", cosr);
+	// model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
+	// httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
+	// return DeliveryController.PAYMENT_TYPE_CONTACT;
+	// }
+	// }
+
+	private String handlePayementMethodRequest(HttpServletRequest httpServletRequest,
+			Model model,
+			HttpServletResponse httpServletResponse,
+			String paymentType) {
 		Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME, httpServletRequest);
 		GopherCookie gopherCookie = new GopherCookie(cookie);
 		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		if (deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_CONTACT, gopherCookie)
-				.equals(DeliveryService.FAILED_CONFIRMATION)) {
+		String confirmedOrderId = deliveryService.transferOrderToSubmitted(paymentType, gopherCookie);
+		if (confirmedOrderId.equals(DeliveryService.FAILED_CONFIRMATION)) {
 			return "orderreview";
 		} else {
-			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder();
+			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrderWithConfirmationID(confirmedOrderId);
 			model.addAttribute("confirmedOrderSummaryResult", cosr);
 			model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
+			model.addAttribute("confirmationid", confirmedOrderId);
 			httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
-			return DeliveryController.PAYMENT_TYPE_CONTACT;
+			if (cosr.isError()) {
+				return "couldNotFindOrder";
+			}
+			return paymentType;
 		}
 	}
 

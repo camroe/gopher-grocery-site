@@ -18,9 +18,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Table(name = "orderlines")
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class OrderLinesEntity implements Comparable<OrderLinesEntity> {
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	/*

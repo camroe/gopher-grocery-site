@@ -2,27 +2,26 @@ package com.gophergroceries.model;
 
 public class SubCategory {
 
-	private String displayName;
-	private String idName;		 // This should represent a name for a list of
-														 // products.
+	private String displayname;
+	private String idName; // This should represent a name for a list of
+												 // products.
 
-	
 	public SubCategory(String name) {
-		this.displayName = name;
+		this.displayname = name;
 		this.idName = name;
 	}
 
-	public SubCategory(String displayName, String idName) {
-		this.displayName = displayName;
+	public SubCategory(String displayname, String idName) {
+		this.displayname = displayname;
 		this.idName = idName;
 	}
 
-	public String getDisplayName() {
-		return displayName;
+	public String getDisplayname() {
+		return displayname;
 	}
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public void setDisplayname(String displayname) {
+		this.displayname = displayname;
 	}
 
 	public String getIdName() {

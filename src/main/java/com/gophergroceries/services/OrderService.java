@@ -96,13 +96,13 @@ public class OrderService {
 			returnResult.setErrorMsg("Could not find Order: " + modifiedOrdersEntity.getId());
 			return returnResult; // break out of method.
 		}
-		for (OrderLinesEntity ol : oe.getOrderLines()) {
+		for (OrderLinesEntity ol : oe.getOrderlines()) {
 			Integer newQuantity = findMatchingOrderLineQuantity(ol.getId(), modifiedOrdersEntity);
 			logger.trace("OldQuantity: " + ol.getQuantity());
 			logger.trace("NewQuantity: " + newQuantity);
 			ol.setQuantity(newQuantity);
 		}
-		removeZeroQuantityOrderLines(oe);
+		removeZeroQuantityOrderlines(oe);
 		ordersRepository.saveAndFlush(oe);
 
 		returnResult.setOrderSummary(new OrderSummary(new Order(oe)));
@@ -168,8 +168,8 @@ public class OrderService {
 		return getOrderWithCartKey(gopherCookie.getCookieValue());
 	}
 
-	private void removeZeroQuantityOrderLines(OrdersEntity oe) {
-		SortedSet<OrderLinesEntity> setOfOLEs = oe.getOrderLines();
+	private void removeZeroQuantityOrderlines(OrdersEntity oe) {
+		SortedSet<OrderLinesEntity> setOfOLEs = oe.getOrderlines();
 
 		Iterator<OrderLinesEntity> iterator = setOfOLEs.iterator();
 		while (iterator.hasNext()) {
@@ -178,12 +178,12 @@ public class OrderService {
 				iterator.remove();
 			}
 		}
-		oe.setOrderLines(setOfOLEs);
+		oe.setOrderlines(setOfOLEs);
 	}
 
 	private Integer findMatchingOrderLineQuantity(Integer id, OrdersEntity modifiedOrdersEntity) {
 		Integer returnValue = new Integer(0);
-		Set<OrderLinesEntity> setOfOLEs = modifiedOrdersEntity.getOrderLines();
+		Set<OrderLinesEntity> setOfOLEs = modifiedOrdersEntity.getOrderlines();
 
 		for (OrderLinesEntity ole : setOfOLEs) {
 			if (ole.getId().equals(id)) {

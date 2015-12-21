@@ -31,11 +31,11 @@
           console.log("SessionID: " + oe.sessionID);
           console.log("EMAIL: " + oe.email);
           console.log("ConfirmationID: " + oe.confirmationID);
-          console.log("CreationDate: " + oe.creationDate);
-          console.log("PayPalNumber: " + oe.payPalNumber);
-          console.log("OrderLines: " + oe.orderLines);
+          console.log("CreationDate: " + oe.creationdate);
+          console.log("PayPalNumber: " + oe.paypalnumber);
+          console.log("OrderLines: " + oe.orderlines);
           console.log("-----------------------------------------");
-          $.each(oe.orderLines, function(i, ole) {
+          $.each(oe.orderlines, function(i, ole) {
             console.log("     Product: " + ole.product.name);
             console.log("     Quantity: " + ole.quantity);
             console.log("-----------------------------------------");

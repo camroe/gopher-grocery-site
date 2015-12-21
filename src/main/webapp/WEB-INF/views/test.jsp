@@ -40,7 +40,7 @@
           <hr>
 
           <label class="delivery-detail-label" for="name">Name: </label>
-          <div class="detail" id="name">${oe.firstName}${oe.lastName}</div>
+          <div class="detail" id="name">${oe.firstname}${oe.lastname}</div>
 
           <label class="delivery-detail-label" for="location">Location: </label>
           <div class="detail" id="location">${oe.location}</div>

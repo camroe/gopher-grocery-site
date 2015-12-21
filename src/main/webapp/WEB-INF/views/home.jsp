@@ -119,7 +119,7 @@
               class="productImageContainer simple-tooltip"
               title='${popularProducts.description}'
             >
-              <img src='${popularProducts.imageFile}' />
+              <img src='${popularProducts.imagefile}' />
             </div>
             <div class="productTitle">${popularProducts.name}</div>
             <div class="productDetailsContainer">

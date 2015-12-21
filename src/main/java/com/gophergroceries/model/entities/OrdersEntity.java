@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class OrdersEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
 
@@ -35,10 +35,10 @@ public class OrdersEntity {
 	@JsonManagedReference
 	// @Sort(type = SortType.NATURAL)
 	@SortNatural
-	private SortedSet<OrderLinesEntity> orderLines; // will be a collection
+	private SortedSet<OrderLinesEntity> orderlines; // will be a collection
 
-	@Column(name = "creationDate")
-	private Date creationDate;
+	@Column(name = "creationdate")
+	private Date creationdate;
 
 	@Column(name = "sessionid")
 	private String sessionID;
@@ -46,15 +46,15 @@ public class OrdersEntity {
 	@Column(name = "username")
 	private String username;
 
-	private String firstName;
-	private String lastName;
+	private String firstname;
+	private String lastname;
 	private String unit;
 	private String location;
 	private String city = "Salt Lake City";
 	private String state = "UT";
-	private String zipCode = "84121";
+	private String zipcode = "84121";
 	private String phone;
-	private String checkinDate;
+	private String checkindate;
 
 	@Column(name = "comment", length = 500)
 	private String comment;
@@ -76,20 +76,20 @@ public class OrdersEntity {
 		this.email = email;
 	}
 
-	public SortedSet<OrderLinesEntity> getOrderLines() {
-		return orderLines;
+	public SortedSet<OrderLinesEntity> getOrderlines() {
+		return orderlines;
 	}
 
-	public void setOrderLines(SortedSet<OrderLinesEntity> orderLines) {
-		this.orderLines = orderLines;
+	public void setOrderlines(SortedSet<OrderLinesEntity> orderlines) {
+		this.orderlines = orderlines;
 	}
 
-	public Date getCreationDate() {
-		return creationDate;
+	public Date getCreationdate() {
+		return creationdate;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+	public void setCreationdate(Date creationdate) {
+		this.creationdate = creationdate;
 	}
 
 	public String getSessionID() {
@@ -108,20 +108,20 @@ public class OrdersEntity {
 		this.username = username;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getUnit() {
@@ -156,12 +156,12 @@ public class OrdersEntity {
 		this.state = state;
 	}
 
-	public String getZipCode() {
-		return zipCode;
+	public String getZipcode() {
+		return zipcode;
 	}
 
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setZipcode(String zipcode) {
+		this.zipcode = zipcode;
 	}
 
 	public String getPhone() {
@@ -172,12 +172,12 @@ public class OrdersEntity {
 		this.phone = phone;
 	}
 
-	public String getCheckinDate() {
-		return checkinDate;
+	public String getCheckindate() {
+		return checkindate;
 	}
 
-	public void setCheckinDate(String checkinDate) {
-		this.checkinDate = checkinDate;
+	public void setCheckindate(String checkindate) {
+		this.checkindate = checkindate;
 	}
 
 	public String getComment() {

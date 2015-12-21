@@ -10,7 +10,7 @@ public class OrdersEntityFactory {
 
 	/**
 	 * This method returns an 'empty' OrdersEntity with the minimal attributes set. 
-	 * Username,, sessionid, empty OrderLines, and cartID set to sessionid for now.
+	 * Username,, sessionid, empty Orderlines, and cartID set to sessionid for now.
 	 * @return OrdersEntity - An 'empty' OrdersEntity
 	 */
 	public static OrdersEntity empty() {
@@ -20,7 +20,7 @@ public class OrdersEntityFactory {
 		OrdersEntity oe = new OrdersEntity();
 		oe.setSessionID(session);
 		oe.setUsername(name);
-		oe.setOrderLines(new TreeSet<OrderLinesEntity>()); // Empty
+		oe.setOrderlines(new TreeSet<OrderLinesEntity>()); // Empty
 		// Since we are creating a new Order (or Cart) but don't have the id yet.
 		oe.setCartId(session);
 		return oe;

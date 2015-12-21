@@ -29,25 +29,25 @@ public class CategoryRepositoryTest {
 	@Before
 	public void executedBeforeEachTest() {
 		cat.setName("TestCategory");
-		cat.setUrlAddress("This is the url #");
+		cat.setUrladdress("This is the url #");
 
 		subCatSet.clear();
 		subCat = new SubCategoryEntity();
 		subCat.setCat(cat);// must be done to manage relationship
-		subCat.setDisplayName("SubCategory One");
-		subCat.setUrlAddress("endpoint for Subcategory One");
+		subCat.setDisplayname("SubCategory One");
+		subCat.setUrladdress("endpoint for Subcategory One");
 		subCatSet.add(subCat);
 
 		subCat = new SubCategoryEntity();
 		subCat.setCat(cat);
-		subCat.setDisplayName("SubCategory Two");
-		subCat.setUrlAddress("endpoint for Subcategory Two");
+		subCat.setDisplayname("SubCategory Two");
+		subCat.setUrladdress("endpoint for Subcategory Two");
 		subCatSet.add(subCat);
 
 		subCat = new SubCategoryEntity();
 		subCat.setCat(cat);
-		subCat.setDisplayName("SubCategory Three");
-		subCat.setUrlAddress("endpoint for Subcategory Three");
+		subCat.setDisplayname("SubCategory Three");
+		subCat.setUrladdress("endpoint for Subcategory Three");
 		subCatSet.add(subCat);
 
 		/** Must be done to manage relationship */

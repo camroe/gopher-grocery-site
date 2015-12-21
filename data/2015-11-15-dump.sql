@@ -147,7 +147,7 @@ DROP TABLE IF EXISTS `orders`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `creationDate` date DEFAULT NULL,
+  `creationdate` date DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `items` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -173,8 +173,8 @@ DROP TABLE IF EXISTS `persons`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `persons` (
   `PersonID` int(11) DEFAULT NULL,
-  `LastName` varchar(255) DEFAULT NULL,
-  `FirstName` varchar(255) DEFAULT NULL,
+  `Lastname` varchar(255) DEFAULT NULL,
+  `Firstname` varchar(255) DEFAULT NULL,
   `Address` varchar(255) DEFAULT NULL,
   `City` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -229,7 +229,7 @@ CREATE TABLE `product` (
   `price` decimal(5,2) NOT NULL DEFAULT '0.00',
   `inventory` int(11) DEFAULT NULL,
   `popular` varchar(1) DEFAULT 'N' COMMENT 'y or Y = YES\nn or N or null = no\n',
-  `imageFile` varchar(45) DEFAULT NULL COMMENT 'file location of the product image relative to context root',
+  `magefile` varchar(45) DEFAULT NULL COMMENT 'file location of the product image relative to context root',
   `category` varchar(45) NOT NULL DEFAULT 'none' COMMENT 'The Category this product is in. ',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)

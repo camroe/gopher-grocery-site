@@ -56,9 +56,9 @@ public class Order {
 
 	public boolean add(AddToCartForm atcf) {
 		ProductEntity productEntity = productsRepository.findOne(new Integer(atcf.getId()));
-		Set<OrderLinesEntity> orderLines = orderEntity.getOrderLines();
+		Set<OrderLinesEntity> orderlines = orderEntity.getOrderlines();
 		boolean found = false;
-		for (OrderLinesEntity ole : orderLines) {
+		for (OrderLinesEntity ole : orderlines) {
 			if (productEntity.equals(ole.getProduct())) {
 				// add cart quantity to existing
 				found = true;
@@ -80,14 +80,14 @@ public class Order {
 			ole.setPrice(productEntity.getPrice());
 			ole.setProduct(productEntity);
 			ole.setQuantity(new Integer(atcf.getQuantity()));
-			Set<OrderLinesEntity> setOfOrderLines = orderEntity.getOrderLines();
-			if (setOfOrderLines.add(ole)) {
-				logger.trace("New OrderLinesEntry " + ole.getId() + "  added to OrderEntity " + orderEntity.getId());
+			Set<OrderLinesEntity> setOfOrderlines = orderEntity.getOrderlines();
+			if (setOfOrderlines.add(ole)) {
+				logger.trace("New OrderlinesEntry " + ole.getId() + "  added to OrderEntity " + orderEntity.getId());
 				this.orderEntity = ordersRepository.save(orderEntity);
 				return true;
 			}
 			else {
-				logger.warn("OrderLinesEntry failed to add to OrderEntity - NOT saving OrdersEntity ");
+				logger.warn("OrderlinesEntry failed to add to OrderEntity - NOT saving OrdersEntity ");
 				return false;
 			}
 		}

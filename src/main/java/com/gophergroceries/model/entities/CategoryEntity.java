@@ -6,6 +6,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -20,15 +21,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class CategoryEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	private String name;
 
-	private String urlAddress;
+	private String urladdress;
 
 	@OneToMany(mappedBy = "cat", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@OrderBy("displayName")
+	@OrderBy("displayname")
 	@JsonManagedReference
 	private Set<SubCategoryEntity> subCats;
 
@@ -40,12 +41,12 @@ public class CategoryEntity {
 		this.name = name;
 	}
 
-	public String getUrlAddress() {
-		return urlAddress;
+	public String getUrladdress() {
+		return urladdress;
 	}
 
-	public void setUrlAddress(String urlAddress) {
-		this.urlAddress = urlAddress;
+	public void setUrladdress(String uurladdress) {
+		this.urladdress = uurladdress;
 	}
 
 	public Set<SubCategoryEntity> getSubCats() {

@@ -1,7 +1,5 @@
 package com.gophergroceries.controllers;
 
-import java.util.Locale;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,40 +24,30 @@ public class ConfirmedOrderController {
 	@Autowired
 	EncryptionDecryptionService edService;
 
-	@RequestMapping(value = "/v1/confirmedorders", method = RequestMethod.GET)
-	public String getConfirmedOrder(Locale locale, Model model) {
-		ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder();
-		model.addAttribute("confirmedOrderSummaryResult", cosr);
-		String cosJson = JsonUtils.JsonStringFromObject(cosr);
-		logger.info("JSON IS: " + cosJson);
-		model.addAttribute("cosJson", cosJson);
-		if (cosr.isError()) {
-			// TODO: Return Error Page
-		}
-		return "confirmedorderreview";
-	}
-
-	@RequestMapping(value = "/v1/customerconfirmedorders/{confimrationid}", method = RequestMethod.GET)
+	/**
+	 * Get the Confirmed Order by Confirmation ID
+	 * 
+	 * @param confirmationid
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/v1/customerconfirmedorders/{confirmationid}", method = RequestMethod.GET)
 	public String getConfirmedWithSession(@PathVariable("confirmationid") String confirmationid, Model model) {
 		/*
 		 * At this point, the customer has supposedly clicked on the email link sent
 		 * to him by the Confirm order.
 		 */
-		String decryptedConfirmationId = "";
-		try {
-			decryptedConfirmationId = edService.decrypt(confirmationid);
-		} catch (Exception e) {
-			logger.error("Trying to Lookup order based on Base64/encrypted sessionID: " + confirmationid);
-			e.printStackTrace();
-		}
-		ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrder(decryptedConfirmationId);
-		model.addAttribute("confirmedOrderSummaryResult", cosr);
-		String cosJson = JsonUtils.JsonStringFromObject(cosr);
-		logger.info("JSON IS: " + cosJson);
-		model.addAttribute("cosJson", cosJson);
-		if (cosr.isError()) {
-			// TODO: Return Error Page
-		}
+
+		ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrderWithConfirmationID(confirmationid);
+		
+			model.addAttribute("confirmedOrderSummaryResult", cosr);
+			model.addAttribute("confirmationid", confirmationid);
+			String cosJson = JsonUtils.JsonStringFromObject(cosr);
+			logger.info("JSON IS: " + cosJson);
+			model.addAttribute("cosJson", cosJson);
+			if (cosr.isError()) {
+			return "couldNotFindOrder";
+			}
 		return "confirmedorderreview";
 
 	}

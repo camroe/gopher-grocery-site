@@ -31,9 +31,9 @@ public class CategoryMappingTest {
 		assertNotNull(c);
 		System.out.println(categoryUnderTest);
 		for (CategoryEntity cat : c) {
-			System.out.println("Major Category: " + cat.getName() + " : " + cat.getUrlAddress());
+			System.out.println("Major Category: " + cat.getName() + " : " + cat.getUrladdress());
 			for (SubCategoryEntity subCat : cat.getSubCats()) {
-				System.out.println("\tSubCategory: " + subCat.getDisplayName() + " : " + subCat.getUrlAddress());
+				System.out.println("\tSubCategory: " + subCat.getDisplayname() + " : " + subCat.getUrladdress());
 			}
 		}
 	}

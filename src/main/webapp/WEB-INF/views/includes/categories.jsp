@@ -6,12 +6,11 @@
     <c:forEach items="${catMap}" var="mainCategory">
       <li>
         <div class="category">
-          <a href='${mainCategory.urlAddress}'>${mainCategory.name}</a>
+          <a href='${mainCategory.urladdress}'>${mainCategory.name}</a>
         </div>
         <ul class=subcategory>
-          <c:forEach items="${mainCategory.getSubCats()}"
-            var="subCategory">
-            <li id='${subCategory.urlAddress}'><a href=#>${subCategory.displayName}</a>
+          <c:forEach items="${mainCategory.getSubCats()}" var="subCategory">
+            <li id='${subCategory.urladdress}'><a href=#>${subCategory.displayname}</a>
           </c:forEach>
         </ul>
       </li>

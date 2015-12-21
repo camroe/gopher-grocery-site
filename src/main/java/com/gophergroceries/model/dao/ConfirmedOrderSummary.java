@@ -19,7 +19,7 @@ public class ConfirmedOrderSummary {
 	public ConfirmedOrderSummary(ConfirmedOrdersEntity confirmedOrdersEntity) {
 		this.confirmedOrdersEntity = confirmedOrdersEntity;
 		recalculate();
-		if (total.longValueExact() == 0l) {
+		if (total.compareTo(BigDecimal.ZERO) == 0) {
 			logger.trace("Confirmed Order Summary Constructed with '0' total");
 		}
 		if (numberOfItems.intValue() == 0) {
@@ -60,7 +60,7 @@ public class ConfirmedOrderSummary {
 
 	private Integer calcNumberOfItems(ConfirmedOrdersEntity coe) {
 		Integer numberOfItems = 0;
-		for (ConfirmedOrderLinesEntity cole : coe.getOrderLines()) {
+		for (ConfirmedOrderLinesEntity cole : coe.getOrderlines()) {
 			numberOfItems = numberOfItems + cole.getQuantity();
 		}
 		return numberOfItems;
@@ -68,7 +68,7 @@ public class ConfirmedOrderSummary {
 
 	private BigDecimal calcTotal(ConfirmedOrdersEntity coe) {
 		BigDecimal runningTotal = new BigDecimal(0);
-		for (ConfirmedOrderLinesEntity cole : coe.getOrderLines()) {
+		for (ConfirmedOrderLinesEntity cole : coe.getOrderlines()) {
 
 			runningTotal = runningTotal
 					.add((cole.getPrice()

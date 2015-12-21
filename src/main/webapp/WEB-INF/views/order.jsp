@@ -5,7 +5,7 @@
 <%@ page session="false"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <%@ include file="includes/header.jsp"%>
@@ -19,8 +19,8 @@
   <div class="full_wrap full_wrap-back">
     <div id="header" class="wide_wrap">
       <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
-      <a href="/"> <img class="logo-marginn simple-tooltip" title="Click here to return to the home page"
-      src="/resources/FONTS/GG-Logo-Color.png"
+      <a href="/"> <img class="logo-marginn simple-tooltip"
+        title="Click here to return to the home page" src="/resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
         width="160px"
       >
@@ -53,7 +53,8 @@
 
           <c:set var="itemCount" value="1" scope="page" />
           <c:set var="salesTotal" value="0" scope="page" />
-          <c:forEach items="${orderSummaryResult.orderSummary.order.orderEntity.orderLines}"
+          <c:set var="jsonFromJSP" value="${osJson}"/>
+          <c:forEach items="${orderSummaryResult.orderSummary.order.orderEntity.orderlines}"
             var="orderLine"
           >
             <c:set var="count" value="${count+1}" scope="page" />
@@ -82,8 +83,8 @@
             <td id="totalLabel" colspan="5">Total</td>
             <td id="grandTotal">$<fmt:formatNumber value="${salesTotal}" minFractionDigits="2"></fmt:formatNumber></td>
         </table>
-        <input class="hidden simple-tooltip" id="updateButton" name="updateButton" type="button" disabled
-          value="Update Changes to Order"
+        <input class="hidden simple-tooltip" id="updateButton" name="updateButton" type="button"
+          disabled value="Update Changes to Order"
           title="This button is disabled until you change a quantity"
         /> <input class="simple-tooltip" id="nextButton" name="next" type="button"
           value="Next Page - Delivery Details"
@@ -107,26 +108,29 @@
                 console.log(token1);
                 var errorMsg = "${orderSummaryResult.errorMsg}";
                 console.log(errorMsg);
-                var osJson = $.parseJSON('${osJson}'); //Page scoped osJson
+//                 var osJson = $.parseJSON(${osJson}); //Page scoped osJson
+                var stringJson = '${osJson}'; //Page scoped osJson
+                console.log(stringJson);
+                var osJson=JSON.parse(stringJson);
                 canIReadIt(osJson);
 
                 /* Change the quantity in the OrderLineEntity */
                 function changeQuantity(olid, newQuantity) {
                   /* Find the OrderLineEntity in the osJson object identifed by the olid */
-                  var orderLines = osJson.orderSummary.order.orderEntity.orderLines;
+                  var orderlines = osJson.orderSummary.order.orderEntity.orderlines;
                   var olidNum = olid.replace('"', '');
                   olidNum = olid.replace('"', '');
                   olidNum = parseInt(olidNum);
                   console.log("olidNum " + olidNum);
                   /*Check for undefined or null (falsy) */
-                  if (orderLines == null) {
+                  if (orderlines == null) {
                     console
                         .log("Attempt to change quantities on an orderLine that can't be found");
                   } else {
-                    /* Search through orderLines until you find the id 
+                    /* Search through orderlines until you find the id 
                     - Could try to manage the index into the arrary but for now
                     just brute hunt */
-                    $.each(orderLines, function(i, ole) {
+                    $.each(orderlines, function(i, ole) {
                       console.log("OLE.id : " + ole.id + " .vs " + "olidNum : "
                           + olidNum);
                       if (ole.id == olidNum) {
@@ -139,8 +143,6 @@
                   }
                 }
 
-              
-
                 $(document)
                     .on(
                         "click",
@@ -150,9 +152,7 @@
                           var data = JSON
                               .stringify(osJson.orderSummary.order.orderEntity);
                           console.log("ABOUT TO SEND : " + data);
-
                           var URL = "/v1/orderAPI/orders";
-
                           $
                               .ajax({
                                 url : URL,
@@ -236,7 +236,7 @@
                             $(this).spinner("value", 0);
                             return false;
                           }
-                       // Someone hit the spinner make the update button visible
+                          // Someone hit the spinner make the update button visible
                           $("#updateButton").prop('disabled', false);
                           $("#updateButton").removeClass("hidden");
                           var $olidField = $(this).closest("tr") //Finds the closest row

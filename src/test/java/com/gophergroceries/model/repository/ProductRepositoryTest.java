@@ -32,7 +32,7 @@ public class ProductRepositoryTest {
 		product.setPrice(new BigDecimal("1.99"));
 		product.setInventory(1);
 		product.setPopular("Y");
-		product.setImageFile("resources/images/errorguy.jpg");
+		product.setImagefile("resources/images/errorguy.jpg");
 		product.setCategory("TestCategory");
 		System.out.println(product);
 	}

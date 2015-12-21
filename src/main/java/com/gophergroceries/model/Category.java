@@ -5,22 +5,23 @@ import java.util.ArrayList;
 public class Category {
 
 	
-	private String displayName;
-	private String urlAddress = "#"; //default to nothing for Category
+	private String displayname;
+	private String urladdress = "#"; //default to nothing for Category
 	private ArrayList<SubCategory> subCategories;
 	
 	
-	public String getDisplayName() {
-		return displayName;
+	
+	public String getDisplayname() {
+		return displayname;
 	}
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public void setDisplayname(String displayname) {
+		this.displayname = displayname;
 	}
-	public String getUrlAddress() {
-		return urlAddress;
+	public String getUrladdress() {
+		return urladdress;
 	}
-	public void setUrlAddress(String urlAddress) {
-		this.urlAddress = urlAddress;
+	public void setUrladdress(String urladdress) {
+		this.urladdress = urladdress;
 	}
 	public ArrayList<SubCategory> getSubCategories() {
 		return subCategories;

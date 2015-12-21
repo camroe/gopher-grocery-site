@@ -31,7 +31,7 @@ public class OrdersRepositoryTest {
 	private OrdersEntity order = new OrdersEntity();
 	private OrdersEntity orderDB = new OrdersEntity();
 
-	private SortedSet<OrderLinesEntity> orderLines = new TreeSet<OrderLinesEntity>();
+	private SortedSet<OrderLinesEntity> orderlines = new TreeSet<OrderLinesEntity>();
 	private final String SESSION_ID = "TestSessionID";
 	private final String EMAIL = "camroe@gmail.com";
 
@@ -48,13 +48,13 @@ public class OrdersRepositoryTest {
 				ole.setProduct(pe);
 				;
 				ole.setQuantity(1);
-				orderLines.add(ole);
+				orderlines.add(ole);
 			}
 			// Set up order
 
-			order.setCreationDate(new Date(System.currentTimeMillis()));
+			order.setCreationdate(new Date(System.currentTimeMillis()));
 			order.setEmail(EMAIL);
-			order.setOrderLines(orderLines);
+			order.setOrderlines(orderlines);
 			order.setSessionID(SESSION_ID);
 			orderDB = repository.save(order);
 
