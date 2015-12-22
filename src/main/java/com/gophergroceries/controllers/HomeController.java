@@ -36,8 +36,8 @@ public class HomeController {
 
 	@Autowired
 	private ProductsService productService;
-	
-	@Autowired 
+
+	@Autowired
 	private OrderService orderService;
 
 	/**
@@ -67,8 +67,6 @@ public class HomeController {
 		// servlet-context.xml
 		return "home";
 	}
-
-	
 
 	// @Secured("USER")
 	@RequestMapping(value = "/*ot*et*mplemented*", method = RequestMethod.GET)

@@ -15,8 +15,7 @@
 	<!-- <jee:jndi-lookup id="ggDataSource" jndi-name="jdbc/tomcatDataSource" -->
 	<!-- lookup-on-startup="false" proxy-interface="javax.sql.DataSource" /> -->
 
-<!-- spring.datasource.url=jdbc:mysql://gophergroceries.ctu8twuynevk.us-west-2.rds.amazonaws.com:3306/gophergroceries -->
-<!--  Local Working/Test datasource  -->
+	<!-- Local Working/Test datasource -->
 	<bean id="gophergroceriesMySQL"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -24,15 +23,16 @@
 		<property name="username" value="gopher" />
 		<property name="password" value="I82frogs" />
 	</bean>
-<!--  Production datasource  -->
-<!-- 	<bean id="gophergroceriesMySQL" -->
-<!-- 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
-<!-- 		<property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
-<!-- 		<property name="url" value="jdbc:mysql://gophergroceries.ctu8twuynevk.us-west-2.rds.amazonaws.com:3306/gophergroceries" /> -->
-<!-- 		<property name="username" value="gopher" /> -->
-<!-- 		<property name="password" value="I82frogs" /> -->
-<!-- 	</bean> -->
-	
+	<!-- Production datasource -->
+	<!-- <bean id="gophergroceriesMySQL" -->
+	<!-- class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+	<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+	<!-- <property name="url" value="jdbc:mysql://gophergroceries.ctu8twuynevk.us-west-2.rds.amazonaws.com:3306/gophergroceries" 
+		/> -->
+	<!-- <property name="username" value="gopher" /> -->
+	<!-- <property name="password" value="I82frogs" /> -->
+	<!-- </bean> -->
+
 	<!-- Entity Manager -->
 	<!-- <bean -->
 	<!-- class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" 

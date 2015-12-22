@@ -111,49 +111,90 @@
       <%@ include file="includes/categories.jsp"%>
       <div class="results">
         <div class="productHeaderContainer">
-          <span class="productHeaderLabel">Welcome</span>
+          <span class="productHeaderLabel">Popular Products</span>
         </div>
         <br>
-        <div class="welcomebox">
-          <p class="welcomeboxgreetingline">Welcome to our website!</p>
+        <c:forEach
+          items="${popularProducts}"
+          var="popularProducts"
+        >
+          <!-- ProductBOX-->
+          <div class="productbox">
+            <div
+              class="productImageContainer simple-tooltip"
+              title='${popularProducts.description}'
+            >
+              <img src='${popularProducts.imagefile}' />
+            </div>
+            <div class="productTitle">${popularProducts.name}</div>
+            <div class="productDetailsContainer">
+              <div class="priceContainer">
+                <span class="priceLabel">Price </span>
+                <span class="priceAmount">$${popularProducts.price}</span>
+              </div>
+              <div class="productClear"></div>
+              <!-- This is code from simply groceries -->
 
-          <p>Don’t stand in line at the grocery and liquor store.
-            Get up to Solitude Village and enjoy your vacation.</p>
+              <div class="addToCartContainer">
 
-          <p>We will ‘gopher” your supplies. We shop the entire Salt
-            Lake Valley to provide you with everything our area has to
-            offer. A 20% service fee will be added to your order. A
-            minimum $20.00 service fee will be added to orders under
-            $100.00.</p>
+                <form
+                  class="addtocart"
+                  action="/v1/addtocart"
+                  method="post"
+                  accept-charset="utf-8"
+                >
+                  <div class="hiddenCartDetails">
+                    <input
+                      type="hidden"
+                      name="cartkey"
+                      value="CartKey"
+                    />
+                    <input
+                      type="hidden"
+                      name="id"
+                      value='${popularProducts.id}'
+                    />
+                    <input
+                      type="hidden"
+                      name="sku"
+                      value='${popularProducts.sku}'
+                    />
+                    <input
+                      type="hidden"
+                      name="${_csrf.parameterName}"
+                      value="${_csrf.token}"
+                    />
+                  </div>
+                  <div class="productQuantityContainer">
+                    <span class=quantityLabel>Quantity </span>
+                    <input
+                      class="productQuantityBox"
+                      type="text"
+                      name="quantity"
+                      value="1"
+                    />
+                  </div>
+                  <div class="addToCartButtonContainer">
+                    <input
+                      class="addtocartButton"
+                      type="submit"
+                      value="Add to Cart"
+                    />
 
-          <p>Arriving late? No problem! We will arrange for your
-            groceries to be delivered and properly stored, ready for
-            your arrival.</p>
-
-          <p>We also deliver beer, wine and spirits. Utah does not
-            sell wine or spirits in their grocery stores and the State
-            run liquor stores are not open on Sunday. You can give us a
-            list or click here to view available products if you have
-            something specific you would like. List them in your
-            additional items list. We will do our best to acquire it. As
-            with groceries a 20% delivery fee will apply to this order.</p>
-
-          <p>Here’s how it works…</p>
-
-          <p>1. Select the items and quantity you want from our
-            product offering.</p>
-
-          <p>2. Proceed to the delivery instructions page and let us
-            know where you are staying and when you will arrive.</p>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="pricingSeperator"></div>
+          </div>
+          <div class="productClear"></div>
+        </c:forEach>
 
 
-          <p>3. Complete your order two ways. We can contact you for
-            a credit card payment OR you can be invoiced and pay through
-            Paypal. We're sorry, we can not accept personal checks.</p>
 
-        </div>
       </div>
       <!--  Results -->
+
     </div>
   </div>
 
