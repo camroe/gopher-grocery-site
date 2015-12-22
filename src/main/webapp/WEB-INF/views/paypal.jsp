@@ -107,7 +107,7 @@
         <button
           class="simple-tooltip"
           title="Click here to review and/or print your order information"
-        onclick="window.location.href='/v1/customerconfirmedorders/${coe.confirmationID}';"
+            onclick="window.location.href='/v1/customerconfirmedorders/${coe.confirmationID}';"
         >Review or Print your Order Information</button>
       </section>
     </div>

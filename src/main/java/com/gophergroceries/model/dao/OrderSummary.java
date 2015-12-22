@@ -21,9 +21,10 @@ public class OrderSummary {
 		recalculate();
 		if (total.compareTo(BigDecimal.ZERO) == 0) {
 			logger.warn("Order Summary Constructed with '0' total");
+
 		}
 		if (numberOfItems.intValue() == 0) {
-			logger.warn("Order Summary Constructed with '0' items");
+			logger.trace("Order Summary Constructed with '0' items");
 		}
 	}
 

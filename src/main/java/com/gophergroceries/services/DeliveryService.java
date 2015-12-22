@@ -1,15 +1,5 @@
 package com.gophergroceries.services;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.ShortBufferException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +32,6 @@ public class DeliveryService {
 	@Autowired
 	private EmailService emailService;
 
-	@Autowired
-	private EncryptionDecryptionService edService;
-
 	public OrderSummaryResult setDeliveryInformation(
 			String firstname,
 			String lastname,
@@ -76,40 +63,33 @@ public class DeliveryService {
 		return osr;
 	}
 
-	public String transferOrderToSubmitted(String methodOfPayment, GopherCookie gopherCookie) {
+	/**
+	 * This method moves the cart to the confirmed orders table and encrypts the
+	 * confirmation id.
+	 * 
+	 * @param methodOfPayment
+	 *          is used to set the method of payment in the confirmed orders
+	 *          table.
+	 * @param gopherCookie
+	 *          is used to get the cart that is being moved to the confirmed
+	 *          orders table.
+	 * @param hostname
+	 *          The name of the web host to build the confirmed order web call for
+	 *          inclusion in the email.
+	 * @return String - the ConfirmationID of the ordered cart. (not encrypted).
+	 */
+	public String transferOrderToSubmitted(String methodOfPayment, GopherCookie gopherCookie, String hostname) {
 		String confirmationID = DeliveryService.FAILED_CONFIRMATION;
 
 		OrdersEntity oe = null;
-		try {
-			oe = orderService.getOrderWithCartKey(gopherCookie.getCookieValue());
-			// TODO: If you hit 'back' from the confirm order page, you could get a
-			// null
-			// oe here.
 
-			if (null != oe) {
-				ConfirmedOrdersEntity coe = moveToConfirmed(oe, methodOfPayment);
-				confirmedOrdersRepository.saveAndFlush(coe);
-				confirmationID = coe.getConfirmationID();
-				ordersRepository.delete(oe.getId());
-				String testEncryption = "";
-				try {
-					testEncryption = edService.encrypt(coe.getSessionID());
-				} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException | NoSuchPaddingException
-						| InvalidAlgorithmParameterException | ShortBufferException | IllegalBlockSizeException
-						| BadPaddingException e) {
-					logger.error("Encryption Error: " + coe.getSessionID());
-					e.printStackTrace();
-				} catch (Exception e) {
-					logger.error("Exception Raised in Delivery Service: Encryption");
-					e.printStackTrace();
-				}
-				logger.info(testEncryption);
-				emailService.sendConfirmationEmail(coe.getEmail());
-			}
-		} catch (Exception ex) {
-			logger.error("Exception raised in Delivery Service");
-			ex.printStackTrace();
-		}
+		oe = orderService.getOrderWithCartKey(gopherCookie.getCookieValue());
+		ConfirmedOrdersEntity coe = moveToConfirmed(oe, methodOfPayment);
+		confirmedOrdersRepository.saveAndFlush(coe);
+		confirmationID = coe.getConfirmationID();
+		ordersRepository.delete(oe.getId());
+		// TODO: Put email on a queue.
+		emailService.sendConfirmationEmail(coe.getEmail(), coe.getConfirmationID(), hostname);
 		return confirmationID;
 	}
 

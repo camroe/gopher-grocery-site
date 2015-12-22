@@ -94,32 +94,6 @@ public class DeliveryController {
 		return handlePayementMethodRequest(httpServletRequest, model, httpServletResponse,
 				DeliveryController.PAYMENT_TYPE_PAYPAL);
 	}
-	//
-	// Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME,
-	// httpServletRequest);
-	// GopherCookie gopherCookie = new GopherCookie(cookie);
-	// OrderSummaryResult osr = orderService
-	// .getOrderSummary(gopherCookie);model.addAttribute("orderSummaryResult",osr);model.addAttribute("osJson",
-	//
-	// getJSon(osr));
-	// String confirmedOrderId =
-	// deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_PAYPAL,
-	// gopherCookie);
-	// if (confirmedOrderId.equals(DeliveryService.FAILED_CONFIRMATION)) {
-	// return "orderreview";
-	// } else {
-	// ConfirmedOrderSummaryResult cosr =
-	// confirmedOrderService.getConfirmedOrderWithConfirmationID(confirmedOrderId);
-	// model.addAttribute("confirmedOrderSummaryResult", cosr);
-	// model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
-	// model.addAttribute("confirmationid", confirmedOrderId);
-	// httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
-	// if (cosr.isError()) {
-	// return "couldNotFindOrder";
-	// }
-	// return DeliveryController.PAYMENT_TYPE_PAYPAL;
-	// }
-	// }
 
 	@RequestMapping(value = "/v1/delivery/contactforpayment", method = RequestMethod.GET)
 	public String payWithContactLater(Model model,
@@ -128,26 +102,6 @@ public class DeliveryController {
 		return handlePayementMethodRequest(httpServletRequest, model, httpServletResponse,
 				DeliveryController.PAYMENT_TYPE_CONTACT);
 	}
-	// Cookie cookie = CookieMgr.getCookie(GopherCookie.GOPHER_COOKIE_NAME,
-	// httpServletRequest);
-	// GopherCookie gopherCookie = new GopherCookie(cookie);
-	// OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
-	// model.addAttribute("orderSummaryResult", osr);
-	// model.addAttribute("osJson", getJSon(osr));
-	// String confirmedOrderId =
-	// deliveryService.transferOrderToSubmitted(DeliveryController.PAYMENT_TYPE_CONTACT,
-	// gopherCookie);
-	// if (confirmedOrderId.equals(DeliveryService.FAILED_CONFIRMATION)) {
-	// return "orderreview";
-	// } else {
-	// ConfirmedOrderSummaryResult cosr =
-	// confirmedOrderService.getConfirmedOrderWithConfirmationID(confirmedOrderId);
-	// model.addAttribute("confirmedOrderSummaryResult", cosr);
-	// model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
-	// httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
-	// return DeliveryController.PAYMENT_TYPE_CONTACT;
-	// }
-	// }
 
 	private String handlePayementMethodRequest(HttpServletRequest httpServletRequest,
 			Model model,
@@ -158,7 +112,8 @@ public class DeliveryController {
 		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
 		model.addAttribute("osJson", getJSon(osr));
-		String confirmedOrderId = deliveryService.transferOrderToSubmitted(paymentType, gopherCookie);
+		String confirmedOrderId = deliveryService.transferOrderToSubmitted(paymentType, gopherCookie,
+				httpServletRequest.getServerName());
 		if (confirmedOrderId.equals(DeliveryService.FAILED_CONFIRMATION)) {
 			return "orderreview";
 		} else {

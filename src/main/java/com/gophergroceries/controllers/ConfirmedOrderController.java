@@ -1,5 +1,8 @@
 package com.gophergroceries.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +42,15 @@ public class ConfirmedOrderController {
 		 */
 
 		ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrderWithConfirmationID(confirmationid);
-		
-			model.addAttribute("confirmedOrderSummaryResult", cosr);
-			model.addAttribute("confirmationid", confirmationid);
-			String cosJson = JsonUtils.JsonStringFromObject(cosr);
-			logger.info("JSON IS: " + cosJson);
-			model.addAttribute("cosJson", cosJson);
-			if (cosr.isError()) {
-			return "couldNotFindOrder";
-			}
-		return "confirmedorderreview";
 
+		model.addAttribute("confirmedOrderSummaryResult", cosr);
+		model.addAttribute("confirmationid", confirmationid);
+		String cosJson = JsonUtils.JsonStringFromObject(cosr);
+		logger.info("JSON IS: " + cosJson);
+		model.addAttribute("cosJson", cosJson);
+		if (cosr.isError()) {
+			return "couldNotFindOrder";
+		}
+		return "confirmedorderreview";
 	}
 }
