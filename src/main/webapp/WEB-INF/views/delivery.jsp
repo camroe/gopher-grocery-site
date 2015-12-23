@@ -44,7 +44,9 @@
       class="wide_wrap"
     >
       <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
-           <a href="/"> <img class="logo-marginn simple-tooltip" title="Click here to return to the home page"
+      <a href="/"> <img
+        class="logo-marginn simple-tooltip"
+        title="Click here to return to the home page"
         src="/resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
         width="160px"
@@ -324,7 +326,7 @@
               </tr>
               <tr>
                 <td class="label"><label for="checkindate">Checkin
-                    Date and Time:</label></td>
+                    Date:</label></td>
                 <!-- datetime-local (yyyy-mm-ddTHH:MMZ) -->
                 <td><input
                     id="checkindate"

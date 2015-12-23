@@ -15,7 +15,7 @@ public class CategoryMappingService {
 	CategoryRepository categoryRepository;
 
 	public List<CategoryEntity> getCategoryList() {
-		return categoryRepository.findAll();
+		return categoryRepository.findAllByOrderByName();
 	}
 
 }

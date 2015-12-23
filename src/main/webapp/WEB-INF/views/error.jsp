@@ -45,13 +45,27 @@
   <!--  Set up the page -->
 
   <c:set
-    var="cosr"
-    value="${confirmedOrderSummaryResult}"
+    var="datetime"
+    value="${datetime}"
   />
 
   <c:set
-    var="confirmationid"
-    value="${confirmationid}"
+    var="exception"
+    value="${exception}"
+  />
+
+  <c:set
+    var="url"
+    value="${url}"
+  />
+
+  <c:set
+    var="exceptionName"
+    value="${exceptionName}"
+  />
+  <c:set
+    var="httpstatus"
+    value="${httpstatus}"
   />
 
   <div class="full_wrap full_wrap-back">
@@ -76,8 +90,9 @@
     style="left: 50px;"
   >
     <p style="font-size: 18px;">We're Sorry, an Error Has Occurred:
-      Confirmation Number: ${confirmationid} Was not found.</p>
-    <p>Please contact support on our contacts page for help.</p>
+      We have logged the error and will investigate.</p>
+    <p>Please contact support on our contacts page for more help,
+      else you can simply return to shopping.</p>
   </div>
   <div class="order-review-left">
     <section class="pressadjust">
@@ -88,6 +103,22 @@
       >Return to Shopping</button>
     </section>
   </div>
+  <div style="clear: both; display: block;"></div>
+
+
+  <div
+    class="ordersummary delivery-detail-label"
+    style="left: 50px;"
+  >
+
+    <p style="font-size: 18px;">Error Details:</p>
+    <p>Server Date/Time: ${datetime}</p>
+    <p>The error occurred while calling URL: ${url}</p>
+    <p>The HttpStatus is : ${httpstatus}</p>
+    <p>The exception raised (if any) was : ${exceptionName}</p>
+
+  </div>
+
   <div style="clear: both; display: block;"></div>
 </body>
 </html>
