@@ -243,8 +243,8 @@
       </section>
     </div>
     <!-- End Right -->
-    
-        <!--  MIDDLE - Go back to shopping  -->
+
+    <!--  MIDDLE - Go back to shopping  -->
     <!-- Order Adjust Button -->
     <div class="order-review-middle">
       <section
@@ -259,7 +259,7 @@
       </section>
     </div>
     <!-- End Right -->
-    
+
     <!--  ORDER Details -->
     <div class="orders">
       <table>
@@ -314,15 +314,41 @@
             <td class="hiddenTableColumn tdOrderLineID">"${orderLine.id}"</td>
           </tr>
         </c:forEach>
+        <!-- Service Fee -->
+        <tr>
+          <td></td>
+          <td></td>
+          <td>Service Fee is 20% of grocery order with a minimum
+            $20.00 charge.</td>
+          <td colspan="2">Service Fee</td>
+          <td class="tdPrice">$<fmt:formatNumber
+              value="${orderSummaryResult.orderSummary.serviceFee}"
+              minFractionDigits="2"
+            /></td>
+        </tr>
+        <!--  Grocery Total -->
+        <tr>
+
+          <td
+            colspan="5"
+            style="text-align: right;"
+          >Grocery Total</td>
+          <td class="tdPrice">$<fmt:formatNumber
+              value="${orderSummaryResult.orderSummary.groceryTotal}"
+              minFractionDigits="2"
+            /></td>
+        </tr>
+
         <tr>
           <td
             id="totalLabel"
             colspan="5"
           >Total</td>
           <td id="grandTotal">$<fmt:formatNumber
-              value="${salesTotal}"
+              value="${orderSummaryResult.orderSummary.total}"
               minFractionDigits="2"
             ></fmt:formatNumber></td>
+        </tr>
       </table>
     </div>
     <div style="clear: both; display: block;"></div>

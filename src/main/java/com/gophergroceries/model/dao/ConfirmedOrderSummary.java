@@ -15,6 +15,8 @@ public class ConfirmedOrderSummary {
 	private BigDecimal total = new BigDecimal(0);
 	private Integer numberOfItems = new Integer(0);
 	private ConfirmedOrdersEntity confirmedOrdersEntity;
+	private BigDecimal groceryTotal = new BigDecimal(0);
+	private BigDecimal serviceFee = new BigDecimal(0);
 
 	public ConfirmedOrderSummary(ConfirmedOrdersEntity confirmedOrdersEntity) {
 		this.confirmedOrdersEntity = confirmedOrdersEntity;
@@ -51,11 +53,38 @@ public class ConfirmedOrderSummary {
 		this.confirmedOrdersEntity = coe;
 	}
 
+	public BigDecimal getGroceryTotal() {
+		return groceryTotal;
+	}
+
+	public void setGroceryTotal(BigDecimal groceryTotal) {
+		this.groceryTotal = groceryTotal;
+	}
+
+	public BigDecimal getServiceFee() {
+		return serviceFee;
+	}
+
+	public void setServiceFee(BigDecimal serviceFee) {
+		this.serviceFee = serviceFee;
+	}
+
 	public void recalculate() {
 		if (!(null == this.confirmedOrdersEntity)) {
 			this.numberOfItems = calcNumberOfItems(this.confirmedOrdersEntity);
-			this.total = calcTotal(this.confirmedOrdersEntity);
+			this.groceryTotal = calcGroceryTotal(this.confirmedOrdersEntity);
+			this.serviceFee = calcServiceFee(this.confirmedOrdersEntity);
+			this.total = groceryTotal.add(serviceFee);
 		}
+	}
+
+	private BigDecimal calcServiceFee(ConfirmedOrdersEntity confirmedOrdersEntity) {
+		BigDecimal serviceFee = new BigDecimal(OrderSummary.MINIMUM_SERVICE_FEE.doubleValue());
+		BigDecimal groceries = calcGroceryTotal(confirmedOrdersEntity);
+		if (serviceFee.doubleValue() < (OrderSummary.SERVICE_FEE_PERCENTAGE.multiply(groceries)).doubleValue()) {
+			serviceFee = OrderSummary.SERVICE_FEE_PERCENTAGE.multiply(groceries);
+		}
+		return serviceFee;
 	}
 
 	private Integer calcNumberOfItems(ConfirmedOrdersEntity coe) {
@@ -66,7 +95,7 @@ public class ConfirmedOrderSummary {
 		return numberOfItems;
 	}
 
-	private BigDecimal calcTotal(ConfirmedOrdersEntity coe) {
+	private BigDecimal calcGroceryTotal(ConfirmedOrdersEntity coe) {
 		BigDecimal runningTotal = new BigDecimal(0);
 		for (ConfirmedOrderLinesEntity cole : coe.getOrderlines()) {
 

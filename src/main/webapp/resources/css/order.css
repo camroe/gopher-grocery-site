@@ -99,7 +99,7 @@ tr:last-child {
 tr:nth-last-child(-n+1) td {
 	text-align: right;
 	color: black;
-	border-bottom: solid black 1px;
+	border-bottom: solid black 5px;
 }
 
 #totalLabel {
