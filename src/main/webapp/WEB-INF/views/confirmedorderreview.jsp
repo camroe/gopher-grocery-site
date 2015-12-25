@@ -190,10 +190,20 @@
       <div
         class="detail"
         id="total"
-      >$${cos.total}</div>
+      >
+        $
+        <fmt:formatNumber
+          value="${cos.total}"
+          minFractionDigits="2"
+          maxFractionDigits="2"
+        ></fmt:formatNumber>
+      </div>
       <div style="clear: both;"></div>
+
+
       <hr>
     </div>
+
     <!--  End Right -->
     <!-- COMMENT -->
     <div class="comment">
@@ -252,10 +262,12 @@
             <td class="tdPrice">$<fmt:formatNumber
                 value="${orderLine.price}"
                 minFractionDigits="2"
+                maxFractionDigits="2"
               /></td>
             <td class="tdTotal">$<fmt:formatNumber
                 value="${orderLine.price * orderLine.quantity}"
                 minFractionDigits="2"
+                maxFractionDigits="2"
               />
             </td>
             <td class="hiddenTableColumn tdOrderLineID">"${orderLine.id}"</td>
@@ -271,6 +283,7 @@
           <td class="tdPrice">$<fmt:formatNumber
               value="${confirmedOrderSummaryResult.confirmedOrderSummary.serviceFee}"
               minFractionDigits="2"
+              maxFractionDigits="2"
             /></td>
         </tr>
         <!--  Grocery Total -->
@@ -283,6 +296,7 @@
           <td class="tdPrice">$<fmt:formatNumber
               value="${confirmedOrderSummaryResult.confirmedOrderSummary.groceryTotal}"
               minFractionDigits="2"
+              maxFractionDigits="2"
             /></td>
         </tr>
 
@@ -294,6 +308,7 @@
           <td id="grandTotal">$<fmt:formatNumber
               value="${confirmedOrderSummaryResult.confirmedOrderSummary.total}"
               minFractionDigits="2"
+              maxFractionDigits="2"
             ></fmt:formatNumber></td>
         </tr>
       </table>

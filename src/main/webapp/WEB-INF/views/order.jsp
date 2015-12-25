@@ -134,6 +134,7 @@
               <td class="tdTotal">$<fmt:formatNumber
                   value="${orderLine.price * orderLine.quantity}"
                   minFractionDigits="2"
+                  maxFractionDigits="2"
                 />
               </td>
               <td class="hiddenTableColumn tdOrderLineID">"${orderLine.id}"</td>
@@ -150,6 +151,7 @@
             <td class="tdPrice">$<fmt:formatNumber
                 value="${orderSummaryResult.orderSummary.serviceFee}"
                 minFractionDigits="2"
+                maxFractionDigits="2"
               /></td>
           </tr>
           <!--  Grocery Total -->
@@ -159,6 +161,7 @@
             <td class="tdPrice">$<fmt:formatNumber
                 value="${orderSummaryResult.orderSummary.groceryTotal}"
                 minFractionDigits="2"
+                maxFractionDigits="2"
               /></td>
           </tr>
 
@@ -170,6 +173,7 @@
             <td id="grandTotal">$<fmt:formatNumber
                 value="${orderSummaryResult.orderSummary.total}"
                 minFractionDigits="2"
+                maxFractionDigits="2"
               ></fmt:formatNumber></td>
               </tr>
               

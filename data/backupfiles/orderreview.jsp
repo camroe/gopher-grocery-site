@@ -73,7 +73,11 @@
           <div class="detail" id="totalitems">${os.numberOfItems}</div>
 
           <label class="delivery-detail-label" for="total">Total: </label>
-          <div class="detail" id="total">$${os.total}</div>
+          <div class="detail" id="total">$$<fmt:formatNumber
+              value="${os.total}"
+              minFractionDigits="2"
+              maxFractionDigits="2"
+            ></fmt:formatNumber></div>
           <hr>
         </div>
         <!--  End Right -->
@@ -126,9 +130,12 @@
                 <td>${orderLine.quantity}</td>
                 <td class="tdPrice">$<fmt:formatNumber value="${orderLine.price}"
                     minFractionDigits="2"
+                    maxFractionDigits="2"
+                    
                   /></td>
                 <td class="tdTotal">$<fmt:formatNumber
                     value="${orderLine.price * orderLine.quantity}" minFractionDigits="2"
+                    maxFractionDigits="2"
                   />
                 </td>
                 <td class="hiddenTableColumn tdOrderLineID">"${orderLine.id}"</td>
@@ -138,6 +145,7 @@
               <td id="totalLabel" colspan="5">Total</td>
               <td id="grandTotal">$<fmt:formatNumber value="${salesTotal}"
                   minFractionDigits="2"
+                  maxFractionDigits="2"
                 ></fmt:formatNumber></td>
           </table>
         </div>
