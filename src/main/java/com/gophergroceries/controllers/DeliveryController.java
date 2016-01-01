@@ -49,7 +49,9 @@ public class DeliveryController {
 		GopherCookie gopherCookie = new GopherCookie(cookie);
 		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
-		model.addAttribute("osJson", getJSon(osr));
+		// model.addAttribute("osJson", getJSon(osr));
+		model.addAttribute("osJson", JsonUtils.javascriptEscapedJsonStringFromObject(osr));
+
 		return "delivery";
 	}
 
@@ -80,7 +82,9 @@ public class DeliveryController {
 		OrderSummaryResult osr = deliveryService.setDeliveryInformation(firstname, lastname, location, unit, phone, email,
 				checkindate, comment, gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
-		model.addAttribute("osJson", getJSon(osr));
+		// model.addAttribute("osJson", getJSon(osr));
+		model.addAttribute("osJson", JsonUtils.javascriptEscapedJsonStringFromObject(osr));
+
 		// TODO: We could return to delivery here if we find there is an error in
 		// the delivery form
 		// else move to next page.
@@ -111,15 +115,20 @@ public class DeliveryController {
 		GopherCookie gopherCookie = new GopherCookie(cookie);
 		OrderSummaryResult osr = orderService.getOrderSummary(gopherCookie);
 		model.addAttribute("orderSummaryResult", osr);
-		model.addAttribute("osJson", getJSon(osr));
+		// model.addAttribute("osJson", getJSon(osr));
+		model.addAttribute("osJson", JsonUtils.javascriptEscapedJsonStringFromObject(osr));
+
 		String confirmedOrderId = deliveryService.transferOrderToSubmitted(paymentType, gopherCookie,
 				httpServletRequest.getServerName());
 		if (confirmedOrderId.equals(DeliveryService.FAILED_CONFIRMATION)) {
 			return "orderreview";
-		} else {
+		}
+		else {
 			ConfirmedOrderSummaryResult cosr = confirmedOrderService.getConfirmedOrderWithConfirmationID(confirmedOrderId);
 			model.addAttribute("confirmedOrderSummaryResult", cosr);
-			model.addAttribute("cosJson", JsonUtils.JsonStringFromObject(cosr));
+			// model.addAttribute("cosJson",
+			// JsonUtils.jsonStringFromObjectPretty(cosr));
+			model.addAttribute("cosJson", JsonUtils.javascriptEscapedJsonStringFromObject(cosr));
 			model.addAttribute("confirmationid", confirmedOrderId);
 			httpServletResponse.addCookie(GopherCookieFactory.clearCookie(gopherCookie.getCookie()));
 			if (cosr.isError()) {

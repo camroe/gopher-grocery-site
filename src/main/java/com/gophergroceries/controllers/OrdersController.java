@@ -48,10 +48,11 @@ public class OrdersController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		logger.info("Outgoing JSON from /v1/orderAPI/orders:GET is : " + JsonUtils.JsonStringFromObject(osr));
-		model.addAttribute("osJson", osJson);
-		// This maps to webapp/WEB-INF/views/order.jsp based on config in
-		// servlet-context.xml
+		logger.info("Outgoing JSON from /v1/orderAPI/orders:GET is : " + JsonUtils.jsonStringFromObjectPretty(osr));
+		// model.addAttribute("osJson",
+		// JsonUtils.javascriptEscapedJsonString(osJson));
+		model.addAttribute("osJson", JsonUtils.javascriptEscapedJsonString(osJson));
+
 		return "order";
 	}
 
@@ -81,7 +82,6 @@ public class OrdersController {
 		try {
 			osJson = objectMapper.writeValueAsString(os);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
@@ -90,9 +90,8 @@ public class OrdersController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		model.addAttribute("osJson", osJson);
-		// This maps to webapp/WEB-INF/views/order.jsp based on config in
-		// servlet-context.xml
+		// model.addAttribute("osJson", osJson);
+		model.addAttribute("osJson", JsonUtils.javascriptEscapedJsonString(osJson));
 		return "order";
 	}
 

@@ -5,12 +5,13 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringEscapeUtils;
 
 public class JsonUtils {
 
 	private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
 
-	public static String JsonStringFromObject(Object obj) {
+	public static String jsonStringFromObjectPretty(Object obj) {
 		ObjectMapper mapper = new ObjectMapper();
 		String returnJsonString = "";
 		try {
@@ -21,6 +22,13 @@ public class JsonUtils {
 		}
 		return returnJsonString;
 	}
-	
-	
+
+	public static String javascriptEscapedJsonStringFromObject(Object obj) {
+		return StringEscapeUtils.escapeEcmaScript(jsonStringFromObjectPretty(obj));
+	}
+
+	public static String javascriptEscapedJsonString(String jsonString) {
+		return StringEscapeUtils.escapeEcmaScript(jsonString);
+	}
+
 }

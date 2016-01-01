@@ -45,9 +45,11 @@ public class ConfirmedOrderController {
 
 		model.addAttribute("confirmedOrderSummaryResult", cosr);
 		model.addAttribute("confirmationid", confirmationid);
-		String cosJson = JsonUtils.JsonStringFromObject(cosr);
+		String cosJson = JsonUtils.jsonStringFromObjectPretty(cosr);
 		logger.info("JSON IS: " + cosJson);
-		model.addAttribute("cosJson", cosJson);
+		// model.addAttribute("cosJson", cosJson);
+		model.addAttribute("cosJson", JsonUtils.javascriptEscapedJsonString(cosJson));
+
 		if (cosr.isError()) {
 			return "couldNotFindOrder";
 		}
