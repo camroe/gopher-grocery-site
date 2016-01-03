@@ -133,7 +133,7 @@
           <p>We also deliver beer, wine and spirits. Utah does not
             sell wine or spirits in their grocery stores and the State
             run liquor stores are not open on Sunday. You can give us a
-            list or click here to view available products if you have
+            list or click <a href="http://abc.utah.gov/products/index.html">here</a> to view available products if you have
             something specific you would like. List them in your
             additional items list. We will do our best to acquire it. As
             with groceries a 20% delivery fee will apply to this order.</p>

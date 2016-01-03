@@ -74,4 +74,9 @@ public class HomeController {
 		return "notyetimplemented";
 	}
 
+	@RequestMapping(value = "/contactus", method = RequestMethod.GET)
+	public String contactus() {
+		return "contactus";
+	}
+
 }

@@ -87,7 +87,7 @@
       <div
         class="detail"
         id="name"
-      >${coe.firstname}${coe.lastname}</div>
+      >${coe.firstname} ${coe.lastname}</div>
       <label
         class="delivery-detail-label"
         for="location"
