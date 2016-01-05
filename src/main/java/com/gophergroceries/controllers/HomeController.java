@@ -1,5 +1,6 @@
 package com.gophergroceries.controllers;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -11,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,4 +85,32 @@ public class HomeController {
 		return "contactus";
 	}
 
+	@RequestMapping(value = "/liquorprices", method = RequestMethod.GET, produces = "application/pdf")
+	public ResponseEntity<InputStreamResource> getLiquorFile(HttpServletResponse httpServletResponse) throws IOException {
+		ClassPathResource pdfFile = new ClassPathResource("liquor.pdf");
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+		headers.add("Pragma", "no-cache");
+		headers.add("Expires", "0");
+
+		return ResponseEntity
+				.ok()
+				.headers(headers)
+				.contentLength(pdfFile.contentLength())
+				.contentType(MediaType.parseMediaType("application/pdf"))
+				.body(new InputStreamResource(pdfFile.getInputStream()));
+
+		// httpServletResponse.setHeader("Content-Disposition", "attachment;
+		// filename=liquorpricing.pdf");
+		//
+		// try {
+		// InputStream is = ClassLoader.getSystemResourceAsStream("liquor.pdf");
+		// IOUtils.copy(is, httpServletResponse.getOutputStream());
+		// httpServletResponse.flushBuffer();
+		// is.close();
+		// } catch (IOException ioex) {
+		// logger.error("Error reading liquor file");
+		// }
+
+	}
 }

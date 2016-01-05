@@ -130,13 +130,16 @@
             groceries to be delivered and properly stored, ready for
             your arrival.</p>
 
-          <p>We also deliver beer, wine and spirits. Utah does not
-            sell wine or spirits in their grocery stores and the State
-            run liquor stores are not open on Sunday. You can give us a
-            list or click <a href="http://abc.utah.gov/products/index.html">here</a> to view available products if you have
-            something specific you would like. List them in your
-            additional items list. We will do our best to acquire it. As
-            with groceries a 20% delivery fee will apply to this order.</p>
+          <p>
+            We also deliver beer, wine and spirits. Utah does not sell
+            wine or spirits in their grocery stores and the State run
+            liquor stores are not open on Sunday. You can give us a list
+            or click <a href="http://abc.utah.gov/products/index.html">here</a>
+            to view available products if you have something specific
+            you would like. List them in your additional items list. We
+            will do our best to acquire it. As with groceries a 20%
+            delivery fee will apply to this order.
+          </p>
 
           <p>Here’s how it works…</p>
 
@@ -219,7 +222,9 @@
                             alert("Successfully Added to Cart\nTotal Number of Items: "
                                 + data.orderSummary.numberOfItems
                                 + "\n Total in Cart = $"
-                                + data.orderSummary.total);
+                                + data.orderSummary.total.toFixed(2)
+                                + "\n\n NOTE: Includes all Service Fees"
+                                + "\n Click Ok or simply hit 'Enter' to continue");
                             var text = $('#cartItemsCount').html(
                                 data.orderSummary.numberOfItems);
                           }

@@ -286,13 +286,14 @@
                     type="text"
                     tabindex="4"
                     placeholder="1234"
-                    value="<c:out value="${oe.unit}"/>"
+                    value="<c:out value="${oe.unit}">0</c:out>"
                     data-val="true"
                     data-val-number="Unit must be a just a number with no special characters "
                     data-val-required="Please enter a valid unit number. This field is required"
                     data-val-length="Please use between 1 to 4 digits"
                     data-val-length-min="1"
                     data-val-length-max="4"
+                    value
                   > <span
                     data-valmsg-replace="true"
                     data-valmsg-for="unit"
