@@ -204,10 +204,15 @@
                 event.preventDefault();
                 // Get the submit button element
                 var inputform = $(event.target);
-                var data = inputform.serialize();
-                console.log("addtocart event caught");
-                console.log(data);
-                var URL = inputform.attr("action");
+                //                 console.log(inputform);
+                //                 var data = inputform.serialize();
+                var data = $(this).serialize();
+                //                 console.log("addtocart event caught");
+                //                 console.log($(this).serialize());
+
+                //                 var URL = inputform.attr("action");
+                var URL = $(this).attr("action");
+                //                 console.log(URL);
                 $
                     .post(
                         URL,
@@ -218,7 +223,7 @@
                           if (data.error) {
                             alert(data.errorMsg);
                           } else {
-                            console.log(data);
+                            //                             console.log(data);
                             alert("Successfully Added to Cart\nTotal Number of Items: "
                                 + data.orderSummary.numberOfItems
                                 + "\n Total in Cart = $"
