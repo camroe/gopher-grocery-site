@@ -1,25 +1,10 @@
 <!DOCTYPE html>
-<%@ taglib
-  uri="http://java.sun.com/jsp/jstl/core"
-  prefix="c"
-%>
-<%@taglib
-  prefix="fn"
-  uri="http://java.sun.com/jsp/jstl/functions"
-%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page session="false"%>
-<%@ page
-  contentType="text/html;charset=UTF-8"
-  language="java"
-%>
-<%@ taglib
-  prefix="security"
-  uri="http://www.springframework.org/security/tags"
-%>
-<%@ taglib
-  uri="http://java.sun.com/jsp/jstl/fmt"
-  prefix="fmt"
-%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <%@ include file="includes/header.jsp"%>
@@ -27,28 +12,17 @@
 </head>
 
 <body>
-  <c:set
-    var="numberOfItems"
-    scope="page"
-    value="${items}"
-  />
+  <c:set var="numberOfItems" scope="page" value="${items}" />
   <div class="full_wrap full_wrap-back">
-    <div
-      id="header"
-      class="wide_wrap"
-    >
+    <div id="header" class="wide_wrap">
       <%--       <a href="/logout">Logout. Hello <security:authentication property="principal.username" />!</a> --%>
-      <a href="/"> <img
-        class="logo-marginn simple-tooltip"
-        title="Click here to return to the home page"
-        src="/resources/FONTS/GG-Logo-Color.png"
+      <a href="/"> <img class="logo-marginn simple-tooltip"
+        title="Click here to return to the home page" src="/resources/FONTS/GG-Logo-Color.png"
         alt="Gopher-Groceries | Order your Groceries Online Today - Great Ski Holidays"
         width="160px"
       >
       </a>
-      <div
-        class="cart"
-        style="float: right; cursor: pointer"
+      <div class="cart" style="float: right; cursor: pointer"
         onclick="window.location='/v1/orderAPI/orders';"
       >
         <!--         <a -->
@@ -57,54 +31,31 @@
         <!--         > -->
         <div class="moduletable">
           <div style="float: left; color: #41BECF; margin-left: 28px">
-            <div
-              class="vmCartModule simple-tooltip"
+            <div class="vmCartModule simple-tooltip"
               title="Click here to go to your cart and place your order"
             >
-              Now in your cart <b><span id="cartItemsCount">
-                  <c:out value="${numberOfItems}" />
-                </span> Items</b>
+              Now in your cart <b><span id="cartItemsCount"> <c:out
+                    value="${numberOfItems}"
+                  />
+              </span> Items</b>
             </div>
           </div>
         </div>
       </div>
-      <div
-        id="search_form"
-        class="right"
-      >
-        <form
-          id="searchButton"
-          action="NotYetImplmented.html"
-          method="post"
-          accept-charset="utf-8"
-        >
-          <input
-            type="text"
-            name="term"
-            placeholder="Search is coming soon"
-            placeholder="Enter search Keywords here"
-            onkeyup="searchProducts(this.value)"
+      <div id="search_form" class="right">
+        <form id="searchButton" action="NotYetImplmented.html" method="post" accept-charset="utf-8">
+          <input type="text" name="term" placeholder="Search is coming soon"
+            placeholder="Enter search Keywords here" onkeyup="searchProducts(this.value)"
             autocomplete="off"
           />
-          <button
-            style="border-radius: 0px"
-            type="submit"
-          >Search</button>
-          <input
-            type="hidden"
-            name="${_csrf.parameterName}"
-            value="${_csrf.token}"
-          />
+          <button style="border-radius: 0px" type="submit">Search</button>
+          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         </form>
       </div>
       <!-- end search_form -->
     </div>
   </div>
-  <div
-    id="results"
-    class="results"
-    style="display: none;"
-  ></div>
+  <div id="results" class="results" style="display: none;"></div>
   <%@ include file="includes/mainNavBarWithCategories.jsp"%>
   <div class="full_wrap ">
     <div class="wide_wrap">
@@ -117,42 +68,37 @@
         <div class="welcomebox">
           <p class="welcomeboxgreetingline">Welcome to our website!</p>
 
-          <p>Don’t stand in line at the grocery and liquor store.
-            Get up to Solitude Village and enjoy your vacation.</p>
+          <p>Don’t stand in line at the grocery and liquor store. Get up to Solitude Village and
+            enjoy your vacation.</p>
 
-          <p>We will ‘gopher” your supplies. We shop the entire Salt
-            Lake Valley to provide you with everything our area has to
-            offer. A 20% service fee will be added to your order. A
-            minimum $20.00 service fee will be added to orders under
-            $100.00.</p>
+          <p>We will ‘gopher” your supplies. We shop the entire Salt Lake Valley to provide you
+            with everything our area has to offer. A 20% service fee will be added to your order. A
+            minimum $20.00 service fee will be added to orders under $100.00. Please note that you
+            should order your groceries at least 5 days before you arrive.</p>
 
-          <p>Arriving late? No problem! We will arrange for your
-            groceries to be delivered and properly stored, ready for
-            your arrival.</p>
+          <p>Arriving late? No problem! We will arrange for your groceries to be delivered and
+            properly stored, ready for your arrival.</p>
 
           <p>
-            We also deliver beer, wine and spirits. Utah does not sell
-            wine or spirits in their grocery stores and the State run
-            liquor stores are not open on Sunday. You can give us a list
-            or click <a href="http://abc.utah.gov/products/index.html">here</a>
-            to view available products if you have something specific
-            you would like. List them in your additional items list. We
-            will do our best to acquire it. As with groceries a 20%
+            We also deliver beer, wine and spirits. Utah does not sell wine or spirits in their
+            grocery stores and the State run liquor stores are not open on Sunday. You can give us a
+            list or click <a href="http://abc.utah.gov/products/documents/AlphaPriceList.pdf">here</a> to view
+            available products if you have something specific you would like. List them in your
+            additional items list. We will do our best to acquire it. As with groceries a 20%
             delivery fee will apply to this order.
           </p>
 
           <p>Here’s how it works…</p>
 
-          <p>1. Select the items and quantity you want from our
-            product offering.</p>
+          <p>1. Select the items and quantity you want from our product offering.</p>
 
-          <p>2. Proceed to the delivery instructions page and let us
-            know where you are staying and when you will arrive.</p>
+          <p>2. Proceed to the delivery instructions page and let us know where you are staying
+            and when you will arrive.</p>
 
 
-          <p>3. Complete your order two ways. We can contact you for
-            a credit card payment OR you can be invoiced and pay through
-            Paypal. We're sorry, we can not accept personal checks.</p>
+          <p>3. Complete your order two ways. We can contact you for a credit card payment OR
+            you can be invoiced and pay through Paypal. We're sorry, we can not accept personal
+            checks.</p>
 
         </div>
       </div>
@@ -161,10 +107,7 @@
   </div>
 
   <!-- JAVASCRIPT SECTION  -->
-  <script
-    type="text/javascript"
-    src="/resources/js/gopher.js"
-  ></script>
+  <script type="text/javascript" src="/resources/js/gopher.js"></script>
   <script type="text/javascript">
       //**********************************************************************
       $(".category").click(function() {
